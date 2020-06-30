@@ -23,36 +23,12 @@ function App() {
   return (
     <Router>
       <div>
-        {/* <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About Us</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact Us</Link>
-            </li>
-            <li>
-              <Link to="/faq">FAQ</Link>
-            </li>
-          </ul>
-        </nav> */}
+
         <Switch>
           <Route path="/app" component={MainLayout}></Route>
           <Route path="/" component={LandingLayout}></Route>
         </Switch>
-        {/* <LandingLayout />
-        <MainLayout /> */}
-        {/* <LandingNavbar />
-        <Switch>
-          <Route path="/become-a-tutor" component={BecomeTutor}></Route>
-          <Route path="/about" component={About}></Route>
-          <Route path="/contact" component={Contact}></Route>
-          <Route path="/faq" component={FAQ}></Route>
-          <Route path="/" component={Home}></Route>
-        </Switch> */}
+
       </div>
     </Router>
   );
