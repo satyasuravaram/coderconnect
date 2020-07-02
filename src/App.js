@@ -23,12 +23,10 @@ function App() {
   return (
     <Router>
       <div>
-
         <Switch>
           <Route path="/app" component={MainLayout}></Route>
           <Route path="/" component={LandingLayout}></Route>
         </Switch>
-
       </div>
     </Router>
   );
