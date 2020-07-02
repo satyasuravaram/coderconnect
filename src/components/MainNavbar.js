@@ -14,9 +14,8 @@ function MainNavbar () {
                         <NavDropdown.Item href="/app/profile">Profile</NavDropdown.Item>
                         <NavDropdown.Item href="/become-a-tutor" target="_blank">Become a tutor</NavDropdown.Item>
                         <NavDropdown.Item href="/faq" target="_blank">FAQ</NavDropdown.Item>
-                        <NavDropdown.Item href="/">Logout</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                        <NavDropdown.Item href="/">Logout</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
