@@ -6,12 +6,6 @@ import {
   Link
 } from 'react-router-dom';
 
-import BecomeTutor from './Pages/Become-a-Tutor';
-import About from './Pages/About';
-import Contact from './Pages/Contact';
-import FAQ from './Pages/FAQ';
-import Home from './Pages/Home';
-
 // Layouts
 import LandingLayout from './Layouts/Landing';
 import MainLayout from './Layouts/Main';
