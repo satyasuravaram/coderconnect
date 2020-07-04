@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
+import UserContext from '../context/UserContext';
 
 function MainNavbar () {
+
+    
+    const { setUserData } = useContext(UserContext);
+
+    const logout = () => {        
+        setUserData({
+            token: undefined,
+            user: undefined
+        });
+        localStorage.setItem("auth-token", "");
+    };
+
     return (
         <Navbar bg="primary" variant="dark" expand="lg">
             <Navbar.Brand href="/app/dashboard">CoderConnect</Navbar.Brand>
@@ -10,12 +23,12 @@ function MainNavbar () {
                 <Nav className="ml-auto">
                     <Nav.Link href="/app/dashboard">Dashboard</Nav.Link>
                     <Nav.Link href="/app/messages">Messages</Nav.Link>
-                    <NavDropdown title="[username]" id="basic-nav-dropdown">
+                    <NavDropdown title="Account" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/app/profile">Profile</NavDropdown.Item>
                         <NavDropdown.Item href="/become-a-tutor" target="_blank">Become a tutor</NavDropdown.Item>
                         <NavDropdown.Item href="/faq" target="_blank">FAQ</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="/">Logout</NavDropdown.Item>
+                        <NavDropdown.Item onClick={logout} href="/">Logout</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
