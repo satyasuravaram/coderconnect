@@ -19,6 +19,11 @@ const UserSchema = new mongoose.Schema({
         required: true,
         minlength: 6
     },
+    tutor: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
     date: {
         type: String,
         default: Date.now()
