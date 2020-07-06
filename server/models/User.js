@@ -24,6 +24,16 @@ const UserSchema = new mongoose.Schema({
         required: false,
         default: false
     },
+    bio: {
+        type: String,
+        required: false,
+        default: ""
+    },
+    skills: {
+        type: Array,
+        required: false,
+        default: []
+    },
     date: {
         type: String,
         default: Date.now()
