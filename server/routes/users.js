@@ -136,10 +136,8 @@ router.get("/", auth, async (req, res) => {
     if (!user) {
         return res.status(500).json({error: err.message});
     }
-
-    res.json({
-        id: user._id
-    })
+    
+    res.json(user)
 });
 
 module.exports = router;
