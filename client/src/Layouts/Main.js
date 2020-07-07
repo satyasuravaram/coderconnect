@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import Dashboard from "../Pages/Dashboard";
 import Messages from "../Pages/Messages";
 import Profile from "../Pages/Profile";
+import EditProfile from "../Pages/EditProfile";
 import UserContext from "../context/UserContext";
 import Axios from "axios";
 import "./styles.css";
@@ -54,6 +55,7 @@ function Main() {
         <Switch>
           <Route path="/app/dashboard" component={Dashboard}></Route>
           <Route path="/app/messages" component={Messages}></Route>
+          <Route path="/app/profile/edit" component={EditProfile}></Route>
           <Route path="/app/profile" component={Profile}></Route>
         </Switch>
       </div>
