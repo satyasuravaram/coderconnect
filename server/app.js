@@ -10,8 +10,10 @@ app.use(express.json());
 
 
 //Connect to mongoose
+const mongo_URI = process.env.MONGO_URI;
+
 mongoose
-    .connect("mongodb://localhost:27017/coderconnect_login_db", {
+    .connect(mongo_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true })
