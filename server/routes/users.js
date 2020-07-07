@@ -177,7 +177,7 @@ router.post("/isTokenValid", async (req, res) => {
 
     return res.json(true);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.json(false);
   }
 });
 
