@@ -29,7 +29,7 @@ function Main() {
         "http://localhost:5000/users/isTokenValid",
         null,
         { headers: { "x-auth-token": token } }
-      );
+      );      
 
       if (tokenRes.data) {
         const userRes = await Axios.get("http://localhost:5000/users/", {
