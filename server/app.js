@@ -7,6 +7,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
+
 //Connect to mongoose
 mongoose
     .connect("mongodb://localhost:27017/coderconnect_login_db", {

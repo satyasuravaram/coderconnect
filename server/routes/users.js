@@ -52,6 +52,7 @@ router.post("/register", async (req, res) => {
         res.json(savedUser);
 
     } catch (err) {
+        
         res.status(500).json({error: err.message});
     }
 
@@ -61,7 +62,8 @@ router.post("/login", async (req, res) => {
     try {
         
         const { email, password } = req.body;
-
+        console.log("Entered login post");
+        
         //validation
         if (!email || !password) {
             return res.status(400).json({msg: "Please fill in all fields."});
@@ -73,6 +75,8 @@ router.post("/login", async (req, res) => {
             return res.status(400).json({msg: "No account with this email has been registered."});
         }
         
+        console.log("Account is registered");
+        
 
         const isMatch = await bcrypt.compare(password, user.password);
 
@@ -80,8 +84,13 @@ router.post("/login", async (req, res) => {
             return res.status(400).json({msg: "Incorrect password."});
         }
 
+        console.log("Correct password");  
+        
+
         //JSON webtoken
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);   
+        console.log("Token successfully created");
+        
         res.json({
             token,
             user: {
