@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Row, Col, Form, Input, FormGroup, Label, Button } from "reactstrap";
 import Axios from "axios";
-import ErrorNotice from "../components/misc/ErrorNotice";
+import ErrorNotice from "../../components/misc/ErrorNotice";
 
 export default function Profile() {
   const [profileData, setProfileData] = useState({
