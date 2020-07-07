@@ -1,7 +1,9 @@
 import React, {useEffect, useContext} from 'react';
 import { useHistory } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import Axios from "axios";
-import UserContext from '../context/UserContext';
+import UserContext from '../../context/UserContext';
+import "./Home.css";
 
 
 export default function Home () {
@@ -40,12 +42,11 @@ export default function Home () {
         checkLoggedIn();
       });
     return (
-    <div>
-        <h2>Home</h2>
+    <div className="home-container">
+        <h2>CoderConnect</h2>
         <br/>
-        <p>Welcome to CoderConnect!</p>
-        <a href="/users/register"> Register here</a>
-        <br/>
-        <a href="/users/login"> Login here</a>
+        <p>Free coding help from qualified volunteer tutors!</p>
+        <Button variant="outline-primary" className="home-btn" href="/users/register">Sign Up</Button>
+        <Button variant="primary" className="home-btn" href="/users/login">Sign In</Button>
     </div>)
 }

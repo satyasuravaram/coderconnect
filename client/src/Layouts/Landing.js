@@ -5,7 +5,7 @@ import BecomeTutor from "../Pages/Become-a-Tutor";
 import About from "../Pages/About";
 import Contact from "../Pages/Contact";
 import Faq from "../Pages/FAQ";
-import Home from "../Pages/Home";
+import Home from "../Pages/Home/Home";
 import Register from "../Pages/Register/Register";
 import Login from "../Pages/Login/Login";
 import "./styles.css";
