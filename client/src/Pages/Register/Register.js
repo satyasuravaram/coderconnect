@@ -59,6 +59,7 @@ export default function Register() {
         password,
         password2,
       };
+      
 
       await Axios.post("http://localhost:5000/users/register", newUser);
 
@@ -66,6 +67,9 @@ export default function Register() {
         email,
         password,
       });
+
+      console.log(loginRes);
+      
 
       setUserData({
         token: loginRes.data.token,
