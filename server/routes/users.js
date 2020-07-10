@@ -191,12 +191,14 @@ router.get("/", auth, async (req, res) => {
   res.json(user);
 });
 
-router.get("/tutors", async (req, res) => {
+router.get("/tutors", auth, async (req, res) => {
   try {
+    console.log("before call");
     const tutors = await User.find({tutor: true});
+    console.log(tutors);
     res.json(tutors);
   } catch (err) {
-    return res.json(false)
+    return res.json(false);
   }
 });
 
