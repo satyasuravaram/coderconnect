@@ -107,7 +107,7 @@ export default function Dashboard() {
             {tutorsBio[index]}
             <Button
               variant="outline-danger"
-              href="profile"
+              href={`/app/profile/${tutorsID[index]}`}
               style={{ marginLeft: ".5rem" }}
             >
               Read more
