@@ -11,14 +11,14 @@ export default function Dashboard() {
     const [tutorsBio, setTutorsBio] = useState([]);
     const [tutorsFirstName, setTutorsFirstName] = useState([]);
     const [tutorsLastName, setTutorsLastName] = useState([]);
+    const [tutorsID, setTutorsID] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
     const getTutors = async () => {
-      //      const tutors = await Axios.get("https://localhost:5000/users/tutors", {});
-      //     console.log(tutors);
+
       let token = localStorage.getItem("auth-token");
 
       if (token === null) {
@@ -39,7 +39,9 @@ export default function Dashboard() {
         for(let i = 0; i < tutorArr.data.length; i++){
             setTutorsBio(oldTutors=>[...oldTutors, tutorArr.data[i].bio]);
             setTutorsFirstName(oldTutors=>[...oldTutors, tutorArr.data[i].firstName]);
-            setTutorsLastName(oldTutors=>[...oldTutors, tutorArr.data[i].lastName]);           
+            setTutorsLastName(oldTutors=>[...oldTutors, tutorArr.data[i].lastName]); 
+            setTutorsID(oldTutors=>[...oldTutors, tutorArr.data[i]._id]);           
+          
         }
       }
     };
@@ -105,7 +107,7 @@ export default function Dashboard() {
             {tutorsBio[index]}
             <Button
               variant="outline-danger"
-              href="profile"
+              href={`/app/profile/${tutorsID[index]}`}
               style={{ marginLeft: ".5rem" }}
             >
               Read more

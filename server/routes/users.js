@@ -119,7 +119,7 @@ router.post("/edit", auth, async (req, res) => {
           .json({ msg: "An account with this email already exists." });
       }
     }
- 
+
     //Bio Validation
     if (bio !== undefined) {
       if (bio.length > 2000) {
@@ -128,28 +128,26 @@ router.post("/edit", auth, async (req, res) => {
           .json({ msg: "Bio cannot exceed 2000 characters." });
       }
       await User.findByIdAndUpdate(id, { $set: { bio: bio } });
-
     }
 
     //All Updates after validation
     await User.findByIdAndUpdate(id, { $set: { email: email } });
 
     if (skills !== undefined) {
-        let skillsArr = skills.split(",");
-        await User.findByIdAndUpdate(id, { $set: { skills: skillsArr } });
+      let skillsArr = skills.split(",");
+      await User.findByIdAndUpdate(id, { $set: { skills: skillsArr } });
     }
 
     if (firstName !== undefined) {
-        await User.findByIdAndUpdate(id, { $set: { firstName: firstName } });
+      await User.findByIdAndUpdate(id, { $set: { firstName: firstName } });
     }
 
     if (lastName !== undefined) {
-        await User.findByIdAndUpdate(id, { $set: { lastName: lastName } });
+      await User.findByIdAndUpdate(id, { $set: { lastName: lastName } });
     }
 
     const updatedUser = await User.findById(id);
     res.json(updatedUser);
-
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -193,10 +191,21 @@ router.get("/", auth, async (req, res) => {
 
 router.get("/tutors", auth, async (req, res) => {
   try {
-    console.log("before call");
-    const tutors = await User.find({tutor: true});
+    const tutors = await User.find({ tutor: true });
     console.log(tutors);
     res.json(tutors);
+  } catch (err) {
+    return res.json(false);
+  }
+});
+
+router.get("/:userid", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userid);
+    if (!user) {
+      return res.json(false);
+    }
+    res.json(user);
   } catch (err) {
     return res.json(false);
   }
