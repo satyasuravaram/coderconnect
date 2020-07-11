@@ -17,8 +17,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const getTutors = async () => {
-      //      const tutors = await Axios.get("https://localhost:5000/users/tutors", {});
-      //     console.log(tutors);
+
       let token = localStorage.getItem("auth-token");
 
       if (token === null) {
