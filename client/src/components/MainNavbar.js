@@ -23,7 +23,7 @@ function MainNavbar () {
                 <Nav className="ml-auto">
                     <Nav.Link href="/app/dashboard">Dashboard</Nav.Link>
                     <Nav.Link href="/app/messages">Messages</Nav.Link>
-                    <NavDropdown title="Account" id="basic-nav-dropdown">
+                    <NavDropdown alignRight title="Account" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/app/profile">Profile</NavDropdown.Item>
                         <NavDropdown.Item href="/become-a-tutor" target="_blank">Become a tutor</NavDropdown.Item>
                         <NavDropdown.Item href="/faq" target="_blank">FAQ</NavDropdown.Item>
