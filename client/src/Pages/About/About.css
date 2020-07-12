@@ -1,0 +1,13 @@
+.container{
+    text-align: center;
+}
+
+.person{
+    margin: 0 0 10% 0;
+}
+
+.person-image{
+    height: 200px;
+    margin: 4%;
+    border-radius: 100%;
+}

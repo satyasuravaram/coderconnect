@@ -1,10 +1,10 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import BecomeTutor from "../Pages/Become-a-Tutor";
-import About from "../Pages/About";
+import BecomeTutor from "../Pages/Become-a-Tutor/BecomeTutor";
+import About from "../Pages/About/About";
 import Contact from "../Pages/Contact";
-import Faq from "../Pages/FAQ";
+import Faq from "../Pages/FAQ/FAQ";
 import Home from "../Pages/Home";
 import Register from "../Pages/Register/Register";
 import Login from "../Pages/Login/Login";
