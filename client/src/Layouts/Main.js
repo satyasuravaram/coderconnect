@@ -4,7 +4,10 @@ import { useHistory } from "react-router-dom";
 
 import Dashboard from "../Pages/Dashboard";
 import Messages from "../Pages/Messages";
-import Profile from "../Pages/Profile";
+import Profile from "../Pages/Profile/Profile";
+import EditProfile from "../Pages/Profile/EditProfile";
+import PublicProfile from "../Pages/Profile/PublicProfile";
+import MainApp from "../Pages/Main/MainApp";
 import UserContext from "../context/UserContext";
 import Axios from "axios";
 import "./styles.css";
@@ -53,8 +56,11 @@ function Main() {
       <div className="content-container">
         <Switch>
           <Route path="/app/dashboard" component={Dashboard}></Route>
-          <Route path="/app/messages" component={Messages}></Route>
-          <Route path="/app/profile" component={Profile}></Route>
+          <Route exact path="/app/messages" component={Messages}></Route>
+          <Route path="/app/profile/edit" component={EditProfile}></Route>
+          <Route path="/app/profile/:userid" component={PublicProfile}></Route>
+          <Route exact path="/app/profile" component={Profile}></Route>
+          <Route path="/app/messages/:connectid" component={MainApp}></Route>
         </Switch>
       </div>
     </React.Fragment>
