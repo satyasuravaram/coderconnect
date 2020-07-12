@@ -192,7 +192,6 @@ router.get("/", auth, async (req, res) => {
 router.get("/tutors", auth, async (req, res) => {
   try {
     const tutors = await User.find({ tutor: true });
-    console.log(tutors);
     res.json(tutors);
   } catch (err) {
     return res.json(false);
