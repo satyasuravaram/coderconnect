@@ -24,6 +24,7 @@ mongoose
 
 //Routes
 app.use("/users", require("./routes/users"));
+app.use("/messages", require("./routes/messages"));
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
