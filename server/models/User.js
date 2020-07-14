@@ -19,6 +19,11 @@ const UserSchema = new mongoose.Schema({
         required: true,
         minlength: 6
     },
+    connections: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "Connection",
+        default: []
+    },
     tutor: {
         type: Boolean,
         required: false,
