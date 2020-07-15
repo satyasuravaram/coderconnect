@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
 import Axios from "axios";
+import UserContext from "../context/UserContext"
+import createConnection from "../actions/CreateConnection"
+
 
 export default function Dashboard() {
   const [show, setShow] = useState(false);
+  const { userData } = useContext(UserContext);
 
   const [tutorsBio, setTutorsBio] = useState([]);
   const [tutorsFirstName, setTutorsFirstName] = useState([]);
@@ -15,8 +18,9 @@ export default function Dashboard() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
   useEffect(() => {
-    const getTutors = async () => {
+      const getTutors = async () => {
       let token = localStorage.getItem("auth-token");
 
       if (token === null) {
@@ -112,7 +116,7 @@ export default function Dashboard() {
             <Button
               variant="primary"
               style={{ position: "relative", left: "300px", bottom: "50px" }}
-              href = {`/app/messages/${tutorsID[index]}`}
+              onClick= {() => createConnection(tutorsID[index], userData.user._id)}
             >
               Connect
             </Button>

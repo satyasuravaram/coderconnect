@@ -7,7 +7,7 @@ import Messages from "../Pages/Messages";
 import Profile from "../Pages/Profile/Profile";
 import EditProfile from "../Pages/Profile/EditProfile";
 import PublicProfile from "../Pages/Profile/PublicProfile";
-import MainApp from "../Pages/Main/MainApp";
+import MainApp from "../Pages/Chat/Chat";
 import UserContext from "../context/UserContext";
 import Axios from "axios";
 import "./styles.css";

@@ -11,34 +11,46 @@ const Connection = require("../models/Connection");
 
 //New Connection
 router.post("/newConnection", async function (req, res, next) {
+  console.log("hi1")
   try {
     const student = await User.findById(req.body.currentUserId);
-    const tutor = await User.findById(req.body.userId);
-
+    const tutor = await User.findById(req.body.tutorId);
+    
+console.log("1")
     const newConversation = new Conversation({
       messages: [],
       users: [student, tutor],
     });
+    console.log("2")
     const conversation = await newConversation.save();
+    console.log("3")
 
     const connectionModel = await new Connection({
-      userId: req.body.userId,
+      userId: req.body.tutorId,
       conversation: conversation,
     });
+    console.log("4")
+
     const connection = await connectionModel.save();
+    console.log("5")
 
     const tutorConnectionModel = await new Connection({
       userId: req.body.currentUserId,
       conversation: conversation,
     });
+    console.log("6")
+
     const tutorConnection = await tutorConnectionModel.save();
+    console.log("7")
 
-    student.data.connections = [...user.data.connections, connection._id];
-    tutor.data.connections = [...tutor.data.connections, tutorConnection._id];
-
+    student.connections = [...student.connections, connection._id];
+    console.log("student id works")
+    tutor.connections = [...tutor.connections, tutorConnection._id];
+    console.log("8")
     await tutor.save();
+    console.log("9")
     const newStudent = await student.save();
-
+    console.log("10")
     res.status(200).json(newStudent);
   } catch (err) {
     res.status(400).json(err);
