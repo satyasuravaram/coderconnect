@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 import Dashboard from "../Pages/Dashboard";
-import Messages from "../Pages/Messages";
+import Messages from "../Pages/Messages/Messages";
 import Profile from "../Pages/Profile/Profile";
 import EditProfile from "../Pages/Profile/EditProfile";
 import PublicProfile from "../Pages/Profile/PublicProfile";
@@ -48,7 +48,7 @@ function Main() {
     };
 
     checkLoggedIn();
-  });
+  }, []);
 
   return (
     <React.Fragment>
