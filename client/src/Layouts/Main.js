@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
-import Dashboard from "../Pages/Dashboard";
+import Dashboard from "../Pages/Dashboard/Dashboard";
 import Messages from "../Pages/Messages/Messages";
 import Profile from "../Pages/Profile/Profile";
 import EditProfile from "../Pages/Profile/EditProfile";
