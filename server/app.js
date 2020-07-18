@@ -4,6 +4,10 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const http = require("http");
 const socketio = require("socket.io");
+const User = require("./models/User");
+const Conversation = require("./models/Conversation");
+const Message = require("./models/Message");
+const Connection = require("./models/Connection");
 
 const app = express();
 const server = http.createServer(app);
@@ -32,14 +36,9 @@ app.use("/messages", require("./routes/messages"));
 io.on("connection", (socket) => {
   console.log(`New User Connected ${socket.id}`);
 
-  socket.once("typing", (data) => {
-    io.sockets.emit("typing", data);
-  });
-
-  socket.on("sendMessage", (data) => {
-    io.sockets.emit("newMessage", data);
-  });
-
+  socket.on("disconnect", () => {
+    console.log("User disconnected");
+  })
 });
 
 const port = process.env.PORT || 5000;
