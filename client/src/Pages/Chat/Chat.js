@@ -1,24 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import io from "socket.io-client";
 import { useParams } from "react-router-dom";
-import Button from "react-bootstrap/Button";
+import Input from "./Input/Input";
+import Messages from "./Messages/Messages";
 
-export default function Chat() {
+import "./Chat.css";
+
+let socket;
+
+export default function Chat({ location }) {
+  const [userID, setUserID] = useState("");
+  const [conversationID, setConversationID] = useState("");
+  const [users, setUsers] = useState("");
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+  const ENDPOINT = "http://localhost:5000";
   const { connectid } = useParams();
 
   return (
-    <div>
-      <div className="container" style={{ marginTop: "2%" }}>
-        <div className="row">
-          <div className="column" style={{ border: "solid black" }}>
-            <div className="messages-container">Messages map goes here</div>
-            <form id="send-container">
-              <input type="text" id="message-input"></input>
-              <Button type="submit" id="send-btn">
-                Send
-              </Button>
-            </form>
-          </div>
-        </div>
+    <div className="outerContainer">
+      <div className="innerContainer">
+        <Messages />
+        <Input />
       </div>
     </div>
   );
