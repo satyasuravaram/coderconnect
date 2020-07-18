@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 import BecomeTutor from "../Pages/Become-a-Tutor/BecomeTutor";
 import About from "../Pages/About/About";
-import Contact from "../Pages/Contact";
+import Contact from "../Pages/Contact/Contact";
 import Faq from "../Pages/FAQ/FAQ";
 import Home from "../Pages/Home/Home";
 import Register from "../Pages/Register/Register";

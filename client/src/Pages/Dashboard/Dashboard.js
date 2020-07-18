@@ -3,8 +3,8 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
 import Axios from "axios";
-import UserContext from "../context/UserContext";
-import createConnection from "../actions/CreateConnection";
+import UserContext from "../../context/UserContext";
+import createConnection from "../../actions/CreateConnection";
 import { useHistory } from "react-router-dom";
 
 export default function Dashboard() {
