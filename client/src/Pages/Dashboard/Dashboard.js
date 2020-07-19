@@ -98,7 +98,7 @@ export default function Dashboard() {
       </h6>
 
       {tutorsFirstName.map((name, index) => (
-        <Card
+        <Card key={index}
           style={{
             width: "50rem",
             marginLeft: "auto",
