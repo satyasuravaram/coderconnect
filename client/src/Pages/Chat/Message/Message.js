@@ -4,26 +4,25 @@ import './Message.css';
 
 import ReactEmoji from 'react-emoji';
 
-const Message = () => {
+const Message = (props) => {
   let isSentByCurrentUser = false;
 
 
+
   return (
-    isSentByCurrentUser
+      props.message.sender === props.userID
       ? (
         <div className="messageContainer justifyEnd">
-          <p className="sentText pr-10">{}</p>
           <div className="messageBox backgroundBlue">
-            <p className="messageText colorWhite">{}</p>
+            <p className="messageText colorWhite">{props.message.data}</p>
           </div>
         </div>
         )
         : (
           <div className="messageContainer justifyStart">
             <div className="messageBox backgroundLight">
-              <p className="messageText colorDark">{}</p>
+              <p className="messageText colorDark">{props.message.data}</p>
             </div>
-            <p className="sentText pl-10 ">{}</p>
           </div>
         )
   );
