@@ -36,7 +36,18 @@ app.use("/messages", require("./routes/messages"));
 io.on("connection", (socket) => {
   console.log(`New User Connected ${socket.id}`);
 
+  socket.on("join", (data) => {
+    const room = data.connectid;
+    socket.join(room);
+    console.log("Joined")
+  })
+
+  socket.on("sendMessage", (data) => {
+    io.to(data.room).emit("newMessage", {message: data.message})
+  })
+
   socket.on("disconnect", () => {
+    socket.leave()
     console.log("User disconnected");
   })
 });
