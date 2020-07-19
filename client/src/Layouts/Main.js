@@ -10,7 +10,6 @@ import PublicProfile from "../Pages/Profile/PublicProfile";
 import Chat from "../Pages/Chat/Chat";
 import UserContext from "../context/UserContext";
 import Axios from "axios";
-import "./styles.css";
 
 import MainNavbar from "../components/MainNavbar";
 
