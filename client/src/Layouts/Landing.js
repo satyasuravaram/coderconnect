@@ -8,7 +8,6 @@ import Faq from "../Pages/FAQ/FAQ";
 import Home from "../Pages/Home/Home";
 import Register from "../Pages/Register/Register";
 import Login from "../Pages/Login/Login";
-import "./styles.css";
 
 import LandingNavbar from "../components/LandingNavbar";
 
