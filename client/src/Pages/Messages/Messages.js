@@ -67,7 +67,7 @@ export default function Messages() {
       <h2>My Messages</h2>
       <ListGroup>
       {firstName.map((first, index) => (
-        <ListGroupItem onClick={()=>{history.push(`/app/messages/${conversation[index]}`)}} className="connection-item">
+        <ListGroupItem key={index} onClick={()=>{history.push(`/app/messages/${conversation[index]}`)}} className="connection-item">
           <ListGroupItemHeading>{first} {lastName[index]}</ListGroupItemHeading>
           <ListGroupItemText>
             Donec id elit non mi porta gravida at eget metus. Maecenas sed diam
