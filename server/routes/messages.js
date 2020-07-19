@@ -8,6 +8,7 @@ const User = require("../models/User");
 const Conversation = require("../models/Conversation");
 const Message = require("../models/Message");
 const Connection = require("../models/Connection");
+const { all } = require("./users");
 
 //New Connection
 router.post("/newConnection", async function (req, res, next) {
@@ -104,7 +105,7 @@ router.post("/loadAllConnections", async function (req, res, next) {
         return res.json(connections)
       } 
     }
-  
+
   } catch (err) {
     res.json(false);
   }
@@ -113,19 +114,22 @@ router.post("/loadAllConnections", async function (req, res, next) {
 //Get All Messages for one Conversation
 router.get("/:id", async function (req, res, next) {
   try {
+    console.log("Running request");
     const conversation = await Conversation.findById(req.params.id);
+    console.log("After conv call");
     const allMessages = [];
     if (!conversation.messages) {
       res.json([]);
     }
-    conversation.messages &&
-      conversation.messages.map(async (msgId, i) => {
-        const message = await Message.findById(msgId);
-        allMessages.push(message);
 
-        if (conversation.messages.length >= i + 1) return res.json(allMessages);
-      });
-    return res.json(allMessages);
+    for (let i = 0; i < conversation.messages.length; i++) {
+      const message = await Message.findById(conversation.messages[i]);
+      allMessages.push(message)
+
+      if (i === conversation.messages.length - 1) {
+        res.json(allMessages)
+      }
+    }
   } catch (err) {
     res.status(400).json(err);
   }
@@ -134,8 +138,10 @@ router.get("/:id", async function (req, res, next) {
 //Send Message
 router.post("/:id", async function (req, res, next) {
   try {
+    
     //Create and Save Message
     const message = await new Message(req.body);
+    console.log(message);
     await message.save();
 
     //Add Message to Conversation
