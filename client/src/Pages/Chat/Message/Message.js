@@ -2,13 +2,7 @@ import React from 'react';
 
 import './Message.css';
 
-import ReactEmoji from 'react-emoji';
-
 const Message = (props) => {
-  let isSentByCurrentUser = false;
-
-
-
   return (
       props.message.sender === props.userID
       ? (
