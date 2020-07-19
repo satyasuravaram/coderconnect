@@ -1,0 +1,6 @@
+
+.connection-item:hover {
+    background-color: #3f72af;
+    color: #fff;
+    cursor: pointer;
+}

@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
 import Axios from "axios";
+import UserContext from "../../context/UserContext";
+import createConnection from "../../actions/CreateConnection";
+import { useHistory } from "react-router-dom";
 
 export default function Dashboard() {
   const [show, setShow] = useState(false);
-
+  const { userData, setUserData } = useContext(UserContext);
   const [tutorsBio, setTutorsBio] = useState([]);
   const [tutorsFirstName, setTutorsFirstName] = useState([]);
   const [tutorsLastName, setTutorsLastName] = useState([]);
   const [tutorsID, setTutorsID] = useState([]);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const history = useHistory();
 
   useEffect(() => {
     const getTutors = async () => {
@@ -32,6 +34,15 @@ export default function Dashboard() {
       );
 
       if (tokenRes.data) {
+        const userRes = await Axios.get("http://localhost:5000/users/", {
+          headers: { "x-auth-token": token },
+        });
+
+        setUserData({
+          token: token,
+          user: userRes.data,
+        });
+
         const tutorArr = await Axios.get("http://localhost:5000/users/tutors", {
           headers: { "x-auth-token": token },
         });
@@ -87,7 +98,7 @@ export default function Dashboard() {
       </h6>
 
       {tutorsFirstName.map((name, index) => (
-        <Card
+        <Card key={index}
           style={{
             width: "50rem",
             marginLeft: "auto",
@@ -110,44 +121,18 @@ export default function Dashboard() {
                 Read more
               </Button>
             </Card.Text>
-            <Button
-              variant="primary"
-              style={{ position: "relative", left: "300px", bottom: "50px" }}
-              onClick={handleShow}
-            >
-              Connect
-            </Button>
 
-            <Modal show={show} onHide={handleClose}>
-              <Modal.Header closeButton>
-                <Modal.Title>Connect with tutor</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <Form>
-                  <Form.Group>
-                    <Form.Label>Skill you need help with:</Form.Label>
-                    <Form.Control placeholder="Skill" />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label>Issue:</Form.Label>
-                    <Form.Control placeholder="Issue" />
-                  </Form.Group>
-                </Form>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-                <Button
-                  variant="primary"
-                  href={`/app/messages/${tutorsID[index]}`}
-                  type="submit"
-                  onClick={handleClose}
-                >
-                  Submit
-                </Button>
-              </Modal.Footer>
-            </Modal>
+            {tutorsID[index] !== userData.user._id && (
+              <Button
+                variant="primary"
+                style={{ position: "relative", left: "300px", bottom: "50px" }}
+                onClick={() =>
+                  createConnection(tutorsID[index], userData.user._id, history)
+                }
+              >
+                Connect
+              </Button>
+            )}
           </Card.Body>
         </Card>
       ))}
