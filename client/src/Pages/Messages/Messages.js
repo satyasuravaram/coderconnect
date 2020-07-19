@@ -6,13 +6,10 @@ import {
   ListGroupItemText,
 } from "reactstrap";
 import Axios from "axios";
-import UserContext from "../../context/UserContext";
 import "./Messages.css";
 import { useHistory } from "react-router-dom";
 
 export default function Messages() {
-  const { userData, setUserData } = useContext(UserContext);
-  const [connections, setConnections] = useState([]);
   const [firstName, setFirstName] = useState([]);
   const [lastName, setLastName] = useState([]);
   const [conversation, setConversation] = useState([]);
