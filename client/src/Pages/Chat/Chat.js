@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import Input from "./Input/Input";
 import Messages from "./Messages/Messages";
 import UserContext from "../../context/UserContext";
+import VideoChat from "./Video/VideoChat";
+import { Col, Row, Container } from "reactstrap";
 import Axios from "axios";
 import "./Chat.css";
 
@@ -63,6 +65,9 @@ export default function Chat() {
       <div className="innerContainer">
         <Messages messages={messages} userID={userID} />
         <Input room={connectid} userID={userID} />
+      </div>
+      <div >
+        <VideoChat room={connectid} userID={userID}/>
       </div>
     </div>
   );

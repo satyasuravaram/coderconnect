@@ -4,10 +4,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const http = require("http");
 const socketio = require("socket.io");
-const User = require("./models/User");
-const Conversation = require("./models/Conversation");
-const Message = require("./models/Message");
-const Connection = require("./models/Connection");
 
 const app = express();
 const server = http.createServer(app);
@@ -44,6 +40,21 @@ io.on("connection", (socket) => {
 
   socket.on("sendMessage", (data) => {
     io.to(data.room).emit("newMessage", {message: data.message})
+  })
+
+  socket.on("callUser", (data) => {
+    socket.broadcast.to(data.room).emit("hey", {
+      signal: data.signalData,
+      from: data.from,
+    });
+  });
+
+  socket.on("acceptCall", (data) => {
+    socket.broadcast.to(data.room).emit("callAccepted", data.signal);
+  });
+
+  socket.on("endCall", (data) => {
+    io.to(data.room).emit("onCallEnd")
   })
 
   socket.on("disconnect", () => {
