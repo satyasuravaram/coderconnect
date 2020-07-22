@@ -18,7 +18,10 @@
     "react-scripts": "3.4.1",
     "react-scroll-to-bottom": "^3.0.0",
     "reactstrap": "^8.5.1",
-    "socket.io-client": "^2.3.0"
+    "simple-peer": "^9.7.2",
+    "socket.io-client": "^2.3.0",
+    "styled-components": "^5.1.1",
+    "sweetalert2": "^9.17.0"
   },
   "scripts": {
     "start": "react-scripts start",
