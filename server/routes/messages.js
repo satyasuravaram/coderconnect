@@ -91,14 +91,22 @@ router.post("/loadAllConnections", async function (req, res, next) {
     }
   
     for(let i = 0; i < user.connections.length; i++) {
-
       const connection = await Connection.findById(user.connections[i]);
       const otherUser = await User.findById(connection.userId);
+      const existingConv = await Conversation.findById(connection.conversation);
+      const conversationLength = existingConv.messages.length;
+      var lastMessage;
 
+      if(conversationLength > 0){
+        lastMessage = await Message.findById(existingConv.messages[conversationLength - 1]);
+      } else {
+        lastMessage = "";
+      }
       connections.push({
         first: otherUser.firstName,
         last: otherUser.lastName,
         conversation: connection.conversation,
+        lastMessage: lastMessage
       });
 
       if (i === user.connections.length - 1) {
@@ -114,9 +122,7 @@ router.post("/loadAllConnections", async function (req, res, next) {
 //Get All Messages for one Conversation
 router.get("/:id", async function (req, res, next) {
   try {
-    console.log("Running request");
     const conversation = await Conversation.findById(req.params.id);
-    console.log("After conv call");
     const allMessages = [];
     if (!conversation.messages) {
       res.json([]);
@@ -141,7 +147,6 @@ router.post("/:id", async function (req, res, next) {
     
     //Create and Save Message
     const message = await new Message(req.body);
-    console.log(message);
     await message.save();
 
     //Add Message to Conversation
