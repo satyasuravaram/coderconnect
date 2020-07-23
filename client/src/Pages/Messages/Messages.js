@@ -13,6 +13,7 @@ export default function Messages() {
   const [firstName, setFirstName] = useState([]);
   const [lastName, setLastName] = useState([]);
   const [conversation, setConversation] = useState([]);
+  const [lastMessage, setLastMessage] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -50,6 +51,10 @@ export default function Messages() {
               loadRes.data[i].last,
             ]);
             setConversation((oldConv) => [...oldConv, loadRes.data[i].conversation]);
+            setLastMessage((lastMessages) => [
+              ...lastMessages,
+              loadRes.data[i].lastMessage.data,
+            ])
           }
 
       }
@@ -67,8 +72,7 @@ export default function Messages() {
         <ListGroupItem key={index} onClick={()=>{history.push(`/app/messages/${conversation[index]}`)}} className="connection-item">
           <ListGroupItemHeading>{first} {lastName[index]}</ListGroupItemHeading>
           <ListGroupItemText>
-            Donec id elit non mi porta gravida at eget metus. Maecenas sed diam
-            eget risus varius blandit.
+            {lastMessage[index]}
           </ListGroupItemText>
         </ListGroupItem>
       ))}
