@@ -1,0 +1,21 @@
+.search-container{
+    position: relative;
+    height: 6.06rem;
+}
+
+.searchbarParent{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 59%;
+    z-index: 3;
+}
+
+.searchbar{
+    position: absolute;
+    display: inline-block;
+    width: 86%;
+    margin-right: 3%;
+}
+
