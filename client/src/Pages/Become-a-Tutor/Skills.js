@@ -8,7 +8,7 @@ export default function Skills() {
 
     return (
         <div>
-            <Select isMulti={true} options={skillsArray} defaultValue={skillsArray}/>
+            <Select isMulti options={skillsArray}/>
         </div>
     )
 }
