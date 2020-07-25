@@ -6,9 +6,14 @@ import Axios from "axios";
 import UserContext from "../../context/UserContext";
 import createConnection from "../../actions/CreateConnection";
 import { useHistory } from "react-router-dom";
+import Select from "react-select";
+import skillsArray from "../../components/SkillsArray"
+import "./Dashboard.css"
+
 
 export default function Dashboard() {
   const [show, setShow] = useState(false);
+  const [searchSkill, setSearchSkill] = useState({});
   const { userData, setUserData } = useContext(UserContext);
   const [tutorsBio, setTutorsBio] = useState([]);
   const [tutorsFirstName, setTutorsFirstName] = useState([]);
@@ -64,41 +69,28 @@ export default function Dashboard() {
   }, []);
   return (
     <div
-      className="text-center"
       style={{ backgroundColor: "#dbe2ef", marginLeft: "0px" }}
     >
-      <h5 style={{ marginLeft: "0px" }}>We'll have some info here</h5>
-      <Button variant="outline-primary" onClick={handleShow}>
-        Request a tutor
-      </Button>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Request a Tutor</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Select Skill: </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Submit
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <div className="search-container">
+        <div className="searchbarParent">
+          <Select className="searchbar" onChange={setSearchSkill} options={skillsArray}></Select>
+          <Button variant="primary">Search</Button>
+        </div>
+      </div>
 
-      <h6
+
+
+      <h6 className="text-center"
         style={{
           marginBottom: 2 + "rem",
-          marginTop: 4 + "rem",
-          marginLeft: "0px",
         }}
       >
         Tutors:
       </h6>
 
       {tutorsFirstName.map((name, index) => (
-        <Card key={index}
+        <Card className = "text-center" key={index}
           style={{
             width: "50rem",
             marginLeft: "auto",
