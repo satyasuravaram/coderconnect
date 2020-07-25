@@ -3,9 +3,15 @@ import { useHistory } from "react-router-dom";
 import { Row, Col, Form, Input, FormGroup, Label, Button } from "reactstrap";
 import Axios from "axios";
 import ErrorNotice from "../../components/misc/ErrorNotice";
+import Select from "react-select";
+import skillsArray from "../../components/SkillsArray";
+import "./EditProfile.css";
+import { CardGroup } from "react-bootstrap";
+import SkillsDropdown from "./SkillsDropdown"
 
 export default function Profile() {
   const [profileData, setProfileData] = useState({
+    id: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -13,6 +19,7 @@ export default function Profile() {
     skills: [],
     tutor: false,
   });
+  const [existingSkills, setExistingSkills] = useState([]);
   const [error, setError] = useState("");
   const history = useHistory();
 
@@ -25,7 +32,15 @@ export default function Profile() {
           headers: { "x-auth-token": token },
         });
 
+        for (let i = 0; i < userRes.data.skills.length; i++) {
+          setExistingSkills((prevSkills) => [
+            ...prevSkills,
+            { value: userRes.data.skills[i], label: userRes.data.skills[i] },
+          ]);
+        }
+
         setProfileData({
+          id: userRes.data._id,
           firstName: userRes.data.firstName,
           lastName: userRes.data.lastName,
           email: userRes.data.email,
@@ -33,6 +48,8 @@ export default function Profile() {
           skills: userRes.data.skills,
           tutor: userRes.data.tutor,
         });
+
+        
       } catch (err) {
         console.log(err);
       }
@@ -61,6 +78,10 @@ export default function Profile() {
     e.preventDefault();
 
     try {
+      const newSkillsArr = [];
+      for (let i = 0; i < existingSkills.length; i++) {
+        newSkillsArr.push(existingSkills[i].value)
+      }
       let token = localStorage.getItem("auth-token");
       const editRes = await Axios.post(
         "http://localhost:5000/users/edit",
@@ -70,13 +91,13 @@ export default function Profile() {
           prevEmail: profileData.email,
           email: newProfileData.email,
           bio: newProfileData.bio,
-          skills: newProfileData.skills,
+          skills: newSkillsArr,
         },
         { headers: { "x-auth-token": token } }
       );
 
       if (editRes.data) {
-          history.push("/app/profile");
+        history.push("/app/profile");
       }
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
@@ -84,7 +105,7 @@ export default function Profile() {
   };
 
   return (
-    <div>
+    <div className="editContainer">
       <h2>Edit Profile</h2>
       {error && <ErrorNotice message={error} />}
       <Form onSubmit={editProfile}>
@@ -130,39 +151,30 @@ export default function Profile() {
           </Col>
         </Row>
 
-        {profileData.tutor &&
-        <Row form>
-          <Col md={6}>
-            <FormGroup>
-              <Label for="bio">Bio</Label>
-              <Input
-                type="textarea"
-                name="bio"
-                id="bio"
-                defaultValue={profileData.bio}
-                onChange={handleChange}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
-        }
+        {profileData.tutor && (
+          <Row form>
+            <Col md={6}>
+              <FormGroup>
+                <Label for="bio">Bio</Label>
+                <Input
+                  type="textarea"
+                  name="bio"
+                  id="bio"
+                  defaultValue={profileData.bio}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+        )}
 
-        {profileData.tutor &&
-        <Row form>
-          <Col md={6}>
-            <FormGroup>
-              <Label for="skills">Skills (Separate by commas)</Label>
-              <Input
-                type="textarea"
-                name="skills"
-                id="skills"
-                defaultValue={profileData.skills}
-                onChange={handleChange}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
-        }
+        {profileData.tutor && (
+          <Row form>
+            <Col md={6}>
+              <SkillsDropdown options={skillsArray} existingSkills={existingSkills} setExistingSkills={setExistingSkills}/>
+            </Col>
+          </Row>
+        )}
         <Button type="submit">Save Changes</Button>
       </Form>
     </div>
