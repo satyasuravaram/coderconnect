@@ -9,6 +9,8 @@ import { useHistory } from "react-router-dom";
 import Select from "react-select";
 import skillsArray from "../../components/SkillsArray";
 import "./Dashboard.css";
+import Pagination from './Pagination'
+
 
 export default function Dashboard() {
   const [show, setShow] = useState(false);
@@ -20,12 +22,14 @@ export default function Dashboard() {
   const [tutorsSkills, setTutorsSkills] = useState([]);
   const [tutorsID, setTutorsID] = useState([]);
   const [tutorsHaveCurrentSkill, setTutorsHaveCurrentSkill] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(2);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const history = useHistory();
 
   useEffect(() => {
-    console.log("yolo");
     const getTutors = async () => {
       let token = localStorage.getItem("auth-token");
 
@@ -86,7 +90,6 @@ export default function Dashboard() {
         hasSkillArr.push(hasSkill);
       }
       setTutorsHaveCurrentSkill(hasSkillArr);
-      console.log(hasSkillArr);
     } else {
       let hasSkillArr = [];
       for (let i = 0; i < tutorsSkills.length; i++) {
@@ -95,6 +98,16 @@ export default function Dashboard() {
       setTutorsHaveCurrentSkill(hasSkillArr);
     }
   };
+  console.log(tutorsHaveCurrentSkill);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentBios = tutorsBio.slice(indexOfFirstPost, indexOfLastPost);
+  const currentFirstNames = tutorsFirstName.slice(indexOfFirstPost, indexOfLastPost);
+  const currentLastNames = tutorsLastName.slice(indexOfFirstPost, indexOfLastPost);
+  const currentIDs = tutorsID.slice(indexOfFirstPost, indexOfLastPost);
+  const currentSkills = tutorsHaveCurrentSkill.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
 
   return (
     <div style={{ marginLeft: "0px", backgroundColor: "#dbe2ef" }}>
@@ -126,15 +139,19 @@ export default function Dashboard() {
       >
         Tutors:
       </h6>
-
-      {tutorsFirstName.map(
+      <Pagination className = 'center'
+        postsPerPage={postsPerPage}
+        totalPosts={tutorsHaveCurrentSkill.filter(tutor => tutor).length}
+        paginate={paginate}
+      />
+      {currentFirstNames.map(
         (name, index) =>
-          tutorsHaveCurrentSkill[index] && (
+          currentSkills[index] && (
             <Card
               className="text-center"
               key={index}
               style={{
-                width: "50rem",
+                width: "59%",
                 marginLeft: "auto",
                 marginRight: "auto",
                 marginBottom: "20px",
@@ -146,10 +163,10 @@ export default function Dashboard() {
               />
               <Card.Body style={{ paddingBottom: ".1rem" }}>
                 <Card.Title>
-                  {name} {tutorsLastName[index]}
+                  {name} {currentLastNames[index]}
                 </Card.Title>
                 <Card.Text>
-                  {tutorsBio[index]}
+                  {currentBios[index]}
                   <Button
                     variant="outline-danger"
                     href={`/app/profile/${tutorsID[index]}`}
@@ -159,7 +176,7 @@ export default function Dashboard() {
                   </Button>
                 </Card.Text>
 
-                {tutorsID[index] !== userData.user._id && (
+                {currentIDs[index] !== userData.user._id && (
                   <Button
                     variant="primary"
                     style={{
@@ -169,7 +186,7 @@ export default function Dashboard() {
                     }}
                     onClick={() =>
                       createConnection(
-                        tutorsID[index],
+                        currentIDs[index],
                         userData.user._id,
                         history
                       )
