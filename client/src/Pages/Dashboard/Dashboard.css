@@ -10,6 +10,8 @@
     transform: translate(-50%, -50%);
     width: 59%;
     z-index: 3;
+    display:flex;
+    justify-content: center;
 }
 
 .searchbar{
@@ -89,6 +91,15 @@
     margin-top: 1rem;
 }
 
+@media screen and (max-width: 1157px) {
+    .searchbarParent{
+        width: 85%;
+    }
+
+    .searchbar{
+        width: 60%;
+    }
+}
 
 @media screen and (max-width: 868px) {
     .tutor-card{
@@ -112,7 +123,38 @@
         max-width: 20rem;
         height: 100%;
     }
+
 }
+
+@media screen and (max-width: 426px) {
+    .tutor-card-img-container{
+        min-width: 14rem;
+        max-width: 14rem;
+        height: 100%;
+        padding-top: 0.3rem;
+    }    
+
+    .tutor-card-name{
+        font-size: 1.75rem;
+    }
+
+    .tutor-card{
+        width: 80%;
+        margin: 0.5rem 0.5rem;
+    }
+    
+}
+
+@media screen and (max-width: 378px) {
+    .tutor-card{
+        margin: 0.5rem 0.5rem;
+        width: 90%;
+    }
+    .searchbar{
+        font-size: small;
+    }
+}
+
 
 
 
