@@ -10,8 +10,8 @@ import PublicProfile from "../Pages/Profile/PublicProfile";
 import Chat from "../Pages/Chat/Chat";
 import UserContext from "../context/UserContext";
 import Axios from "axios";
-
 import MainNavbar from "../components/MainNavbar";
+import "./Main.css"
 
 function Main() {
   const { setUserData } = useContext(UserContext);

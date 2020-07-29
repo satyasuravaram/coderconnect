@@ -1,6 +1,7 @@
 import React, {useState, validated, handleSubmit} from "react";
 import {Form, Col, InputGroup, Button} from "react-bootstrap";
 import "./BecomeTutor.css"
+import Skills from "./Skills"
 
 export default function BecomeTutor() {
   const [validated, setValidated] = useState(false);
@@ -83,6 +84,8 @@ export default function BecomeTutor() {
               </Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
+          <Skills />
+          <hr/>
           <Button type="submit">Submit app</Button>
         </Form>
       </div>

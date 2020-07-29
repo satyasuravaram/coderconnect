@@ -134,8 +134,7 @@ router.post("/edit", auth, async (req, res) => {
     await User.findByIdAndUpdate(id, { $set: { email: email } });
 
     if (skills !== undefined) {
-      let skillsArr = skills.split(",");
-      await User.findByIdAndUpdate(id, { $set: { skills: skillsArr } });
+      await User.findByIdAndUpdate(id, { $set: { skills: skills } });
     }
 
     if (firstName !== undefined) {
