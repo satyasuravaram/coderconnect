@@ -9,9 +9,8 @@ import { useHistory } from "react-router-dom";
 import Select from "react-select";
 import skillsArray from "../../components/SkillsArray";
 import "./Dashboard.css";
-import SatyaImg from "../About/images/satya.jpeg"
-import Pagination from './Pagination'
-
+import SatyaImg from "../About/images/satya.jpeg";
+import Pagination from "./Pagination";
 
 export default function Dashboard() {
   const [show, setShow] = useState(false);
@@ -103,12 +102,21 @@ export default function Dashboard() {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentBios = tutorsBio.slice(indexOfFirstPost, indexOfLastPost);
-  const currentFirstNames = tutorsFirstName.slice(indexOfFirstPost, indexOfLastPost);
-  const currentLastNames = tutorsLastName.slice(indexOfFirstPost, indexOfLastPost);
+  const currentFirstNames = tutorsFirstName.slice(
+    indexOfFirstPost,
+    indexOfLastPost
+  );
+  const currentLastNames = tutorsLastName.slice(
+    indexOfFirstPost,
+    indexOfLastPost
+  );
   const currentIDs = tutorsID.slice(indexOfFirstPost, indexOfLastPost);
-  const currentSkills = tutorsHaveCurrentSkill.slice(indexOfFirstPost, indexOfLastPost);
+  const currentSkills = tutorsHaveCurrentSkill.slice(
+    indexOfFirstPost,
+    indexOfLastPost
+  );
 
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div style={{ marginLeft: "0px", backgroundColor: "#dbe2ef" }}>
@@ -132,17 +140,11 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <h6
-        className="text-center"
-        style={{
-          marginBottom: 2 + "rem",
-        }}
-      >
-        Tutors:
-      </h6>
-      <Pagination className='center'
+      <h6 className="text-center">Tutors:</h6>
+      <Pagination
+        className="center"
         postsPerPage={postsPerPage}
-        totalPosts={tutorsHaveCurrentSkill.filter(tutor => tutor).length}
+        totalPosts={tutorsHaveCurrentSkill.filter((tutor) => tutor).length}
         paginate={paginate}
       />
       <div className="tutor-card-container">
@@ -151,7 +153,11 @@ export default function Dashboard() {
             currentSkills[index] && (
               <div className="tutor-card">
                 <div className="tutor-card-img-container">
-                  <img className="tutor-card-img" src={SatyaImg} alt="satyaimg" />
+                  <img
+                    className="tutor-card-img"
+                    src={SatyaImg}
+                    alt="satyaimg"
+                  />
                 </div>
 
                 <div className="tutor-card-info">
@@ -162,7 +168,12 @@ export default function Dashboard() {
                     {currentBios[index].substring(0, 150)}
                     {currentBios[index].length > 150 && "..."} &nbsp;
                   </p>
-                  <a href={`/app/profile/${currentIDs[index]}`} className="tutor-card-readmore">See Profile</a>
+                  <a
+                    href={`/app/profile/${currentIDs[index]}`}
+                    className="tutor-card-readmore"
+                  >
+                    See Profile
+                  </a>
 
                   {currentIDs[index] !== userData.user._id && (
                     <Button
@@ -189,7 +200,8 @@ export default function Dashboard() {
   );
 }
 
-{/* <Card
+{
+  /* <Card
 className="text-center"
 key={index}
 style={{
@@ -238,4 +250,5 @@ style={{
     </Button>
   )}
 </Card.Body>
-</Card> */}
+</Card> */
+}
