@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import Select from "react-select";
 import skillsArray from "../../components/SkillsArray";
 import "./Dashboard.css";
+import SatyaImg from "../About/images/satya.jpeg"
 import Pagination from './Pagination'
 
 
@@ -139,66 +140,102 @@ export default function Dashboard() {
       >
         Tutors:
       </h6>
-      <Pagination className = 'center'
+      <Pagination className='center'
         postsPerPage={postsPerPage}
         totalPosts={tutorsHaveCurrentSkill.filter(tutor => tutor).length}
         paginate={paginate}
       />
-      {currentFirstNames.map(
-        (name, index) =>
-          currentSkills[index] && (
-            <Card
-              className="text-center"
-              key={index}
-              style={{
-                width: "59%",
-                marginLeft: "auto",
-                marginRight: "auto",
-                marginBottom: "20px",
-              }}
-            >
-              <Card.Img
-                variant="left"
-                src="holder.js/100px180?text=Image cap"
-              />
-              <Card.Body style={{ paddingBottom: ".1rem" }}>
-                <Card.Title>
-                  {name} {currentLastNames[index]}
-                </Card.Title>
-                <Card.Text>
-                  {currentBios[index]}
-                  <Button
-                    variant="outline-danger"
-                    href={`/app/profile/${tutorsID[index]}`}
-                    style={{ marginLeft: ".5rem" }}
-                  >
-                    Read more
-                  </Button>
-                </Card.Text>
+      <div className="tutor-card-container">
+        {currentFirstNames.map(
+          (firstName, index) =>
+            currentSkills[index] && (
+              <div className="tutor-card">
+                <div className="tutor-card-img-container">
+                  <img className="tutor-card-img" src={SatyaImg} alt="satyaimg" />
+                </div>
 
-                {currentIDs[index] !== userData.user._id && (
-                  <Button
-                    variant="primary"
-                    style={{
-                      position: "relative",
-                      left: "300px",
-                      bottom: "50px",
-                    }}
-                    onClick={() =>
-                      createConnection(
-                        currentIDs[index],
-                        userData.user._id,
-                        history
-                      )
-                    }
-                  >
-                    Connect
-                  </Button>
-                )}
-              </Card.Body>
-            </Card>
-          )
-      )}
+                <div className="tutor-card-info">
+                  <h1 className="tutor-card-name">
+                    {firstName} {currentLastNames[index]}
+                  </h1>
+                  <p className="tutor-card-bio">
+                    {currentBios[index].substring(0, 150)}
+                    {currentBios[index].length > 150 && "..."} &nbsp;
+                  </p>
+                  <a href={`/app/profile/${currentIDs[index]}`} className="tutor-card-readmore">See Profile</a>
+
+                  {currentIDs[index] !== userData.user._id && (
+                    <Button
+                      size="lg"
+                      variant="primary"
+                      onClick={() =>
+                        createConnection(
+                          currentIDs[index],
+                          userData.user._id,
+                          history
+                        )
+                      }
+                      className="connect-btn"
+                    >
+                      Connect
+                    </Button>
+                  )}
+                </div>
+              </div>
+            )
+        )}
+      </div>
     </div>
   );
 }
+
+{/* <Card
+className="text-center"
+key={index}
+style={{
+  width: "59%",
+  marginLeft: "auto",
+  marginRight: "auto",
+  marginBottom: "20px",
+}}
+>
+<Card.Img
+  variant="left"
+  src="holder.js/100px180?text=Image cap"
+/>
+<Card.Body style={{ paddingBottom: ".1rem" }}>
+  <Card.Title>
+    {firstName} {currentLastNames[index]}
+  </Card.Title>
+  <Card.Text>
+    {currentBios[index]}
+    <Button
+      variant="outline-danger"
+      href={`/app/profile/${tutorsID[index]}`}
+      style={{ marginLeft: ".5rem" }}
+    >
+      Read more
+    </Button>
+  </Card.Text>
+
+  {currentIDs[index] !== userData.user._id && (
+    <Button
+      variant="primary"
+      style={{
+        position: "relative",
+        left: "300px",
+        bottom: "50px",
+      }}
+      onClick={() =>
+        createConnection(
+          currentIDs[index],
+          userData.user._id,
+          history
+        )
+      }
+    >
+      Connect
+    </Button>
+  )}
+</Card.Body>
+</Card> */}
