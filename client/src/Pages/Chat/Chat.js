@@ -1,67 +1,143 @@
-import React, { useState, useEffect, useContext } from "react";
-import io from "socket.io-client";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
+import { Button } from "reactstrap";
 import Input from "./Input/Input";
 import Messages from "./Messages/Messages";
-import UserContext from "../../context/UserContext";
 import VideoChat from "./Video/VideoChat";
-import { Col, Row, Container } from "reactstrap";
 import Axios from "axios";
 import "./Chat.css";
 
 import { socket } from "../../context/Socket";
+import CreateSession from "./CreateSession/CreateSession";
+import Whiteboard from "./Whiteboard/Whiteboard";
 
 export default function Chat() {
-  const [userID, setUserID] = useState("");
-  const [users, setUsers] = useState("");
-  const [messages, setMessages] = useState([]);
-  const ENDPOINT = "http://localhost:5000";
-  const { connectid } = useParams();
-  const { userData } = useContext(UserContext);
+	const [userID, setUserID] = useState("");
+	const [sessionInProgress, setSessionInProgress] = useState(false);
+	const [sessionType, setSessionType] = useState("Video");
+	const [messages, setMessages] = useState([]);
+	const ENDPOINT = "http://localhost:5000";
+	const { connectid } = useParams();
+	const videoRef = useRef();
+	const whiteboardRef = useRef();
+	const [leaveStatus, setLeaveStatus] = useState(false);
 
-  useEffect(() => {
-    const getUser = async () => {
-      const token = localStorage.getItem("auth-token");
-      const userRes = await Axios.get("http://localhost:5000/users/", {
-        headers: { "x-auth-token": token },
-      });
-      setUserID(userRes.data._id);
-    };
-    getUser();
-  }, []);
+	useEffect(() => {
+		const getUser = async () => {
+			const token = localStorage.getItem("auth-token");
+			const userRes = await Axios.get("http://localhost:5000/users/", {
+				headers: { "x-auth-token": token },
+			});
+			setUserID(userRes.data._id);
+		};
+		getUser();
+	}, []);
 
-  useEffect(() => {
-    socket.emit("join", { connectid }, () => {});
-  }, []);
+	useEffect(() => {
+		socket.emit("join", { connectid }, () => {});
+	}, []);
 
-  useEffect(() => {
-    const loadConversation = async () => {
-      try {
-        const loadRes = await Axios.get(
-          `http://localhost:5000/messages/${connectid}`,
-        );
-        const existingMessages = loadRes.data;
-        for (let i = 0; i < existingMessages.length; i++) {
-          setMessages((oldMessages) => [...oldMessages, existingMessages[i]]);
-        }
-        
-        
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    loadConversation();
-  }, [])
+	useEffect(() => {
+		const loadConversation = async () => {
+			try {
+				const loadRes = await Axios.get(
+					`http://localhost:5000/messages/${connectid}`
+				);
+				const existingMessages = loadRes.data;
+				for (let i = 0; i < existingMessages.length; i++) {
+					setMessages((oldMessages) => [...oldMessages, existingMessages[i]]);
+				}
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		loadConversation();
+	}, []);
 
-  useEffect(() => {
-    socket.on("newMessage", (message) => {
-      const msgBody = message.message;
-      setMessages([...messages, msgBody]);
-    });
-  }, [messages]);
+	useEffect(() => {
+		socket.on("newMessage", (message) => {
+			const msgBody = message.message;
+			setMessages([...messages, msgBody]);
+		});
+	}, [messages]);
 
-  return (
-    <div className="outerContainer">
+	const handleLeave = (e) => {
+		e.preventDefault();
+		console.log(videoRef.current);
+		setSessionInProgress(false);
+	};
+
+	let sessionMedia;
+	if (sessionType === "Video") {
+		sessionMedia = (
+			<VideoChat
+				ref={videoRef}
+				room={connectid}
+				userID={userID}
+				leaveStatus={leaveStatus}
+			/>
+		);
+	} else if (sessionType === "Whiteboard") {
+		sessionMedia = <Whiteboard ref={whiteboardRef} />;
+	}
+
+	const handleScreenSwitch = (type) => {
+		console.log(videoRef.current);
+		console.log(whiteboardRef.current);
+	};
+
+	return (
+		<div className="outer-chat-container">
+			{sessionInProgress && (
+				<div className="call-options">
+					{/* <Button
+						color="outline-primary"
+						href="#video"
+					>
+						Video Call
+					</Button> */}
+					<Button id="btn-whiteboard" color="primary" href="#header-whiteboard">
+						Whiteboard
+					</Button>
+					<Button id="btn-leave" color="danger" onClick={(e) => handleLeave(e)}>
+						Leave Room
+					</Button>
+				</div>
+			)}
+			<div className="chat-container">
+				<div className="messages-container">
+					<Messages messages={messages} userID={userID} />
+					<Input room={connectid} userID={userID} />
+				</div>
+				<div className="session-container">
+					{!sessionInProgress ? (
+						<CreateSession setSessionInProgress={setSessionInProgress} />
+					) : (
+						<VideoChat
+							ref={videoRef}
+							room={connectid}
+							userID={userID}
+							leaveStatus={leaveStatus}
+						/>
+					)}
+				</div>
+			</div>
+			{sessionInProgress && (
+				<>
+					<h2 id="header-whiteboard">Whiteboard</h2>
+					<Whiteboard />
+				</>
+			)}
+		</div>
+	);
+}
+
+{
+	/* <VideoChat room={connectid} userID={userID} /> */
+}
+
+{
+	/* <div className="outerContainer">
       <div className="innerContainer">
         <Messages messages={messages} userID={userID} />
         <Input room={connectid} userID={userID} />
@@ -69,6 +145,5 @@ export default function Chat() {
       <div >
         <VideoChat room={connectid} userID={userID}/>
       </div>
-    </div>
-  );
+    </div> */
 }

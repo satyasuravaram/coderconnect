@@ -5,156 +5,182 @@ import Peer from "simple-peer";
 import styled from "styled-components";
 import { Button } from "reactstrap";
 import makeToast from "../../../components/misc/Toaster";
-
-const Video = styled.video`
-  border: 1px solid blue;
-  width: 50%;
-  height: 50%;
-  border-radius: 5px;
-  display: block;
-  margin-bottom: 0.5rem;
-`;
+import "./VideoChat.css";
 
 export default function VideoChat(props) {
-  const [stream, setStream] = useState();
-  const [receivingCall, setReceivingCall] = useState(false);
-  const [caller, setCaller] = useState("");
-  const [callerSignal, setCallerSignal] = useState();
-  const [callAccepted, setCallAccepted] = useState(false);
+	const [stream, setStream] = useState();
+	const [receivingCall, setReceivingCall] = useState(false);
+	const [caller, setCaller] = useState("");
+	const [callerSignal, setCallerSignal] = useState();
+	const [callAccepted, setCallAccepted] = useState(false);
 
-  const userVideo = useRef();
-  const partnerVideo = useRef();
-  const acceptDivRef = useRef();
-  const callBtn = useRef();
-  const endBtn = useRef();
+	const userVideo = useRef();
+	const partnerVideo = useRef();
+	const acceptDivRef = useRef();
+	const callBtn = useRef();
+	const endBtn = useRef();
 
-  useEffect(() => {
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
-      .then((stream) => {
-        setStream(stream);
-        if (userVideo.current) {
-          userVideo.current.srcObject = stream;
-        }
-      });
+	useEffect(() => {
 
-    socket.on("hey", (data) => {
-      setReceivingCall(true);
-      setCaller(data.from);
-      setCallerSignal(data.signal);
-    });
+		navigator.mediaDevices
+			.getUserMedia({ video: true, audio: true })
+			.then((stream) => {
+				setStream(stream);
+				if (userVideo.current) {
+					userVideo.current.srcObject = stream;
+				}
+			});
 
-    socket.on("onCallEnd", () => {
-      makeToast("success", "The call has ended.")
-      callBtn.current.children[0].innerText = "Call";
-      setCallAccepted(false);
-      setReceivingCall(false);
-    });
-  }, []);
+		socket.on("hey", (data) => {
+			setReceivingCall(true);
+			setCaller(data.from);
+			setCallerSignal(data.signal);
+		});
 
-  function callPeer() {
-    console.log(callBtn.current.children[0]);
-    callBtn.current.children[0].innerText = "Calling...";
-    const peer = new Peer({
-      initiator: true,
-      trickle: false,
-      stream: stream,
-    });
+		socket.on("onCallEnd", () => {
+			makeToast("success", "Video share has ended.");
+			callBtn.current.children[0].innerText = "Call";
+			setCallAccepted(false);
+			setReceivingCall(false);
+		});
+	}, []);
 
-    peer.on("signal", (data) => {
-      socket.emit("callUser", {
-        room: props.room,
-        signalData: data,
-        from: props.userID,
-      });
-    });
+	function callPeer() {
+		console.log(callBtn.current.children[0]);
+		callBtn.current.children[0].innerText = "Calling...";
+		const peer = new Peer({
+			initiator: true,
+			trickle: false,
+			stream: stream,
+		});
 
-    peer.on("stream", (stream) => {
-      if (partnerVideo.current) {
-        partnerVideo.current.srcObject = stream;
-      }
-    });
+		peer.on("signal", (data) => {
+			socket.emit("callUser", {
+				room: props.room,
+				signalData: data,
+				from: props.userID,
+			});
+		});
 
-    socket.on("callAccepted", (signal) => {
-      setCallAccepted(true);
-      peer.signal(signal);
-    });
-  }
+		peer.on("stream", (stream) => {
+			if (partnerVideo.current) {
+				partnerVideo.current.srcObject = stream;
+			}
+		});
 
-  function acceptCall() {
-    setCallAccepted(true);
-    const peer = new Peer({
-      initiator: false,
-      trickle: false,
-      stream: stream,
-    });
-    peer.on("signal", (data) => {
-      socket.emit("acceptCall", { signal: data, to: caller, room: props.room });
-    });
+		socket.on("callAccepted", (signal) => {
+			setCallAccepted(true);
+			peer.signal(signal);
+		});
+	}
 
-    peer.on("stream", (stream) => {
-      partnerVideo.current.srcObject = stream;
-    });
+	function acceptCall() {
+		setCallAccepted(true);
+		const peer = new Peer({
+			initiator: false,
+			trickle: false,
+			stream: stream,
+		});
+		peer.on("signal", (data) => {
+			socket.emit("acceptCall", { signal: data, to: caller, room: props.room });
+		});
 
-    peer.signal(callerSignal);
-    acceptDivRef.current.innerHTML = "";
-  }
+		peer.on("stream", (stream) => {
+			partnerVideo.current.srcObject = stream;
+		});
 
-  let UserVideo;
-  if (stream) {
-    UserVideo = <Video playsInline muted ref={userVideo} autoPlay />;
-  }
+		peer.signal(callerSignal);
+		acceptDivRef.current.innerHTML = "";
+	}
 
-  let PartnerVideo;
-  if (callAccepted) {
-    // console.log("Ok:" + acceptDivRef.current.innerHTML)
-    // acceptDivRef.current.innerHTML = "";
-    console.log(endBtn.current);
-    PartnerVideo = <Video playsInline ref={partnerVideo} autoPlay />;
-  }
+	let UserVideo;
+	if (stream) {
+		UserVideo = (
+			<video
+				className={`${callAccepted ? "user-video" : " user-video-default"}`}
+				playsInline
+				muted
+				ref={userVideo}
+				autoPlay
+			/>
+		);
+	}
 
-  let incomingCall;
-  if (receivingCall) {
-    incomingCall = (
-      <div ref={acceptDivRef}>
-        <h1>Incoming Call...</h1>
-        <Button color="success" onClick={acceptCall}>
-          Accept
-        </Button>
-      </div>
-    );
-  }
+	let PartnerVideo;
+	if (callAccepted) {
+		// console.log("Ok:" + acceptDivRef.current.innerHTML)
+		// acceptDivRef.current.innerHTML = "";
+		console.log(endBtn.current);
+		PartnerVideo = (
+			<video
+				controls
+				className="partner-video"
+				playsInline
+				ref={partnerVideo}
+				autoPlay
+			/>
+		);
+	}
 
-  function endCall() {
-    socket.emit("endCall", {
-      room: props.room,
-    });
-  }
+	let incomingCall;
+	if (receivingCall) {
+		callBtn.current.children[0].style.visibility = "hidden";
+		callBtn.current.children[0].style.height = 0;
 
-  return (
-    <div>
-      <div>
-        {UserVideo}
-        {PartnerVideo}
-      </div>
-      <div ref={callBtn}>
-        {callAccepted ? null : (
-          <Button color="primary" onClick={() => callPeer()}>
-            Call
-          </Button>
-        )}
-        {callAccepted && (
-          <Button
-            className="endBtn"
-            onClick={() => endCall()}
-            ref={endBtn}
-            color="danger"
-          >
-            End
-          </Button>
-        )}
-      </div>
-      <div >{incomingCall}</div>
-    </div>
-  );
+		incomingCall = (
+			<div ref={acceptDivRef}>
+				<h1>Incoming Call...</h1>
+				<Button color="success" onClick={acceptCall}>
+					Accept
+				</Button>
+			</div>
+		);
+	}
+
+	function endCall() {
+		socket.emit("endCall", {
+			room: props.room,
+		});
+	}
+
+	console.log(props.leaveStatus);
+
+	return (
+		<div className="video-container">
+			{UserVideo}
+			{PartnerVideo}
+			<div ref={callBtn} className="btn-div">
+				{callAccepted ? null : (
+					<Button
+						className="call-btn"
+						color="primary"
+						onClick={() => callPeer()}
+					>
+						Call
+					</Button>
+				)}
+				{callAccepted && (
+					<Button
+						className="endBtn"
+						onClick={() => endCall()}
+						ref={endBtn}
+						color="danger"
+					>
+						End
+					</Button>
+				)}
+				<div>{incomingCall}</div>
+				{callAccepted && (
+					<Button
+						className="endBtn"
+						onClick={() => endCall()}
+						ref={endBtn}
+						color="danger"
+					>
+						End
+					</Button>
+				)}
+			</div>
+		</div>
+	);
 }

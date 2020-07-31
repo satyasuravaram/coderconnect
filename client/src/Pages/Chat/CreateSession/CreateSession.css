@@ -1,0 +1,15 @@
+.create-session-container {
+	overflow: hidden;
+	height: 100%;
+	border-radius: 8px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #bebebe;
+}
+
+.create-session {
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
