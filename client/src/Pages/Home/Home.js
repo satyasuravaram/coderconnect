@@ -46,7 +46,7 @@ export default function Home () {
         <h2>CoderConnect</h2>
         <br/>
         <p>Free coding help from qualified volunteer tutors!</p>
-        <Button variant="outline-primary" className="home-btn" href="/users/register">Sign Up</Button>
+        <Button variant="light" className="home-btn" href="/users/register">Sign Up</Button>
         <Button variant="primary" className="home-btn" href="/users/login">Sign In</Button>
     </div>)
 }
