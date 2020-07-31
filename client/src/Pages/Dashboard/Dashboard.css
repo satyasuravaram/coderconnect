@@ -1,3 +1,8 @@
+.full-container{
+    margin-left: 0px;
+    background-color: #dbe2ef;
+}
+
 .search-container{
     position: relative;
     height: 6.06rem;

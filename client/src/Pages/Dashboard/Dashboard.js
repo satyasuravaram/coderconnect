@@ -119,7 +119,7 @@ export default function Dashboard() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div style={{ marginLeft: "0px", backgroundColor: "#dbe2ef" }}>
+    <div className="full-container">
       <div className="search-container">
         <div className="searchbarParent">
           <Select
