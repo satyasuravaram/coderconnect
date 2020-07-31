@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
+import "./PublicProfile.css";
 import {
     ListGroup,
     ListGroupItem,
@@ -53,7 +54,7 @@ export default function PublicProfile() {
 
   return (
     <div>
-      <h2 style={{marginLeft: '2rem'}}>
+      <h2 className="full-name">
         {profileData.firstName} {profileData.lastName + "'s"} Profile
         <span>
           <Button
@@ -64,8 +65,8 @@ export default function PublicProfile() {
           >
             Connect
           </Button>
-          <Button style={{marginLeft: '0rem'}}
-            className="edit-btn"
+          <Button 
+            className="edit-btn-2"
             variant="outline-secondary"
             href="/app/dashboard"
             size="md"
