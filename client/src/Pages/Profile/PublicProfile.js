@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 import "./PublicProfile.css";
-import {
-    ListGroup,
-    ListGroupItem,
-    ListGroupItemHeading,
-    ListGroupItemText,
-  } from "reactstrap";
-  import { Button } from "react-bootstrap";
+import createConnection from "../../actions/CreateConnection";
+import { useHistory } from "react-router-dom";
+import UserContext from "../../context/UserContext";
 
+import {
+  ListGroup,
+  ListGroupItem,
+  ListGroupItemHeading,
+  ListGroupItemText,
+} from "reactstrap";
+import { Button } from "react-bootstrap";
 
 export default function PublicProfile() {
   const { userid } = useParams();
+  const { userData, setUserData } = useContext(UserContext);
   const [profileData, setProfileData] = useState({
     firstName: "",
     lastName: "",
@@ -20,6 +24,7 @@ export default function PublicProfile() {
     bio: "",
     skills: [],
   });
+  const history = useHistory();
 
   useEffect(() => {
     const getTutor = async () => {
@@ -37,6 +42,16 @@ export default function PublicProfile() {
       );
 
       if (tokenRes.data) {
+        const userRes = await Axios.get("http://localhost:5000/users/", {
+          headers: { "x-auth-token": token },
+      });
+
+      setUserData({
+        token: token,
+        user: userRes.data,
+      });
+
+      if (tokenRes.data) {
         const tutor = await Axios.get(`http://localhost:5000/users/${userid}`, {
           headers: { "x-auth-token": token },
         });
@@ -46,9 +61,10 @@ export default function PublicProfile() {
           email: tutor.data.email,
           bio: tutor.data.bio,
           skills: tutor.data.skills,
+          id: tutor.data._id
         });
       }
-    };
+    };}
     getTutor();
   }, []);
 
@@ -60,12 +76,14 @@ export default function PublicProfile() {
           <Button
             className="edit-btn"
             variant="primary"
-            href="/app/profile/edit"
             size="md"
+            onClick={() =>
+              createConnection(profileData.id, userData.user._id, history)
+            }
           >
             Connect
           </Button>
-          <Button 
+          <Button
             className="edit-btn-2"
             variant="outline-secondary"
             href="/app/dashboard"
@@ -87,19 +105,19 @@ export default function PublicProfile() {
           <ListGroupItemText>{profileData.email}</ListGroupItemText>
         </ListGroupItem>
 
-          <ListGroupItem>
-            <ListGroupItemHeading>Bio</ListGroupItemHeading>
-            <ListGroupItemText>{profileData.bio}</ListGroupItemText>
-          </ListGroupItem>
+        <ListGroupItem>
+          <ListGroupItemHeading>Bio</ListGroupItemHeading>
+          <ListGroupItemText>{profileData.bio}</ListGroupItemText>
+        </ListGroupItem>
 
-          <ListGroupItem>
-            <ListGroupItemHeading>Skills</ListGroupItemHeading>
-            <ListGroup horizontal="lg">
-              {profileData.skills.map((skill, index) => (
-                <ListGroupItem>{skill}</ListGroupItem>
-              ))}
-            </ListGroup>
-          </ListGroupItem>
+        <ListGroupItem>
+          <ListGroupItemHeading>Skills</ListGroupItemHeading>
+          <ListGroup horizontal="lg">
+            {profileData.skills.map((skill, index) => (
+              <ListGroupItem>{skill}</ListGroupItem>
+            ))}
+          </ListGroup>
+        </ListGroupItem>
       </ListGroup>
     </div>
   );
