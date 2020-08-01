@@ -1,6 +1,5 @@
-import React from 'react';
-import './Dashboard.css';
-
+import React from "react";
+import "./Dashboard.css";
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
@@ -10,11 +9,15 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   }
 
   return (
-    <nav className = 'search-container'>
-      <ul className='pagination center'>
-        {pageNumbers.map(number => (
-          <li key={number} className='page-item'>
-            <a onClick={() => paginate(number)} href='#' className='page-link page-anchor'>
+    <nav className="search-container">
+      <ul className="pagination center">
+        {pageNumbers.map((number) => (
+          <li key={number} className="page-item">
+            <a
+              onClick={() => paginate(number)}
+              href="#"
+              className="page-link page-anchor"
+            >
               {number}
             </a>
           </li>
