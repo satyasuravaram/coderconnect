@@ -1,0 +1,35 @@
+.code-editor-container {
+	margin: 1rem;
+	height: 100%;
+	border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+	position: relative;
+}
+
+.code-editor-main {
+
+    /* width: 100% !important;
+    height: 100% !important; */
+	/* position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0; */
+}
+
+.options {
+    background-color: #777;
+    width: 14%;
+    position: relative;
+    padding: 1rem;
+    color: #fff;
+}
+
+.options-mode, .options-theme {
+    display: block;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+
+

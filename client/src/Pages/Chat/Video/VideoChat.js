@@ -21,7 +21,6 @@ export default function VideoChat(props) {
 	const endBtn = useRef();
 
 	useEffect(() => {
-
 		navigator.mediaDevices
 			.getUserMedia({ video: true, audio: true })
 			.then((stream) => {
@@ -129,8 +128,8 @@ export default function VideoChat(props) {
 
 		incomingCall = (
 			<div ref={acceptDivRef}>
-				<h1>Incoming Call...</h1>
-				<Button color="success" onClick={acceptCall}>
+				<p className="incoming-call-header">Incoming Call...</p>
+				<Button className="accept-btn" color="success" onClick={acceptCall}>
 					Accept
 				</Button>
 			</div>

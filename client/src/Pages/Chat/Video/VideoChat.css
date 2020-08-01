@@ -1,17 +1,17 @@
 .video-container {
 	overflow: hidden;
 	height: 100%;
-	border-bottom-right-radius: 8px;
-	border-bottom-left-radius: 8px;
-    position: relative;
-    display: flex;
+	border-radius: 8px;
+	position: relative;
+	display: flex;
+	background-color: #777;
+
 }
 
 .user-video {
-    transform: rotateY(180deg);
-    -webkit-transform:rotateY(180deg); /* Safari and Chrome */
-    -moz-transform:rotateY(180deg); /* Firefox */
-	border: 1px solid blue;
+	transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg); /* Safari and Chrome */
+	-moz-transform: rotateY(180deg); /* Firefox */
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -22,30 +22,50 @@
 }
 
 .user-video-default {
-	border: 1px solid blue;
 	width: 80%;
 	border-radius: 5px;
 	display: block;
-    margin-bottom: 0.5rem;
-    transform: rotateY(180deg);
-    -webkit-transform:rotateY(180deg); /* Safari and Chrome */
-    -moz-transform:rotateY(180deg); /* Firefox */
+	transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg); /* Safari and Chrome */
+	-moz-transform: rotateY(180deg); /* Firefox */
 }
 
 .partner-video {
-	border: 1px solid blue;
+	background-color: #777;
 	width: 80%;
 	border-radius: 5px;
 	display: block;
-	margin-bottom: 0.5rem;
+}
+
+.callBtn {
+	justify-content: center;
 }
 
 .endBtn {
+	/* justify-self: center; */
+	/* align-self: flex-end; */
+	/* justify-content: center;
+	/* align-content: center; */
 	position: absolute;
 	top: 30%;
-	right: 0;
+	right: 2%;
+	width: 10rem;
+	
+}
+
+.accept-btn {
+	width: 10rem;
 }
 
 .btn-div {
-	display: inline;
+	text-align: center;
+	color: #fff;
+	width: 20%;
+	padding: 1rem;
+	padding-left: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* width: 50%; */
+	background-color: #777;
 }
