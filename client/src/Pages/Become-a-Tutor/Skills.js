@@ -4,11 +4,12 @@ import skillsArray from '../../components/SkillsArray'
 
 
 
-export default function Skills() {
+
+export default function Skills(props) {
 
     return (
         <div>
-            <Select isMulti options={skillsArray}/>
+            <Select isMulti onChange={props.setSkills} options={skillsArray}/>
         </div>
     )
 }
