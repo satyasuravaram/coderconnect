@@ -14,14 +14,10 @@ import Pagination from "./Pagination";
 
 export default function Dashboard() {
   const [show, setShow] = useState(false);
+  const [tutors, setTutors] = useState([]);
   const [searchSkill, setSearchSkill] = useState({});
   const { userData, setUserData } = useContext(UserContext);
-  const [tutorsBio, setTutorsBio] = useState([]);
-  const [tutorsFirstName, setTutorsFirstName] = useState([]);
-  const [tutorsLastName, setTutorsLastName] = useState([]);
-  const [tutorsSkills, setTutorsSkills] = useState([]);
-  const [tutorsID, setTutorsID] = useState([]);
-  const [tutorsHaveCurrentSkill, setTutorsHaveCurrentSkill] = useState([]);
+  const [currentTutors, setCurrentTutors] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(2);
@@ -58,21 +54,26 @@ export default function Dashboard() {
           headers: { "x-auth-token": token },
         });
         for (let i = 0; i < tutorArr.data.length; i++) {
-          setTutorsSkills((prevSkills) => [
-            ...prevSkills,
-            tutorArr.data[i].skills,
+          setTutors((prevTutors) => [
+            ...prevTutors,
+            {
+              id: tutorArr.data[i]._id,
+              firstName: tutorArr.data[i].firstName,
+              lastName: tutorArr.data[i].lastName,
+              skills: tutorArr.data[i].skills,
+              bio: tutorArr.data[i].bio,
+            }
           ]);
-          setTutorsBio((oldTutors) => [...oldTutors, tutorArr.data[i].bio]);
-          setTutorsFirstName((oldTutors) => [
-            ...oldTutors,
-            tutorArr.data[i].firstName,
+          setCurrentTutors((prevTutors) => [
+            ...prevTutors,
+            {
+              id: tutorArr.data[i]._id,
+              firstName: tutorArr.data[i].firstName,
+              lastName: tutorArr.data[i].lastName,
+              skills: tutorArr.data[i].skills,
+              bio: tutorArr.data[i].bio,
+            }
           ]);
-          setTutorsLastName((oldTutors) => [
-            ...oldTutors,
-            tutorArr.data[i].lastName,
-          ]);
-          setTutorsID((oldTutors) => [...oldTutors, tutorArr.data[i]._id]);
-          setTutorsHaveCurrentSkill((prevSkill) => [...prevSkill, true]);
         }
       }
     };
@@ -81,40 +82,24 @@ export default function Dashboard() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-
+    setCurrentPage(1);
     if (searchSkill !== null && Object.keys(searchSkill).length !== 0) {
       const skill = searchSkill.value;
-      let hasSkillArr = [];
-      for (let i = 0; i < tutorsSkills.length; i++) {
-        const hasSkill = tutorsSkills[i].includes(skill);
-        hasSkillArr.push(hasSkill);
+      let currTutors = [];
+      for (let i = 0; i < tutors.length; i++) {
+        if (tutors[i].skills.includes(skill)) {
+          currTutors.push(tutors[i]);
+        }
       }
-      setTutorsHaveCurrentSkill(hasSkillArr);
+      setCurrentTutors(currTutors);
     } else {
-      let hasSkillArr = [];
-      for (let i = 0; i < tutorsSkills.length; i++) {
-        hasSkillArr.push(true);
-      }
-      setTutorsHaveCurrentSkill(hasSkillArr);
+      setCurrentTutors(tutors);
     }
   };
-  console.log(tutorsHaveCurrentSkill);
+  console.log(currentTutors);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentBios = tutorsBio.slice(indexOfFirstPost, indexOfLastPost);
-  const currentFirstNames = tutorsFirstName.slice(
-    indexOfFirstPost,
-    indexOfLastPost
-  );
-  const currentLastNames = tutorsLastName.slice(
-    indexOfFirstPost,
-    indexOfLastPost
-  );
-  const currentIDs = tutorsID.slice(indexOfFirstPost, indexOfLastPost);
-  const currentSkills = tutorsHaveCurrentSkill.slice(
-    indexOfFirstPost,
-    indexOfLastPost
-  );
+  const filteredTutors = currentTutors.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -139,116 +124,58 @@ export default function Dashboard() {
           </Button>
         </div>
       </div>
-
       <h6 className="text-center">Tutors:</h6>
       <Pagination
         className="center"
         postsPerPage={postsPerPage}
-        totalPosts={tutorsHaveCurrentSkill.filter((tutor) => tutor).length}
+        totalPosts={currentTutors.length}
         paginate={paginate}
       />
+
       <div className="tutor-card-container">
-        {currentFirstNames.map(
-          (firstName, index) =>
-            currentSkills[index] && (
-              <div className="tutor-card">
-                <div className="tutor-card-img-container">
-                  <img
-                    className="tutor-card-img"
-                    src={SatyaImg}
-                    alt="satyaimg"
-                  />
-                </div>
+        {filteredTutors.length === 0?
+        <div className="no-tutors">
+          <h2>
+            No tutors with this skill available
+          </h2>
+        </div>
+        :filteredTutors.map((tutor, index) => (
+          <div className="tutor-card">
+            <div className="tutor-card-img-container">
+              <img className="tutor-card-img" src={SatyaImg} alt="satyaimg" />
+            </div>
 
-                <div className="tutor-card-info">
-                  <h1 className="tutor-card-name">
-                    {firstName} {currentLastNames[index]}
-                  </h1>
-                  <p className="tutor-card-bio">
-                    {currentBios[index].substring(0, 150)}
-                    {currentBios[index].length > 150 && "..."} &nbsp;
-                  </p>
-                  <a
-                    href={`/app/profile/${currentIDs[index]}`}
-                    className="tutor-card-readmore"
-                  >
-                    See Profile
-                  </a>
+            <div className="tutor-card-info">
+              <h1 className="tutor-card-name">
+                {tutor.firstName} {tutor.lastName}
+              </h1>
+              <p className="tutor-card-bio">
+                {tutor.bio.substring(0, 150)}
+                {tutor.bio.length > 150 && "..."} &nbsp;
+              </p>
+              <a
+                href={`/app/profile/${tutor.id}`}
+                className="tutor-card-readmore"
+              >
+                See Profile
+              </a>
 
-                  {currentIDs[index] !== userData.user._id && (
-                    <Button
-                      size="lg"
-                      variant="primary"
-                      onClick={() =>
-                        createConnection(
-                          currentIDs[index],
-                          userData.user._id,
-                          history
-                        )
-                      }
-                      className="connect-btn"
-                    >
-                      Connect
-                    </Button>
-                  )}
-                </div>
-              </div>
-            )
-        )}
+              {tutor.id !== userData.user._id && (
+                <Button
+                  size="lg"
+                  variant="primary"
+                  onClick={() =>
+                    createConnection(tutor.id, userData.user._id, history)
+                  }
+                  className="connect-btn"
+                >
+                  Connect
+                </Button>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
-}
-
-{
-  /* <Card
-className="text-center"
-key={index}
-style={{
-  width: "59%",
-  marginLeft: "auto",
-  marginRight: "auto",
-  marginBottom: "20px",
-}}
->
-<Card.Img
-  variant="left"
-  src="holder.js/100px180?text=Image cap"
-/>
-<Card.Body style={{ paddingBottom: ".1rem" }}>
-  <Card.Title>
-    {firstName} {currentLastNames[index]}
-  </Card.Title>
-  <Card.Text>
-    {currentBios[index]}
-    <Button
-      variant="outline-danger"
-      href={`/app/profile/${tutorsID[index]}`}
-      style={{ marginLeft: ".5rem" }}
-    >
-      Read more
-    </Button>
-  </Card.Text>
-
-  {currentIDs[index] !== userData.user._id && (
-    <Button
-      variant="primary"
-      style={{
-        position: "relative",
-        left: "300px",
-        bottom: "50px",
-      }}
-      onClick={() =>
-        createConnection(
-          currentIDs[index],
-          userData.user._id,
-          history
-        )
-      }
-    >
-      Connect
-    </Button>
-  )}
-</Card.Body>
-</Card> */
 }
