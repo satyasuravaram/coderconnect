@@ -67,8 +67,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("change-mode", (data) => {
-	socket.broadcast.to(data.room).emit("new-mode", data);
-  })
+    socket.broadcast.to(data.room).emit("new-mode", data);
+  });
 
   socket.on("disconnect", () => {
     socket.leave();

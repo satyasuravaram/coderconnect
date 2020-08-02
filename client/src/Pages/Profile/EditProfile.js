@@ -3,13 +3,12 @@ import { useHistory } from "react-router-dom";
 import { Row, Col, Form, Input, FormGroup, Label, Button } from "reactstrap";
 import Axios from "axios";
 import ErrorNotice from "../../components/misc/ErrorNotice";
-import Select from "react-select";
 import skillsArray from "../../components/SkillsArray";
 import "./EditProfile.css";
-import { CardGroup } from "react-bootstrap";
-import SkillsDropdown from "./SkillsDropdown"
+import SkillsDropdown from "./SkillsDropdown";
+import DefaultImg from "../About/images/default-profile-pic.png"
 
-export default function Profile() {
+export default function EditProfile() {
   const [profileData, setProfileData] = useState({
     id: "",
     firstName: "",
@@ -18,10 +17,12 @@ export default function Profile() {
     bio: "",
     skills: [],
     tutor: false,
+    image: "",
   });
   const [existingSkills, setExistingSkills] = useState([]);
   const [error, setError] = useState("");
   const history = useHistory();
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     const getUser = async () => {
@@ -47,9 +48,8 @@ export default function Profile() {
           bio: userRes.data.bio,
           skills: userRes.data.skills,
           tutor: userRes.data.tutor,
+          image: userRes.data.image,
         });
-
-        
       } catch (err) {
         console.log(err);
       }
@@ -64,6 +64,7 @@ export default function Profile() {
     email: undefined,
     bio: undefined,
     skills: undefined,
+    image: undefined,
   });
 
   const handleChange = (e) => {
@@ -79,20 +80,22 @@ export default function Profile() {
 
     try {
       const newSkillsArr = [];
+      const data = new FormData();
       for (let i = 0; i < existingSkills.length; i++) {
-        newSkillsArr.push(existingSkills[i].value)
+        newSkillsArr.push(existingSkills[i].value);
+        data.append("skills", existingSkills[i].value);
       }
       let token = localStorage.getItem("auth-token");
+
+      data.append("image", image);
+      data.append("firstName", newProfileData.firstName);
+      data.append("lastName", newProfileData.lastName);
+      data.append("prevEmail", profileData.email);
+      data.append("email", newProfileData.email);
+      data.append("bio", newProfileData.bio);
       const editRes = await Axios.post(
         "http://localhost:5000/users/edit",
-        {
-          firstName: newProfileData.firstName,
-          lastName: newProfileData.lastName,
-          prevEmail: profileData.email,
-          email: newProfileData.email,
-          bio: newProfileData.bio,
-          skills: newSkillsArr,
-        },
+        data,
         { headers: { "x-auth-token": token } }
       );
 
@@ -171,10 +174,23 @@ export default function Profile() {
         {profileData.tutor && (
           <Row form>
             <Col md={6}>
-              <SkillsDropdown options={skillsArray} existingSkills={existingSkills} setExistingSkills={setExistingSkills}/>
+              <SkillsDropdown
+                options={skillsArray}
+                existingSkills={existingSkills}
+                setExistingSkills={setExistingSkills}
+              />
             </Col>
           </Row>
         )}
+
+        <div>
+          <input
+            type="file"
+            name="image"
+            onChange={(e) => setImage(e.target.files[0])}
+          />
+        </div>
+
         <Button type="submit">Save Changes</Button>
       </Form>
     </div>

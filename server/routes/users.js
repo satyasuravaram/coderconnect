@@ -4,6 +4,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 const User = require("../models/User");
+const multer = require("multer");
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 //Register Page
 router.post("/register", async (req, res) => {
@@ -96,19 +99,17 @@ router.delete("/delete", auth, async (req, res) => {
   }
 });
 
-router.post("/edit", auth, async (req, res) => {
+router.post("/edit", auth, upload.single("image"), async (req, res) => {
   try {
     let { firstName, lastName, prevEmail, email, bio, skills } = req.body;
 
     //User ID
     const id = (await User.findOne({ email: prevEmail }))._id;
-
     //Email Validation
-    if (email === undefined || prevEmail === email) {
+    if (email === undefined || email === "undefined" || prevEmail === email) {
       email = prevEmail;
     } else {
       const regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-
       if (!regex.test(email)) {
         return res.status(400).json({ msg: "Please enter a valid email." });
       }
@@ -121,7 +122,7 @@ router.post("/edit", auth, async (req, res) => {
     }
 
     //Bio Validation
-    if (bio !== undefined) {
+    if (bio !== "undefined") {
       if (bio.length > 2000) {
         return res
           .status(400)
@@ -137,12 +138,18 @@ router.post("/edit", auth, async (req, res) => {
       await User.findByIdAndUpdate(id, { $set: { skills: skills } });
     }
 
-    if (firstName !== undefined) {
+    if (firstName !== "undefined") {
       await User.findByIdAndUpdate(id, { $set: { firstName: firstName } });
     }
 
-    if (lastName !== undefined) {
+    if (lastName !== "undefined") {
       await User.findByIdAndUpdate(id, { $set: { lastName: lastName } });
+    }
+
+    if (req.file !== undefined) {
+      await User.findByIdAndUpdate(id, { $set: { image: req.file.buffer } });
+      const user = await User.findById(id);
+      console.log(user.image);
     }
 
     const updatedUser = await User.findById(id);
