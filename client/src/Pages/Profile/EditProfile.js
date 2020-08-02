@@ -8,6 +8,7 @@ import skillsArray from "../../components/SkillsArray";
 import "./EditProfile.css";
 import { CardGroup } from "react-bootstrap";
 import SkillsDropdown from "./SkillsDropdown"
+import FileBase from 'react-file-base64';
 
 export default function Profile() {
   const [profileData, setProfileData] = useState({
