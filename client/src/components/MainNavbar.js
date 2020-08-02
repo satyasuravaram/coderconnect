@@ -27,6 +27,7 @@ function MainNavbar () {
                         <NavDropdown.Item href="/app/profile">Profile</NavDropdown.Item>
                         <NavDropdown.Item href="/become-a-tutor" target="_blank">Become a tutor</NavDropdown.Item>
                         <NavDropdown.Item href="/faq" target="_blank">FAQ</NavDropdown.Item>
+                        <NavDropdown.Item href="/contact" target="_blank">Contact us</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item onClick={logout} href="/">Logout</NavDropdown.Item>
                     </NavDropdown>
