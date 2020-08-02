@@ -29,7 +29,6 @@ mongoose
 app.use("/users", require("./routes/users"));
 app.use("/messages", require("./routes/messages"));
 app.use("/mail", require("./routes/mail"));
-app.use("/images", require("./routes/images"));
 
 io.on("connection", (socket) => {
   console.log(`New User Connected ${socket.id}`);
@@ -68,8 +67,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("change-mode", (data) => {
-	socket.broadcast.to(data.room).emit("new-mode", data);
-  })
+    socket.broadcast.to(data.room).emit("new-mode", data);
+  });
 
   socket.on("disconnect", () => {
     socket.leave();
