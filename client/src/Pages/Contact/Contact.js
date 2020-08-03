@@ -2,7 +2,7 @@ import React, { useState, validated, handleSubmit } from "react";
 import { Form, Col, InputGroup, Button } from "react-bootstrap";
 import "./Contact.css"
 import Axios from "axios";
-import makeToast from "../../components/misc/Toaster";
+
 
 export default function Contact() {
     const [validated, setValidated] = useState(true);
@@ -27,7 +27,6 @@ export default function Contact() {
                 })
             setValidated(false);
             document.getElementById("contact-form").reset();
-            makeToast("success", "Submitted form successfully!");
         } else {
             e.stopPropagation();
             setValidated(true);
