@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import UserContext from "../../context/UserContext";
+import { GoogleLogin } from "react-google-login";
 import { useHistory } from "react-router-dom";
 import ErrorNotice from "../../components/misc/ErrorNotice";
 import "./Login.css";
@@ -68,6 +69,28 @@ export default function Login() {
     }
   };
 
+  const responseGoogle = async (res) => {
+    try {
+      const googleRes = await Axios.post(
+        "http://localhost:5000/auth/googlelogin",
+        {
+          tokenId: res.tokenId,
+        }
+      );
+
+      setUserData({
+        token: googleRes.data.token,
+        user: googleRes.data.user.id,
+      });
+
+      localStorage.setItem("auth-token", googleRes.data.token);
+
+      history.push("/app/dashboard");
+    } catch (error) {
+      console.log("responseGoogle -> error", error);
+    }
+  };
+
   return (
     <div>
       <h2>Log In</h2>
@@ -109,6 +132,16 @@ export default function Login() {
       <p>
         Don't have an account? <a href="/users/register">Sign up here</a>
       </p>
+      <hr />
+      <div className="google-login">
+        <GoogleLogin
+          clientId="679676510970-e025pl5387i4uc4gnohqn70ss5au4l2c.apps.googleusercontent.com"
+          buttonText="Sign in with Google"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={"single_host_origin"}
+        />
+      </div>
     </div>
   );
 }
