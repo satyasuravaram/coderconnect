@@ -6,7 +6,7 @@ import Messages from "./Messages/Messages";
 import VideoChat from "./Video/VideoChat";
 import Axios from "axios";
 import "./Chat.css";
-
+import { makeToast, endSessionToast } from "../../components/misc/Toaster";
 import { socket } from "../../context/Socket";
 import CreateSession from "./CreateSession/CreateSession";
 import Whiteboard from "./Whiteboard/Whiteboard";
@@ -35,7 +35,13 @@ export default function Chat() {
   }, []);
 
   useEffect(() => {
+
     socket.emit("join", { connectid }, () => {});
+
+    socket.on("endSession", (data) => {
+      setSessionInProgress(false);
+      makeToast("success", "Session has been ended.");
+    });
   }, []);
 
   useEffect(() => {
@@ -64,8 +70,7 @@ export default function Chat() {
 
   const handleLeave = (e) => {
     e.preventDefault();
-    console.log(videoRef.current);
-    setSessionInProgress(false);
+    endSessionToast(connectid);
   };
 
   let sessionMedia;
@@ -98,7 +103,7 @@ export default function Chat() {
             Whiteboard
           </Button>
           <Button id="btn-leave" color="danger" onClick={(e) => handleLeave(e)}>
-            Leave Room
+            End Session
           </Button>
         </div>
       )}
@@ -109,7 +114,10 @@ export default function Chat() {
         </div>
         <div className="session-container">
           {!sessionInProgress ? (
-            <CreateSession setSessionInProgress={setSessionInProgress} />
+            <CreateSession
+              room={connectid}
+              setSessionInProgress={setSessionInProgress}
+            />
           ) : (
             <VideoChat
               ref={videoRef}
