@@ -43,6 +43,12 @@ io.on("connection", (socket) => {
     io.to(data.room).emit("newMessage", { message: data.message });
   });
 
+  socket.on("statusReady", (data) => {
+    console.log("User ready");
+    console.log(data.room);
+    socket.broadcast.to(data.room).emit("statusReady");
+  });
+
   socket.on("callUser", (data) => {
     socket.broadcast.to(data.room).emit("hey", {
       signal: data.signalData,
@@ -68,6 +74,10 @@ io.on("connection", (socket) => {
 
   socket.on("change-mode", (data) => {
     socket.broadcast.to(data.room).emit("new-mode", data);
+  });
+
+  socket.on("endSession", (data) => {
+    io.to(data.room).emit("endSession", data);
   });
 
   socket.on("disconnect", () => {
