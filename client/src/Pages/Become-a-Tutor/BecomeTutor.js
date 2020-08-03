@@ -3,6 +3,7 @@ import { Form, Col, InputGroup, Button } from "react-bootstrap";
 import "./BecomeTutor.css"
 import Skills from "./Skills"
 import Axios from "axios";
+import { makeToast, endSessionToast } from "../../components/misc/Toaster";
 
 
 export default function BecomeTutor() {
@@ -33,6 +34,7 @@ export default function BecomeTutor() {
         })
       document.getElementById("tutor-form").reset();
       setValidated(false);
+      makeToast("Application submitted successfully!");
     } else {
       if (skills.length == 0) {
         alert("Please input your skills");
