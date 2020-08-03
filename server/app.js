@@ -29,6 +29,7 @@ mongoose
 app.use("/users", require("./routes/users"));
 app.use("/messages", require("./routes/messages"));
 app.use("/mail", require("./routes/mail"));
+app.use("/auth", require("./routes/auth"));
 
 io.on("connection", (socket) => {
   console.log(`New User Connected ${socket.id}`);
