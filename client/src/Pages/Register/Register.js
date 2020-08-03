@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { GoogleLogin } from "react-google-login";
 import UserContext from "../../context/UserContext";
 import { useHistory } from "react-router-dom";
 import ErrorNotice from "../../components/misc/ErrorNotice";
@@ -59,7 +60,6 @@ export default function Register() {
         password,
         password2,
       };
-      
 
       await Axios.post("http://localhost:5000/users/register", newUser);
 
@@ -69,7 +69,6 @@ export default function Register() {
       });
 
       console.log(loginRes);
-      
 
       setUserData({
         token: loginRes.data.token,
@@ -80,7 +79,29 @@ export default function Register() {
 
       history.push("/app/dashboard");
     } catch (err) {
-        err.response.data.msg && setError(err.response.data.msg);
+      err.response.data.msg && setError(err.response.data.msg);
+    }
+  };
+
+  const responseGoogle = async (res) => {
+    try {
+      const googleRes = await Axios.post(
+        "http://localhost:5000/auth/googlelogin",
+        {
+          tokenId: res.tokenId,
+        }
+      );
+
+      setUserData({
+        token: googleRes.data.token,
+        user: googleRes.data.user.id,
+      });
+
+      localStorage.setItem("auth-token", googleRes.data.token);
+
+      history.push("/app/dashboard");
+    } catch (error) {
+      console.log("responseGoogle -> error", error);
     }
   };
 
@@ -167,6 +188,16 @@ export default function Register() {
       <p>
         Already have an account? <a href="/users/login">Sign In here</a>
       </p>
+      <hr />
+      <div className="google-login">
+        <GoogleLogin
+          clientId="679676510970-e025pl5387i4uc4gnohqn70ss5au4l2c.apps.googleusercontent.com"
+          buttonText="Sign up with Google"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={"single_host_origin"}
+        />
+      </div>
     </div>
   );
 }
