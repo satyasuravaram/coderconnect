@@ -8,7 +8,7 @@ router.post("/send", async (req, res) => {
         skillsList += `<li>${skill.value}</li>`
     }
     const output = `
-    <h2>Tutor Application</h2>
+    <h2>Tutor Application - ${firstName + " " + lastName}</h2>
     <ul>  
       <li>Name: ${firstName + " " + lastName}</li>
       <li>Email: ${email}</li>
@@ -20,19 +20,6 @@ router.post("/send", async (req, res) => {
     </ul>
   `;
     console.log("output", output)
-    // let transporter = nodemailer.createTransport({
-    //     host: "mail.google.com",
-    //     port: 587,
-    //     secure: false, // true for 465, false for other ports
-    //     auth: {
-    //         user: "coderconnectemail@gmail.com", // generated ethereal user
-    //         pass: "SethCurry31GG!", // generated ethereal password
-    //     },
-    //     tls: {
-    //         rejectUnauthorized: false
-    //     }
-    // });
-
     let transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -44,11 +31,13 @@ router.post("/send", async (req, res) => {
         // }
     });
 
+    const subjectTitle = `Tutor Application - ${firstName + " " + lastName}`;
+
     // send mail with defined transport object
     let info = await transporter.sendMail({
         from: '"Coder Connect Email" <coderconnectemail@gmail.com>', // sender address
         to: "coderconnectteam@gmail.com", // list of receivers
-        subject: "Tutor Application", // Subject line
+        subject: subjectTitle, // Subject line
         text: "", // plain text body
         html: output, // html body
     }, function (err, data) {
@@ -84,11 +73,13 @@ router.post("/contact", async(req, res)=>{
         // }
     });
 
+    const subjectTitle = `Contact Form - ${firstName + " " + lastName}`;
+
     // send mail with defined transport object
     let info = await transporter.sendMail({
         from: '"Coder Connect Email" <coderconnectemail@gmail.com>', // sender address
         to: "coderconnectteam@gmail.com", // list of receivers
-        subject: "Contact Form", // Subject line
+        subject: subjectTitle, // Subject line
         text: "", // plain text body
         html: output, // html body
     }, function (err, data) {

@@ -2,39 +2,41 @@ import React, { useState, validated, handleSubmit } from "react";
 import { Form, Col, InputGroup, Button } from "react-bootstrap";
 import "./Contact.css"
 import Axios from "axios";
+import makeToast from "../../components/misc/Toaster";
 
 export default function Contact() {
-    const [validated, setValidated] = useState(false);
+    const [validated, setValidated] = useState(true);
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
     const [email, setEmail] = useState();
     const [message, setMessage] = useState();
 
     const handleSubmit = (e) => {
+        const form = e.currentTarget;
         e.preventDefault();
-        console.log(firstName, lastName, email, message);
-        // console.log("hi");
-        // const form = event.currentTarget;
-        // console.log("handleSubmit -> form", form)
-        // if (form.checkValidity() === false) {
-        //   event.preventDefault();
-        //   event.stopPropagation();
-        // }
-        Axios.post('http://localhost:5000/mail/contact', {
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            message: message
-        })
-            .then(function (response) {
-                console.log(response);
+        if (form.checkValidity() === true) {
+            console.log(firstName, lastName, email, message);
+            Axios.post('http://localhost:5000/mail/contact', {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                message: message
             })
-        setValidated(true);
+                .then(function (response) {
+                    console.log(response);
+                })
+            setValidated(false);
+            document.getElementById("contact-form").reset();
+            makeToast("success", "Submitted form successfully!");
+        } else {
+            e.stopPropagation();
+            setValidated(true);
+        }
     };
 
     return <div>
         <h2>Contact Us</h2>
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Form id="contact-form" noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Row>
                 <Form.Group as={Col} md="4" controlId="validationCustom01">
                     <Form.Label>First name</Form.Label>
@@ -81,16 +83,22 @@ export default function Contact() {
                         />
                         <Form.Control.Feedback type="valid">
                             Looks good!
-                </Form.Control.Feedback>
+                        </Form.Control.Feedback>
                         <Form.Control.Feedback type="invalid">
                             Please input your email address.
-                </Form.Control.Feedback>
+                        </Form.Control.Feedback>
                     </InputGroup>
                 </Form.Group>
             </Form.Row>
             <Form.Group controlId="exampleForm.ControlTextarea1">
-                <Form.Label>Example textarea</Form.Label>
-                <Form.Control required as="textarea" rows="3" onChange={e=>setMessage(e.target.value)}/>
+                <Form.Label>Message</Form.Label>
+                <Form.Control required as="textarea" rows="3" onChange={e => setMessage(e.target.value)} />
+                <Form.Control.Feedback type="valid">
+                    Looks good!
+                </Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                    Please input your message
+                </Form.Control.Feedback>
             </Form.Group>
             <hr />
             <Button type="submit">Submit message</Button>
