@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import UserContext from "../../context/UserContext";
 import { GoogleLogin } from "react-google-login";
+import FacebookLogin from "react-facebook-login";
 import { useHistory } from "react-router-dom";
 import ErrorNotice from "../../components/misc/ErrorNotice";
 import "./Login.css";
@@ -91,6 +92,30 @@ export default function Login() {
     }
   };
 
+  const responseFacebook = async (res) => {
+    console.log(res);
+    try {
+      const facebookRes = await Axios.post(
+        "http://localhost:5000/auth/facebooklogin",
+        {
+          accessToken: res.accessToken,
+          userID: res.userID,
+        }
+      );
+      console.log(facebookRes);
+      setUserData({
+        token: facebookRes.data.token,
+        user: facebookRes.data.user.id,
+      });
+
+      localStorage.setItem("auth-token", facebookRes.data.token);
+
+      history.push("/app/dashboard");
+    } catch (error) {
+      console.log("responseFacebook -> error", error);
+    }
+  };
+
   return (
     <div>
       <h2>Log In</h2>
@@ -133,13 +158,28 @@ export default function Login() {
         Don't have an account? <a href="/users/register">Sign up here</a>
       </p>
       <hr />
-      <div className="google-login">
+      <div className="social-login">
         <GoogleLogin
           clientId="679676510970-e025pl5387i4uc4gnohqn70ss5au4l2c.apps.googleusercontent.com"
           buttonText="Sign in with Google"
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
           cookiePolicy={"single_host_origin"}
+          render={(renderProps) => (
+            <button
+              onClick={renderProps.onClick}
+              class="social-btn loginBtn--google"
+            >
+              Login with Google
+            </button>
+          )}
+        />
+        <FacebookLogin
+          appId="3479849305373234"
+          autoLoad={false}
+          fields="name,email,picture"
+          callback={responseFacebook}
+          cssClass="social-btn facebook-btn"
         />
       </div>
     </div>
