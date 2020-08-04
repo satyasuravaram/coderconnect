@@ -3,6 +3,17 @@
 }
 
 .home-container {
-    padding: 10rem 0;
+    height: 92vh;
     text-align: center;
+    margin: auto auto;
+    position: relative;
+    background-color: #7cd0e6;
+
+}
+
+.home-contents {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
