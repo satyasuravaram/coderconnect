@@ -1,15 +1,10 @@
 import React from "react";
-import { UncontrolledAlert, Row, Col } from "reactstrap";
-
+import { UncontrolledAlert, Alert, Row, Col } from "reactstrap";
+import "./ErrorNotice.css";
 export default function ErrorNotice(props) {
-  return <div>
-    <Row>
-        <Col md={6} >
-            <UncontrolledAlert color="danger">
-                <span>{props.message}</span>
-            </UncontrolledAlert>
-        </Col>
-    </Row>
-      
-  </div>;
+  return (
+    <Alert className="error-popup" color="danger">
+      <span>{props.message}</span>
+    </Alert>
+  );
 }

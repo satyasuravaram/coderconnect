@@ -5,6 +5,7 @@ import FacebookLogin from "react-facebook-login";
 import UserContext from "../../context/UserContext";
 import { useHistory } from "react-router-dom";
 import ErrorNotice from "../../components/misc/ErrorNotice";
+import Particles from "react-particles-js";
 import Axios from "axios";
 import "./Register.css";
 
@@ -14,7 +15,7 @@ export default function Register() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [password2, setPassword2] = useState();
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
   const history = useHistory();
 
   const { setUserData } = useContext(UserContext);
@@ -130,112 +131,131 @@ export default function Register() {
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
-      {error && <ErrorNotice message={error} />}
-      <Form onSubmit={registerUser}>
-        <Row form>
-          <Col md={3}>
-            <FormGroup>
-              <Label for="firstName">First Name</Label>
-              <Input
-                type="text"
-                name="firstName"
-                id="firstName"
-                placeholder="First Name"
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-            </FormGroup>
-          </Col>
-          <Col md={3}>
-            <FormGroup>
-              <Label for="lastName">Last Name</Label>
-              <Input
-                type="text"
-                name="lastName"
-                id="lastName"
-                placeholder="Last Name"
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
+    <div className="register-outer-container">
+      <Particles
+        canvasClassName="particles-container"
+        params={{
+          particles: {
+            number: {
+              value: 110,
+              density: {
+                enable: true,
+                value_area: 1000,
+              },
+            },
+          },
+        }}
+      />
+      <div className={`sign-up-container ${error && "error-condition-signup"}`}>
+        <Form className="sign-up-form" onSubmit={registerUser}>
+          <h2 className="sign-up-header">Sign Up</h2>
+          {error && <ErrorNotice message={error} />}
+          <Row form>
+            <Col>
+              <FormGroup>
+                <Label for="firstName">First Name</Label>
+                <Input
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  placeholder="First Name"
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </FormGroup>
+            </Col>
+            <Col>
+              <FormGroup>
+                <Label for="lastName">Last Name</Label>
+                <Input
+                  type="text"
+                  name="lastName"
+                  id="lastName"
+                  placeholder="Last Name"
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
 
-        <Row form>
-          <Col md={6}>
-            <FormGroup>
-              <Label for="email">Email</Label>
-              <Input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Email address"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
+          <Row form>
+            <Col>
+              <FormGroup>
+                <Label for="email">Email</Label>
+                <Input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Email address"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
 
-        <Row form>
-          <Col md={6}>
-            <FormGroup>
-              <Label for="password">Password</Label>
-              <Input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
+          <Row form>
+            <Col>
+              <FormGroup>
+                <Label for="password">Password</Label>
+                <Input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
 
-        <Row form>
-          <Col md={6}>
-            <FormGroup>
-              <Label for="password2">Confirm Password</Label>
-              <Input
-                type="password"
-                name="password2"
-                id="password2"
-                placeholder="Confirm Password"
-                onChange={(e) => setPassword2(e.target.value)}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
+          <Row form>
+            <Col>
+              <FormGroup>
+                <Label for="password2">Confirm Password</Label>
+                <Input
+                  type="password"
+                  name="password2"
+                  id="password2"
+                  placeholder="Confirm Password"
+                  onChange={(e) => setPassword2(e.target.value)}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
 
-        <Button type="submit">Sign Up</Button>
-      </Form>
-      <br />
-      <p>
-        Already have an account? <a href="/users/login">Sign In here</a>
-      </p>
-      <hr />
-      <div className="social-login">
-        <GoogleLogin
-          clientId="679676510970-e025pl5387i4uc4gnohqn70ss5au4l2c.apps.googleusercontent.com"
-          buttonText="Sign up with Google"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={"single_host_origin"}
-          render={(renderProps) => (
-            <button
-              onClick={renderProps.onClick}
-              class="social-btn loginBtn--google"
-            >
-              Login with Google
-            </button>
-          )}
-        />
-        <FacebookLogin
-          appId="3479849305373234"
-          autoLoad={false}
-          fields="name,email,picture"
-          callback={responseFacebook}
-          cssClass="social-btn facebook-btn"
-        />
+          <Button className="sign-up-btn" type="submit">
+            Sign Up
+          </Button>
+          <p>
+            Already have an account? <a href="/users/login">Sign In here</a>
+          </p>
+        </Form>
+        <div className="social-register">
+          <div className="social-btn-container">
+            <GoogleLogin
+              clientId="679676510970-e025pl5387i4uc4gnohqn70ss5au4l2c.apps.googleusercontent.com"
+              buttonText="Sign up with Google"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy={"single_host_origin"}
+              render={(renderProps) => (
+                <button
+                  onClick={renderProps.onClick}
+                  class="social-btn loginBtn--google"
+                >
+                  Sign up with Google
+                </button>
+              )}
+            />
+            <FacebookLogin
+              appId="3479849305373234"
+              autoLoad={false}
+              fields="name,email,picture"
+              callback={responseFacebook}
+              cssClass="social-btn facebook-btn"
+              textButton="Sign up with Facebook"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

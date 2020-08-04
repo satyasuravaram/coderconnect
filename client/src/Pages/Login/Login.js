@@ -5,6 +5,7 @@ import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import { useHistory } from "react-router-dom";
 import ErrorNotice from "../../components/misc/ErrorNotice";
+import Particles from "react-particles-js";
 import "./Login.css";
 import Axios from "axios";
 
@@ -117,70 +118,87 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h2>Log In</h2>
-      {error && <ErrorNotice message={error} />}
-      <Form onSubmit={LogInUser}>
-        <Row form>
-          <Col md={6}>
-            <FormGroup>
-              <Label for="email">Email</Label>
-              <Input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Email address"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
+    <div className="login-outer-container">
+      <Particles
+        canvasClassName="particles-container"
+        params={{
+          particles: {
+            number: {
+              value: 110,
+              density: {
+                enable: true,
+                value_area: 1000,
+              },
+            },
+          },
+        }}
+      />
+      <div className={`login-container ${error && "error-condition"}`}>
+        <Form className="login-form" onSubmit={LogInUser}>
+          <h2>Sign In</h2>
+          {error && <ErrorNotice message={error} />}
+          <Row form>
+            <Col>
+              <FormGroup>
+                <Label for="email">Email</Label>
+                <Input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Email address"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
 
-        <Row form>
-          <Col md={6}>
-            <FormGroup>
-              <Label for="password">Password</Label>
-              <Input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
+          <Row form>
+            <Col>
+              <FormGroup>
+                <Label for="password">Password</Label>
+                <Input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
 
-        <Button>Log In</Button>
-      </Form>
-      <br />
-      <p>
-        Don't have an account? <a href="/users/register">Sign up here</a>
-      </p>
-      <hr />
-      <div className="social-login">
-        <GoogleLogin
-          clientId="679676510970-e025pl5387i4uc4gnohqn70ss5au4l2c.apps.googleusercontent.com"
-          buttonText="Sign in with Google"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={"single_host_origin"}
-          render={(renderProps) => (
-            <button
-              onClick={renderProps.onClick}
-              class="social-btn loginBtn--google"
-            >
-              Login with Google
-            </button>
-          )}
-        />
-        <FacebookLogin
-          appId="3479849305373234"
-          autoLoad={false}
-          fields="name,email,picture"
-          callback={responseFacebook}
-          cssClass="social-btn facebook-btn"
-        />
+          <Button className="login-btn-regular">Log In</Button>
+          <p>
+            Don't have an account? <a href="/users/register">Sign up here</a>
+          </p>
+        </Form>
+        <div className="social-login">
+          <div className="social-btn-container">
+            <GoogleLogin
+              clientId="679676510970-e025pl5387i4uc4gnohqn70ss5au4l2c.apps.googleusercontent.com"
+              buttonText="Sign in with Google"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy={"single_host_origin"}
+              render={(renderProps) => (
+                <button
+                  onClick={renderProps.onClick}
+                  class="social-btn loginBtn--google"
+                >
+                  Sign in with Google
+                </button>
+              )}
+            />
+            <FacebookLogin
+              appId="3479849305373234"
+              autoLoad={false}
+              fields="name,email,picture"
+              callback={responseFacebook}
+              cssClass="social-btn facebook-btn"
+              textButton="Sign in with Facebook"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
