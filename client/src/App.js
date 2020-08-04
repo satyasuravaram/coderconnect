@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "./App.css";
 
 //Context
 import UserContext from "./context/UserContext";
@@ -12,12 +13,12 @@ function App() {
   const [userData, setUserData] = useState({
     token: undefined,
     user: undefined,
-  });  
+  });
 
   return (
     <Router>
       <UserContext.Provider value={{ userData, setUserData }}>
-        <div>
+        <div className="App">
           <Switch>
             <Route path="/app" component={MainLayout}></Route>
             <Route path="/" component={LandingLayout}></Route>
