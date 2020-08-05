@@ -42,7 +42,35 @@ export default function Home() {
   });
   return (
     <div className="home-container">
-      
+      <Particles
+        canvasClassName="particles-container"
+        params={{
+          particles: {
+            number: {
+              value: 110,
+              density: {
+                enable: true,
+                value_area: 1000,
+              },
+              line_linked: {
+            				shadow: {
+            					enable: true,
+            					color: "#faa",
+            					blur: 10
+            				}
+            			}
+            },
+          },
+          interactivity: {
+            events: {
+              onhover: {
+                enable: true,
+                mode: "repulse",
+              },
+            },
+          },
+        }}
+      />
       <div className="home-contents">
         <h2>CoderConnect</h2>
         <br />

@@ -1,11 +1,17 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
 const router = express.Router();
-router.post("/send", async (req, res) => {
-    const { firstName, lastName, email, age, skills } = req.body;
+const multer = require('multer');
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+router.post("/send", upload.single("resume"), async (req, res) => {
+    const { firstName, lastName, email, age, skills, resume } = req.body;
+    console.log(req);
     let skillsList = "";
     for(let skill of skills){
-        skillsList += `<li>${skill.value}</li>`
+        skillsList += `<li>${skill}</li>`
     }
     const output = `
     <h2>Tutor Application - ${firstName + " " + lastName}</h2>
@@ -32,7 +38,7 @@ router.post("/send", async (req, res) => {
     });
 
     const subjectTitle = `Tutor Application - ${firstName + " " + lastName}`;
-
+    
     // send mail with defined transport object
     let info = await transporter.sendMail({
         from: '"Coder Connect Email" <coderconnectemail@gmail.com>', // sender address
@@ -40,6 +46,10 @@ router.post("/send", async (req, res) => {
         subject: subjectTitle, // Subject line
         text: "", // plain text body
         html: output, // html body
+        attachments: {   // binary buffer as an attachment
+            filename: req.file.originalname,
+            content: req.file.buffer
+        }
     }, function (err, data) {
         if (err) {
             console.log(err);
