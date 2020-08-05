@@ -28,7 +28,7 @@ export default function Contact() {
                 })
             setValidated(false);
             document.getElementById("contact-form").reset();
-            makeToast("Form submitted successfully!");
+            makeToast("success", "Form submitted successfully!");
         } else {
             e.stopPropagation();
             setValidated(true);
