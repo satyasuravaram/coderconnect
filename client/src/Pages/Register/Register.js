@@ -230,7 +230,7 @@ export default function Register() {
           </p>
         </Form>
         <div className="social-register">
-          <div className="social-btn-container">
+          <div className="social-btn-container-signup">
             <GoogleLogin
               clientId="679676510970-e025pl5387i4uc4gnohqn70ss5au4l2c.apps.googleusercontent.com"
               buttonText="Sign up with Google"
@@ -240,7 +240,7 @@ export default function Register() {
               render={(renderProps) => (
                 <button
                   onClick={renderProps.onClick}
-                  class="social-btn loginBtn--google"
+                  class="social-btn signup-btn--google"
                 >
                   Sign up with Google
                 </button>
@@ -251,7 +251,7 @@ export default function Register() {
               autoLoad={false}
               fields="name,email,picture"
               callback={responseFacebook}
-              cssClass="social-btn facebook-btn"
+              cssClass="social-btn facebook-btn-signup"
               textButton="Sign up with Facebook"
             />
           </div>

@@ -173,7 +173,7 @@ export default function Login() {
           </p>
         </Form>
         <div className="social-login">
-          <div className="social-btn-container">
+          <div className="social-btn-container-login">
             <GoogleLogin
               clientId="679676510970-e025pl5387i4uc4gnohqn70ss5au4l2c.apps.googleusercontent.com"
               buttonText="Sign in with Google"
@@ -194,7 +194,7 @@ export default function Login() {
               autoLoad={false}
               fields="name,email,picture"
               callback={responseFacebook}
-              cssClass="social-btn facebook-btn"
+              cssClass="social-btn facebook-btn-login"
               textButton="Sign in with Facebook"
             />
           </div>
