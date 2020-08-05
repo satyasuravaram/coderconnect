@@ -136,46 +136,46 @@ export default function Register() {
         canvasClassName="particles-container"
         params={{
           particles: {
-	        number: {
-	            value: 120,
-	            density: {
-	                enable: true,
-	                value_area: 1500
-	            }
-	        },
-	        line_linked: {
-	            enable: true,
-	            opacity: 0.1
-	        },
-	        move: {
-	            direction: "right",
-	            speed: 0.05
-	        },
-	        size: {
-	            value: 3
-	        },
-	        opacity: {
-	            anim: {
-	                enable: true,
-	                speed: 1,
-	                opacity_min: 0.2
-	            }
-	        }
-	    },
-	    interactivity: {
-	        events: {
-	            onclick: {
-	                enable: true,
-	                mode: "push"
-	            }
-	        },
-	        modes: {
-	            push: {
-	                particles_nb: 1
-	            }
-	        }
-	    },
-	    retina_detect: true
+            number: {
+              value: 120,
+              density: {
+                enable: true,
+                value_area: 1500,
+              },
+            },
+            line_linked: {
+              enable: true,
+              opacity: 0.1,
+            },
+            move: {
+              direction: "right",
+              speed: 0.15,
+            },
+            size: {
+              value: 3,
+            },
+            opacity: {
+              anim: {
+                enable: true,
+                speed: 1,
+                opacity_min: 0.2,
+              },
+            },
+          },
+          interactivity: {
+            events: {
+              onclick: {
+                enable: true,
+                mode: "push",
+              },
+            },
+            modes: {
+              push: {
+                particles_nb: 1,
+              },
+            },
+          },
+          retina_detect: true,
         }}
       />
       <div className={`sign-up-container ${error && "error-condition-signup"}`}>

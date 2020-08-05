@@ -17,6 +17,7 @@ import { Button } from "react-bootstrap";
 export default function PublicProfile() {
   const { userid } = useParams();
   const { userData, setUserData } = useContext(UserContext);
+  const [loggedInID, setLoggedInID] = useState();
   const [profileData, setProfileData] = useState({
     firstName: "",
     lastName: "",
@@ -44,27 +45,32 @@ export default function PublicProfile() {
       if (tokenRes.data) {
         const userRes = await Axios.get("http://localhost:5000/users/", {
           headers: { "x-auth-token": token },
-      });
-
-      setUserData({
-        token: token,
-        user: userRes.data,
-      });
-
-      if (tokenRes.data) {
-        const tutor = await Axios.get(`http://localhost:5000/users/${userid}`, {
-          headers: { "x-auth-token": token },
         });
-        setProfileData({
-          firstName: tutor.data.firstName,
-          lastName: tutor.data.lastName,
-          email: tutor.data.email,
-          bio: tutor.data.bio,
-          skills: tutor.data.skills,
-          id: tutor.data._id
+
+        setLoggedInID(userRes.data._id)
+        setUserData({
+          token: token,
+          user: userRes.data,
         });
+
+        if (tokenRes.data) {
+          const tutor = await Axios.get(
+            `http://localhost:5000/users/${userid}`,
+            {
+              headers: { "x-auth-token": token },
+            }
+          );
+          setProfileData({
+            firstName: tutor.data.firstName,
+            lastName: tutor.data.lastName,
+            email: tutor.data.email,
+            bio: tutor.data.bio,
+            skills: tutor.data.skills,
+            id: tutor.data._id,
+          });
+        }
       }
-    };}
+    };
     getTutor();
   }, []);
 
@@ -73,7 +79,7 @@ export default function PublicProfile() {
       <h2 className="full-name">
         {profileData.firstName} {profileData.lastName + "'s"} Profile
         <span>
-          <Button
+          {profileData.id !== loggedInID  && <Button
             className="edit-btn"
             variant="primary"
             size="md"
@@ -82,7 +88,7 @@ export default function PublicProfile() {
             }
           >
             Connect
-          </Button>
+          </Button>}
           <Button
             className="edit-btn-2"
             variant="outline-secondary"
