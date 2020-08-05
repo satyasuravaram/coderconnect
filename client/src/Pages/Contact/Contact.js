@@ -3,6 +3,7 @@ import { Form, Col, InputGroup, Button } from "react-bootstrap";
 import "./Contact.css"
 import { makeToast, endSessionToast } from "../../components/misc/Toaster";
 import Axios from "axios";
+import SuccessNotice from "../../components/misc/SuccessNotice";
 
 
 export default function Contact() {
@@ -11,6 +12,7 @@ export default function Contact() {
     const [lastName, setLastName] = useState();
     const [email, setEmail] = useState();
     const [message, setMessage] = useState();
+    const [success, setSuccess] = useState("");
 
     const handleSubmit = (e) => {
         const form = e.currentTarget;
@@ -28,7 +30,7 @@ export default function Contact() {
                 })
             setValidated(false);
             document.getElementById("contact-form").reset();
-            makeToast("success", "Form submitted successfully!");
+            setSuccess("Form submitted successfully!");
         } else {
             e.stopPropagation();
             setValidated(true);
@@ -37,6 +39,7 @@ export default function Contact() {
 
     return <div>
         <h2>Contact Us</h2>
+        {success && <SuccessNotice message={success} />}
         <Form id="contact-form" noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Row>
                 <Form.Group as={Col} md="4" controlId="validationCustom01">
