@@ -5,6 +5,7 @@ import Skills from "./Skills"
 import Axios from "axios";
 import { makeToast, endSessionToast } from "../../components/misc/Toaster";
 import ErrorNotice from "../../components/misc/ErrorNotice";
+import SuccessNotice from "../../components/misc/SuccessNotice";
 
 
 export default function BecomeTutor() {
@@ -16,7 +17,7 @@ export default function BecomeTutor() {
   const [skills, setSkills] = useState([]);
   const [resume, setResume]= useState();
   const [error, setError] = useState("");
-
+  const [success, setSuccess] = useState("");
   const handleSubmit = (e) => {
     const form = e.currentTarget;
     e.preventDefault();
@@ -36,7 +37,7 @@ export default function BecomeTutor() {
         })
       document.getElementById("tutor-form").reset();
       setValidated(false);
-      makeToast("success", "Application submitted successfully!");
+      setSuccess("Application submitted successfully!");
     } else {
       if (skills === null || skills.length == 0) {
         setError("Please input your skills");
@@ -50,6 +51,7 @@ export default function BecomeTutor() {
   return <div>
     <h2>Become a Tutor</h2>
     {error && <ErrorNotice message={error} />}
+    {success && <SuccessNotice message={success} />}
     <Form id="tutor-form" noValidate validated={validated} onSubmit={handleSubmit}>
       <Form.Row>
         <Form.Group as={Col} md="4" controlId="validationCustom01">
