@@ -1,19 +1,26 @@
+#tsparticles {
+  height: 100%;
+}
+
 .home-btn {
-    margin: 1rem;
+  margin: 1rem;
 }
 
 .home-container {
-    height: 92vh;
-    text-align: center;
-    margin: auto auto;
-    position: relative;
-    background-color: #7cd0e6;
-
+  height: 92vh;
+  text-align: center;
+  margin: auto auto;
+  position: relative;
+  background-color: #7cd0e6;
 }
 
 .home-contents {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.home-container{
+    background-color: #03acd6;
 }
