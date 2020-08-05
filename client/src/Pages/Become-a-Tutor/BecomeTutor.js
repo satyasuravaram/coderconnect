@@ -51,7 +51,7 @@ export default function BecomeTutor() {
       setValidated(true);
     }
   };
-  return <div>
+  return (<div>
     <h2>Become a Tutor</h2>
     {error && <ErrorNotice message={error} />}
     {success && <SuccessNotice message={success} />}
@@ -105,6 +105,7 @@ export default function BecomeTutor() {
             <Form.Control.Feedback type="invalid">
               Please input your last name.
             </Form.Control.Feedback>
+            </InputGroup>
           </Form.Group>
           <Form.Group as={Col} md="4" controlId="validationCustomEmail">
             <Form.Label>Email</Form.Label>
