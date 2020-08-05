@@ -4,6 +4,7 @@ import "./BecomeTutor.css"
 import Skills from "./Skills"
 import Axios from "axios";
 import { makeToast, endSessionToast } from "../../components/misc/Toaster";
+import ErrorNotice from "../../components/misc/ErrorNotice";
 
 
 export default function BecomeTutor() {
@@ -14,11 +15,12 @@ export default function BecomeTutor() {
   const [age, setAge] = useState();
   const [skills, setSkills] = useState([]);
   const [resume, setResume]= useState();
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     const form = e.currentTarget;
     e.preventDefault();
-    if (form.checkValidity() === true && skills.length > 0) {
+    if (form.checkValidity() === true && skills !== null && skills.length > 0) {
 
       console.log(firstName, lastName, email, skills, age);
       console.log(resume);
@@ -34,10 +36,10 @@ export default function BecomeTutor() {
         })
       document.getElementById("tutor-form").reset();
       setValidated(false);
-      makeToast("Application submitted successfully!");
+      makeToast("success", "Application submitted successfully!");
     } else {
-      if (skills.length == 0) {
-        alert("Please input your skills");
+      if (skills === null || skills.length == 0) {
+        setError("Please input your skills");
       }
       e.stopPropagation();
       setValidated(true);
@@ -47,6 +49,7 @@ export default function BecomeTutor() {
 
   return <div>
     <h2>Become a Tutor</h2>
+    {error && <ErrorNotice message={error} />}
     <Form id="tutor-form" noValidate validated={validated} onSubmit={handleSubmit}>
       <Form.Row>
         <Form.Group as={Col} md="4" controlId="validationCustom01">
@@ -103,11 +106,11 @@ export default function BecomeTutor() {
       </Form.Row>
       <Form.Row>
         <Form.Group as={Col} md="3" controlId="validationCustom03">
-          <Form.File id="resume" label="Please put your resume or CV here" onChange={e=> setResume(e.target.value)} required />
+          <Form.File id="resume" label="Please put your resume or CV here" onChange={e=> setResume(e.target.files[0])} required />
         </Form.Group>
         <Form.Group as={Col} md="3" controlId="validationCustom05">
           <Form.Label>Age</Form.Label>
-          <Form.Control onChange={e => setAge(e.target.value)} type="text" placeholder="Age" required />
+          <Form.Control onChange={e => setAge(e.target.value)} type="number" placeholder="Age" required />
           <Form.Control.Feedback type="valid">
             Looks good!
               </Form.Control.Feedback>

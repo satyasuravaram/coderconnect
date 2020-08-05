@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import Select from "react-select";
 import skillsArray from "../../components/SkillsArray";
 import "./Dashboard.css";
-import SatyaImg from "../About/images/satya.jpeg";
+import DefaultImg from "../About/images/default-profile-pic.png";
 import Pagination from "./Pagination";
 
 export default function Dashboard() {
@@ -18,7 +18,7 @@ export default function Dashboard() {
   const [searchSkill, setSearchSkill] = useState({});
   const { userData, setUserData } = useContext(UserContext);
   const [currentTutors, setCurrentTutors] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(2);
   const handleClose = () => setShow(false);
@@ -50,9 +50,14 @@ export default function Dashboard() {
           user: userRes.data,
         });
 
+        setLoading(true);
+
         const tutorArr = await Axios.get("http://localhost:5000/users/tutors", {
           headers: { "x-auth-token": token },
         });
+
+        setLoading(false);
+
         for (let i = 0; i < tutorArr.data.length; i++) {
           setTutors((prevTutors) => [
             ...prevTutors,
@@ -62,7 +67,8 @@ export default function Dashboard() {
               lastName: tutorArr.data[i].lastName,
               skills: tutorArr.data[i].skills,
               bio: tutorArr.data[i].bio,
-            }
+              image: tutorArr.data[i].image
+            },
           ]);
           setCurrentTutors((prevTutors) => [
             ...prevTutors,
@@ -72,7 +78,8 @@ export default function Dashboard() {
               lastName: tutorArr.data[i].lastName,
               skills: tutorArr.data[i].skills,
               bio: tutorArr.data[i].bio,
-            }
+              image: tutorArr.data[i].image
+            },
           ]);
         }
       }
@@ -124,58 +131,69 @@ export default function Dashboard() {
           </Button>
         </div>
       </div>
-      <h6 className="text-center">Tutors:</h6>
-      <Pagination
-        className="center"
-        postsPerPage={postsPerPage}
-        totalPosts={currentTutors.length}
-        paginate={paginate}
-      />
 
-      <div className="tutor-card-container">
-        {filteredTutors.length === 0?
-        <div className="no-tutors">
-          <h2>
-            No tutors with this skill available
-          </h2>
-        </div>
-        :filteredTutors.map((tutor, index) => (
-          <div className="tutor-card">
-            <div className="tutor-card-img-container">
-              <img className="tutor-card-img" src={SatyaImg} alt="satyaimg" />
-            </div>
+      {!loading ? (
+        <div>
+          <h6 className="text-center">Tutors:</h6>
+          <Pagination
+            className="center"
+            postsPerPage={postsPerPage}
+            totalPosts={currentTutors.length}
+            paginate={paginate}
+          />
 
-            <div className="tutor-card-info">
-              <h1 className="tutor-card-name">
-                {tutor.firstName} {tutor.lastName}
-              </h1>
-              <p className="tutor-card-bio">
-                {tutor.bio.substring(0, 150)}
-                {tutor.bio.length > 150 && "..."} &nbsp;
-              </p>
-              <a
-                href={`/app/profile/${tutor.id}`}
-                className="tutor-card-readmore"
-              >
-                See Profile
-              </a>
+          <div className="tutor-card-container">
+            {filteredTutors.length === 0 ? (
+              <div className="no-tutors">
+                <h2>No tutors with this skill available</h2>
+              </div>
+            ) : (
+              filteredTutors.map((tutor, index) => (
+                <div className="tutor-card">
+                  <div className="tutor-card-img-container">
+                    <img
+                      className="tutor-card-img"
+                      src={tutor.image?`data:image;base64,${tutor.image}`: DefaultImg}
+                      alt={`${tutor.firstName}-img`}
+                    />
+                  </div>
 
-              {tutor.id !== userData.user._id && (
-                <Button
-                  size="lg"
-                  variant="primary"
-                  onClick={() =>
-                    createConnection(tutor.id, userData.user._id, history)
-                  }
-                  className="connect-btn"
-                >
-                  Connect
-                </Button>
-              )}
-            </div>
+                  <div className="tutor-card-info">
+                    <h1 className="tutor-card-name">
+                      {tutor.firstName} {tutor.lastName}
+                    </h1>
+                    <p className="tutor-card-bio">
+                      {tutor.bio.substring(0, 150)}
+                      {tutor.bio.length > 150 && "..."} &nbsp;
+                    </p>
+                    <a
+                      href={`/app/profile/${tutor.id}`}
+                      className="tutor-card-readmore"
+                    >
+                      See Profile
+                    </a>
+
+                    {tutor.id !== userData.user._id && (
+                      <Button
+                        size="lg"
+                        variant="primary"
+                        onClick={() =>
+                          createConnection(tutor.id, userData.user._id, history)
+                        }
+                        className="connect-btn"
+                      >
+                        Connect
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              ))
+            )}
           </div>
-        ))}
-      </div>
+        </div>
+      ) : (
+        <div className="text-center">Page is loading</div>
+      )}
     </div>
   );
 }
