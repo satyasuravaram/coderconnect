@@ -1,11 +1,14 @@
-import React, { useState, validated, handleSubmit } from "react";
+import React, { Component, useState, validated, handleSubmit } from "react";
 import { Form, Col, InputGroup, Button } from "react-bootstrap";
+import { render } from 'react-dom';
 import "./BecomeTutor.css";
 import Skills from "./Skills";
 import Axios from "axios";
 import { makeToast, endSessionToast } from "../../components/misc/Toaster";
 import ErrorNotice from "../../components/misc/ErrorNotice";
 import SuccessNotice from "../../components/misc/SuccessNotice";
+import bsCustomFileInput from "bs-custom-file-input"
+
 
 export default function BecomeTutor() {
   const [validated, setValidated] = useState(true);
@@ -44,20 +47,93 @@ export default function BecomeTutor() {
       setValidated(false);
       setSuccess("Application submitted successfully!");
     } else {
-      if (skills === null || skills.length == 0) {
-        setError("Please input your skills");
+      let missingInputs = []
+      let needs = ["first name", "last name", "email", "age", "resume/CV", "skills"]
+      let firstTrue = -1;
+      let lastTrue = 0;
+      let count = 0;
+      let tcount = 0;
+      if (firstName===undefined || firstName.length== 0) {
+        missingInputs.push(true);
+        if(firstTrue == -1) firstTrue = count;
+        lastTrue = count;
+        tcount++;
+      } else {missingInputs.push(false);} count++;
+      if (lastName===undefined || lastName.length== 0) {
+        missingInputs.push(true);
+        if(firstTrue == -1) firstTrue = count;
+        lastTrue = count;
+        tcount++;
+        
+      } else {missingInputs.push(false);} count++;
+      if (email===undefined || email.length== 0) {
+        missingInputs.push(true);
+        if(firstTrue == -1) firstTrue = count;
+        lastTrue = count;
+        tcount++;
+        
+      } else {missingInputs.push(false);} count++;
+      if (age===undefined || age.length== 0) {
+        missingInputs.push(true);
+        if(firstTrue == -1) firstTrue = count;
+        lastTrue = count;
+        tcount++;
+        
+      } else {missingInputs.push(false);} count++;
+      if (resume===undefined || resume.length== 0) {
+        missingInputs.push(true);
+        if(firstTrue == -1) firstTrue = count;
+        lastTrue = count;
+        tcount++;
+        
+      } else {missingInputs.push(false);} count++;
+      if (skills===null|| skills.length== 0) {
+        missingInputs.push(true);
+        if(firstTrue == -1) firstTrue = count;
+        lastTrue = count;
+        tcount++;
+        
+      } else {missingInputs.push(false);}
+      console.log("handleSubmit -> lastTrue", lastTrue)
+      let output = "";
+      firstTrue == lastTrue ? output = "Please output your " : output ="Please output your ";
+      console.log(firstTrue, lastTrue);
+      for(let i = 0; i < missingInputs.length; i++){
+        if(firstTrue != lastTrue){
+          if(missingInputs[i]){
+            if(lastTrue == i){
+              output += "and "
+            }
+            output += needs[i];
+            if(tcount != 2 && lastTrue != i){
+              output += ", "
+            }
+            else if(tcount == 2 && lastTrue != i){
+              output += " ";
+            }
+          }
+        }
+        else{
+          if(missingInputs[i]){
+            output += needs[i];
+          }
+        }
       }
+      output += ".";
+      setError(output);
       e.stopPropagation();
       setValidated(true);
     }
-  };
+  }
+
+
   return (
     <div className="bt-outer-container">
       <div className="bt-inner-container">
         <div className="bt-form">
           <h2>Become a Tutor</h2>
-          {error && <ErrorNotice message={error} />}
-          {success && <SuccessNotice message={success} />}
+          {error && <ErrorNotice message={error} fade={true} />
+         || success && <SuccessNotice message={success} />}
           <Form
             id="tutor-form"
             noValidate
@@ -133,14 +209,22 @@ export default function BecomeTutor() {
               </Form.Group>
             </Form.Row>
             <Form.Row>
-            <Form.Group as={Col} controlId="validationCustom03">
-              <Form.File
+              <Form.Group as={Col} controlId="validationCustom03">
+                {/* <Form.File
                 id="resume"
                 label="Resume/CV"
                 onChange={(e) => setResume(e.target.files[0])}
                 required
-              />
-            </Form.Group>
+              /> */}
+              <Form.Label>Resume/CV</Form.Label>
+                <Form.File
+                  id="resume"
+                  label="Choose a file..."
+                  custom
+                  onChange={(e) => setResume(e.target.files[0])}
+                  required 
+                />
+              </Form.Group>
             </Form.Row>
             <Form.Row>
               <Form.Group as={Col} controlId="validationCustom06">
@@ -158,3 +242,4 @@ export default function BecomeTutor() {
     </div>
   );
 }
+
