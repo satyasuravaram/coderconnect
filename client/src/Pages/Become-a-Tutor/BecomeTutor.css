@@ -1,0 +1,40 @@
+.bt-outer-container {
+  height: 95vh;
+  background-color: rgb(66,133,244);
+  position: relative;
+}
+
+.bt-inner-container {
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  background-color: #fff;
+  height: 55rem;
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 1.4rem 2rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+}
+
+.bt-form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 2rem;
+  line-height: 1.4rem;
+  width: 50%;
+  padding-right: 4rem;
+}
+
+.bt-right-half{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: rgb(182, 181, 181);
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
