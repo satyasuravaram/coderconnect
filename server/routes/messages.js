@@ -104,13 +104,14 @@ router.post("/loadAllConnections", async function (req, res, next) {
 			} else {
 				lastMessage = "";
 			}
+			
 			connections.push({
 				first: otherUser.firstName,
 				last: otherUser.lastName,
+				image: otherUser.image,
 				conversation: connection.conversation,
 				lastMessage: lastMessage,
 			});
-
 			if (i === user.connections.length - 1) {
 				return res.json(connections);
 			}

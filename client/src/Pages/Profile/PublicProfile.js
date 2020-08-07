@@ -5,6 +5,7 @@ import "./PublicProfile.css";
 import createConnection from "../../actions/CreateConnection";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../context/UserContext";
+import DefaultImg from "../About/images/default-profile-pic.png";
 
 import {
   ListGroup,
@@ -24,6 +25,7 @@ export default function PublicProfile() {
     email: "",
     bio: "",
     skills: [],
+    image: "",
   });
   const history = useHistory();
 
@@ -47,7 +49,7 @@ export default function PublicProfile() {
           headers: { "x-auth-token": token },
         });
 
-        setLoggedInID(userRes.data._id)
+        setLoggedInID(userRes.data._id);
         setUserData({
           token: token,
           user: userRes.data,
@@ -67,6 +69,7 @@ export default function PublicProfile() {
             bio: tutor.data.bio,
             skills: tutor.data.skills,
             id: tutor.data._id,
+            image: tutor.data.image,
           });
         }
       }
@@ -79,16 +82,18 @@ export default function PublicProfile() {
       <h2 className="full-name">
         {profileData.firstName} {profileData.lastName + "'s"} Profile
         <span>
-          {profileData.id !== loggedInID  && <Button
-            className="edit-btn"
-            variant="primary"
-            size="md"
-            onClick={() =>
-              createConnection(profileData.id, userData.user._id, history)
-            }
-          >
-            Connect
-          </Button>}
+          {profileData.id !== loggedInID && (
+            <Button
+              className="edit-btn"
+              variant="primary"
+              size="md"
+              onClick={() =>
+                createConnection(profileData.id, userData.user._id, history)
+              }
+            >
+              Connect
+            </Button>
+          )}
           <Button
             className="edit-btn-2"
             variant="outline-secondary"
@@ -99,30 +104,36 @@ export default function PublicProfile() {
           </Button>
         </span>
       </h2>
+      <div className="tutor-card-img-container">
+        <img
+          className="tutor-card-img"
+          src={
+            profileData.image
+              ? `data:image;base64,${profileData.image}`
+              : DefaultImg
+          }
+          alt={`${profileData.firstName}-img-public`}
+        />
+      </div>
       <ListGroup>
         <ListGroupItem>
-          <ListGroupItemHeading>Name</ListGroupItemHeading>
-          <ListGroupItemText>
-            {profileData.firstName} {profileData.lastName}
-          </ListGroupItemText>
+          <ListGroupItemHeading>Bio</ListGroupItemHeading>
+          <ListGroupItemText>{profileData.bio}</ListGroupItemText>
         </ListGroupItem>
+        
         <ListGroupItem>
           <ListGroupItemHeading>Email</ListGroupItemHeading>
           <ListGroupItemText>{profileData.email}</ListGroupItemText>
         </ListGroupItem>
 
-        <ListGroupItem>
-          <ListGroupItemHeading>Bio</ListGroupItemHeading>
-          <ListGroupItemText>{profileData.bio}</ListGroupItemText>
-        </ListGroupItem>
 
         <ListGroupItem>
           <ListGroupItemHeading>Skills</ListGroupItemHeading>
-          <ListGroup horizontal="lg">
+          <div className="listgroup-skills">
             {profileData.skills.map((skill, index) => (
-              <ListGroupItem>{skill}</ListGroupItem>
+              <div className="listgroup-skill">{skill}</div>
             ))}
-          </ListGroup>
+          </div>
         </ListGroupItem>
       </ListGroup>
     </div>

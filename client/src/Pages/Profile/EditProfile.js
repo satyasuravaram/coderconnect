@@ -6,7 +6,7 @@ import ErrorNotice from "../../components/misc/ErrorNotice";
 import skillsArray from "../../components/SkillsArray";
 import "./EditProfile.css";
 import SkillsDropdown from "./SkillsDropdown";
-import DefaultImg from "../About/images/default-profile-pic.png"
+import DefaultImg from "../About/images/default-profile-pic.png";
 
 export default function EditProfile() {
   const [profileData, setProfileData] = useState({
@@ -23,6 +23,7 @@ export default function EditProfile() {
   const [error, setError] = useState("");
   const history = useHistory();
   const [image, setImage] = useState("");
+  const [profilePic, setProfilePic] = useState(DefaultImg);
 
   useEffect(() => {
     const getUser = async () => {
@@ -40,6 +41,7 @@ export default function EditProfile() {
           ]);
         }
 
+        if (userRes.data.image) setProfilePic(userRes.data.image);
         setProfileData({
           id: userRes.data._id,
           firstName: userRes.data.firstName,
@@ -107,11 +109,41 @@ export default function EditProfile() {
     }
   };
 
+  const imageHandler = (e) => {
+    setImage(e.target.files[0]);
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState) {
+        setProfilePic(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
   return (
     <div className="editContainer">
       <h2>Edit Profile</h2>
       {error && <ErrorNotice message={error} />}
       <Form onSubmit={editProfile}>
+        <Row>
+          <Col>
+            <Label for="bio">Profile Picture</Label>
+            <br />
+            <input type="file" name="image" onChange={imageHandler} />
+            <div className="tutor-card-img-container">
+              <img
+                className="tutor-card-img"
+                src={
+                  !profilePic.startsWith("data")
+                    ? `data:image;base64,${profileData.image}`
+                    : profilePic
+                }
+                alt="profile-picture"
+              />
+            </div>
+          </Col>
+        </Row>
+
         <Row form>
           <Col md={3}>
             <FormGroup>
@@ -174,6 +206,8 @@ export default function EditProfile() {
         {profileData.tutor && (
           <Row form>
             <Col md={6}>
+              <Label>Skills</Label>
+
               <SkillsDropdown
                 options={skillsArray}
                 existingSkills={existingSkills}
@@ -182,14 +216,6 @@ export default function EditProfile() {
             </Col>
           </Row>
         )}
-
-        <div>
-          <input
-            type="file"
-            name="image"
-            onChange={(e) => setImage(e.target.files[0])}
-          />
-        </div>
 
         <Button type="submit">Save Changes</Button>
       </Form>

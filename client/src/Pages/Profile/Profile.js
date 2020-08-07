@@ -8,6 +8,7 @@ import {
 import { Button } from "react-bootstrap";
 import "./Profile.css";
 import Axios from "axios";
+import DefaultImg from "../About/images/default-profile-pic.png";
 
 export default function Profile() {
   const [profileData, setProfileData] = useState({
@@ -17,6 +18,7 @@ export default function Profile() {
     bio: "",
     skills: [],
     tutor: false,
+    image: "",
   });
 
   useEffect(() => {
@@ -35,6 +37,7 @@ export default function Profile() {
           bio: userRes.data.bio,
           skills: userRes.data.skills,
           tutor: userRes.data.tutor,
+          image: userRes.data.image,
         });
       } catch (err) {
         console.log(err);
@@ -47,31 +50,52 @@ export default function Profile() {
   return (
     <div>
       <h2>
-        {profileData.firstName} {profileData.lastName + "'s"} Profile
+        {profileData.firstName} {profileData.lastName}
         <span>
-          <Button className="edit-btn" variant="outline-primary" href="/app/profile/edit" size="sm">
+          <Button
+            className="edit-btn"
+            variant="outline-primary"
+            href="/app/profile/edit"
+            size="sm"
+          >
             Edit Profile
           </Button>
         </span>
       </h2>
       <ListGroup>
         <ListGroupItem>
+          <ListGroupItemHeading>Picture</ListGroupItemHeading>
+          <ListGroupItemText>
+            <div className="tutor-card-img-container">
+              <img
+                className="tutor-card-img"
+                src={
+                  profileData.image
+                    ? `data:image;base64,${profileData.image}`
+                    : DefaultImg
+                }
+                alt={`${profileData.firstName}-img`}
+              />
+            </div>
+          </ListGroupItemText>
+        </ListGroupItem>
+        <ListGroupItem>
           <ListGroupItemHeading>Name</ListGroupItemHeading>
           <ListGroupItemText>
             {profileData.firstName} {profileData.lastName}
           </ListGroupItemText>
         </ListGroupItem>
-        <ListGroupItem>
-          <ListGroupItemHeading>Email</ListGroupItemHeading>
-          <ListGroupItemText>{profileData.email}</ListGroupItemText>
-        </ListGroupItem>
-
         {profileData.tutor && (
           <ListGroupItem>
             <ListGroupItemHeading>Bio</ListGroupItemHeading>
             <ListGroupItemText>{profileData.bio}</ListGroupItemText>
           </ListGroupItem>
         )}
+
+        <ListGroupItem>
+          <ListGroupItemHeading>Email</ListGroupItemHeading>
+          <ListGroupItemText>{profileData.email}</ListGroupItemText>
+        </ListGroupItem>
 
         {profileData.tutor && (
           <ListGroupItem>

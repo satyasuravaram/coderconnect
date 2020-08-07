@@ -198,6 +198,7 @@ router.get("/", auth, async (req, res) => {
 router.get("/tutors", auth, async (req, res) => {
   try {
     const tutors = await User.find({ tutor: true });
+    console.log(tutors[0].image);
     res.json(tutors);
   } catch (err) {
     return res.json(false);
