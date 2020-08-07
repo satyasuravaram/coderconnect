@@ -8,12 +8,10 @@ import {
 import Axios from "axios";
 import "./Messages.css";
 import { useHistory } from "react-router-dom";
+import DefaultImg from "../About/images/default-profile-pic.png";
 
 export default function Messages() {
-  const [firstName, setFirstName] = useState([]);
-  const [lastName, setLastName] = useState([]);
-  const [conversation, setConversation] = useState([]);
-  const [lastMessage, setLastMessage] = useState([]);
+  const [connections, setConnections] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -42,23 +40,19 @@ export default function Messages() {
 
         console.log(loadRes.data);
         for (let i = 0; i < loadRes.data.length; i++) {
-            setFirstName((oldFirst) => [
-              ...oldFirst,
-              loadRes.data[i].first,
-            ]);
-            setLastName((oldLast) => [
-              ...oldLast,
-              loadRes.data[i].last,
-            ]);
-            setConversation((oldConv) => [...oldConv, loadRes.data[i].conversation]);
-            setLastMessage((lastMessages) => [
-              ...lastMessages,
-              loadRes.data[i].lastMessage.data,
-            ])
-          }
-
+          console.log(loadRes.data[i].image);
+          setConnections((prevConnections) => [
+            ...prevConnections,
+            {
+              firstName: loadRes.data[i].first,
+              lastName: loadRes.data[i].last,
+              image: loadRes.data[i].image,
+              conversation: loadRes.data[i].conversation,
+              lastMessage: loadRes.data[i].lastMessage.data,
+            },
+          ]);
+        }
       }
-
     };
 
     loadConnections();
@@ -68,14 +62,34 @@ export default function Messages() {
     <div>
       <h2>My Messages</h2>
       <ListGroup>
-      {firstName.map((first, index) => (
-        <ListGroupItem key={index} onClick={()=>{history.push(`/app/messages/${conversation[index]}`)}} className="connection-item">
-          <ListGroupItemHeading>{first} {lastName[index]}</ListGroupItemHeading>
-          <ListGroupItemText>
-            {lastMessage[index]}
-          </ListGroupItemText>
-        </ListGroupItem>
-      ))}
+        {connections.map((connection, index) => (
+          <div
+            className="message-connection"
+            onClick={() => {
+              history.push(`/app/messages/${connection.conversation}`);
+            }}
+          >
+            <div className="tutor-card-img-container-messages img-messages">
+              <img
+                className="tutor-card-img mr-neg"
+                src={
+                  Object.keys(connection.image).length !== 0
+                    ? `data:image;base64,${Buffer.from(
+                        connection.image.buffer.data
+                      ).toString("base64")}`
+                    : DefaultImg
+                }
+                alt={`${connection.firstName}-img-public`}
+              />
+            </div>
+            <div key={index} className="connection-item">
+              <ListGroupItemHeading>
+                {connection.firstName} {connection.lastName}
+              </ListGroupItemHeading>
+              <ListGroupItemText>{connection.lastMessage}</ListGroupItemText>
+            </div>
+          </div>
+        ))}
       </ListGroup>
     </div>
   );

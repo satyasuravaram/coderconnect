@@ -1,6 +1,29 @@
+.message-connection {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 2rem;
+  border: 1px #777 solid;
+  border-radius: 3px;
+  padding: 1rem;
+}
 
-.connection-item:hover {
-    background-color: #3f72af;
-    color: #fff;
-    cursor: pointer;
+.message-connection:hover {
+  background-color: #3f72af;
+  color: #fff;
+  cursor: pointer;
+}
+
+.tutor-card-img-container-messages{
+    min-width: 7rem;
+    max-width: 7rem;
+    height: 7rem;
+    position: relative;
+    margin: .5rem 1rem;
+    margin-right: 2rem;
+    /* padding: .5rem; */
+    /* margin: .5rem; */
+}
+.mr-neg {
+  /* margin: 0;*/
+  /* transform: scale(0.5); */
 }
