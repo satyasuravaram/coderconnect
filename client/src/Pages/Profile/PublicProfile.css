@@ -5,3 +5,15 @@
 .edit-btn-2{
     margin-left: 1rem;
 }
+
+.listgroup-skills {
+    display: flex;
+    flex-wrap: wrap;
+}
+.listgroup-skill {
+    margin: .25rem;
+    padding: .5rem 1rem;
+    border: 1px #777 solid;
+    border-radius: 8px;
+    background-color: #fff;
+}
