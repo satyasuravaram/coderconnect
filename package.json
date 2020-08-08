@@ -7,7 +7,7 @@
     "start": "node server/app.js",
     "backend": "nodemon server/app.js",
     "frontend": "npm run start --prefix client",
-    "dev": "concurrently  \"npm run backend\" \"npm run frontend\"",
+    "dev": "concurrently  \"npm run backend\" \"npm run start --prefix client\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
