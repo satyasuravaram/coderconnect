@@ -18,7 +18,7 @@ export default function Contact() {
     e.preventDefault();
     if (form.checkValidity() === true) {
       console.log(firstName, lastName, email, message);
-      Axios.post("http://localhost:5000/mail/contact", {
+      Axios.post("/mail/contact", {
         firstName: firstName,
         lastName: lastName,
         email: email,

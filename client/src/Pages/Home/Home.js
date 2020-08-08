@@ -19,14 +19,12 @@ export default function Home() {
         token = "";
       }
 
-      const tokenRes = await Axios.post(
-        "http://localhost:5000/users/isTokenValid",
-        null,
-        { headers: { "x-auth-token": token } }
-      );
+      const tokenRes = await Axios.post("/users/isTokenValid", null, {
+        headers: { "x-auth-token": token },
+      });
 
       if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:5000/users/", {
+        const userRes = await Axios.get("/users/", {
           headers: { "x-auth-token": token },
         });
 
@@ -53,12 +51,12 @@ export default function Home() {
                 value_area: 1000,
               },
               line_linked: {
-            				shadow: {
-            					enable: true,
-            					color: "#faa",
-            					blur: 10
-            				}
-            			}
+                shadow: {
+                  enable: true,
+                  color: "#faa",
+                  blur: 10,
+                },
+              },
             },
           },
           interactivity: {

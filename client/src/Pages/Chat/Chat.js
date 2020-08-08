@@ -26,7 +26,7 @@ export default function Chat() {
   useEffect(() => {
     const getUser = async () => {
       const token = localStorage.getItem("auth-token");
-      const userRes = await Axios.get("http://localhost:5000/users/", {
+      const userRes = await Axios.get("/users/", {
         headers: { "x-auth-token": token },
       });
       setUserID(userRes.data._id);
@@ -48,7 +48,7 @@ export default function Chat() {
     const loadConversation = async () => {
       try {
         const loadRes = await Axios.get(
-          `http://localhost:5000/messages/${connectid}`
+          `/messages/${connectid}`
         );
         const existingMessages = loadRes.data;
         for (let i = 0; i < existingMessages.length; i++) {

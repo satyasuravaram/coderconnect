@@ -30,7 +30,7 @@ export default function EditProfile() {
       try {
         const token = localStorage.getItem("auth-token");
 
-        const userRes = await Axios.get("http://localhost:5000/users/", {
+        const userRes = await Axios.get("/users/", {
           headers: { "x-auth-token": token },
         });
 
@@ -96,7 +96,7 @@ export default function EditProfile() {
       data.append("email", newProfileData.email);
       data.append("bio", newProfileData.bio);
       const editRes = await Axios.post(
-        "http://localhost:5000/users/edit",
+        "/users/edit",
         data,
         { headers: { "x-auth-token": token } }
       );

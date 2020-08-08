@@ -27,13 +27,13 @@ function Main() {
       }
 
       const tokenRes = await Axios.post(
-        "http://localhost:5000/users/isTokenValid",
+        "/users/isTokenValid",
         null,
         { headers: { "x-auth-token": token } }
       );
 
       if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:5000/users/", {
+        const userRes = await Axios.get("/users/", {
           headers: { "x-auth-token": token },
         });
 

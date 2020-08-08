@@ -26,7 +26,7 @@ export default function Profile() {
       try {
         const token = localStorage.getItem("auth-token");
 
-        const userRes = await Axios.get("http://localhost:5000/users/", {
+        const userRes = await Axios.get("/users/", {
           headers: { "x-auth-token": token },
         });
 

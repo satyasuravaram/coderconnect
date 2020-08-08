@@ -30,13 +30,13 @@ export default function Register() {
       }
 
       const tokenRes = await Axios.post(
-        "http://localhost:5000/users/isTokenValid",
+        "/users/isTokenValid",
         null,
         { headers: { "x-auth-token": token } }
       );
 
       if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:5000/users/", {
+        const userRes = await Axios.get("/users/", {
           headers: { "x-auth-token": token },
         });
 
@@ -63,9 +63,9 @@ export default function Register() {
         password2,
       };
 
-      await Axios.post("http://localhost:5000/users/register", newUser);
+      await Axios.post("/users/register", newUser);
 
-      const loginRes = await Axios.post("http://localhost:5000/users/login", {
+      const loginRes = await Axios.post("/users/login", {
         email,
         password,
       });
@@ -88,7 +88,7 @@ export default function Register() {
   const responseGoogle = async (res) => {
     try {
       const googleRes = await Axios.post(
-        "http://localhost:5000/auth/googlelogin",
+        "/auth/googlelogin",
         {
           tokenId: res.tokenId,
         }
@@ -110,7 +110,7 @@ export default function Register() {
     console.log(res);
     try {
       const facebookRes = await Axios.post(
-        "http://localhost:5000/auth/facebooklogin",
+        "/auth/facebooklogin",
         {
           accessToken: res.accessToken,
           userID: res.userID,
