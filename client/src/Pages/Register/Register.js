@@ -10,6 +10,7 @@ import Axios from "axios";
 import "./Register.css";
 
 export default function Register() {
+  console.log("On the register Page");
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
@@ -21,6 +22,7 @@ export default function Register() {
   const { setUserData } = useContext(UserContext);
 
   useEffect(() => {
+    console.log("About to Call Use Effect");
     const checkLoggedIn = async () => {
       let token = localStorage.getItem("auth-token");
 
@@ -28,12 +30,11 @@ export default function Register() {
         localStorage.setItem("auth-token", "");
         token = "";
       }
-
-      const tokenRes = await Axios.post(
-        "/users/isTokenValid",
-        null,
-        { headers: { "x-auth-token": token } }
-      );
+      console.log("Before token");
+      const tokenRes = await Axios.post("/users/isTokenValid", null, {
+        headers: { "x-auth-token": token },
+      });
+      console.log("After token res", tokenRes);
 
       if (tokenRes.data) {
         const userRes = await Axios.get("/users/", {
@@ -49,7 +50,7 @@ export default function Register() {
     };
 
     checkLoggedIn();
-  });
+  }, []);
 
   const registerUser = async (e) => {
     e.preventDefault();
@@ -87,12 +88,9 @@ export default function Register() {
 
   const responseGoogle = async (res) => {
     try {
-      const googleRes = await Axios.post(
-        "/auth/googlelogin",
-        {
-          tokenId: res.tokenId,
-        }
-      );
+      const googleRes = await Axios.post("/auth/googlelogin", {
+        tokenId: res.tokenId,
+      });
 
       setUserData({
         token: googleRes.data.token,
@@ -109,13 +107,10 @@ export default function Register() {
   const responseFacebook = async (res) => {
     console.log(res);
     try {
-      const facebookRes = await Axios.post(
-        "/auth/facebooklogin",
-        {
-          accessToken: res.accessToken,
-          userID: res.userID,
-        }
-      );
+      const facebookRes = await Axios.post("/auth/facebooklogin", {
+        accessToken: res.accessToken,
+        userID: res.userID,
+      });
       console.log(facebookRes);
       setUserData({
         token: facebookRes.data.token,
