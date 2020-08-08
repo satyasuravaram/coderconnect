@@ -202,7 +202,14 @@ export default function Dashboard() {
           </div>
         </div>
       ) : (
-        <div className="load-ani"><ClipLoader css={override} size={150} color={"navy"} loading={loading} /></div>   
+        <div className="load-ani">
+          <ClipLoader
+            css={override}
+            size={150}
+            color={"navy"}
+            loading={loading}
+          />
+        </div>
       )}
     </div>
   );
