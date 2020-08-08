@@ -46,6 +46,8 @@ export default function BecomeTutor() {
       document.getElementById("tutor-form").reset();
       setValidated(false);
       setSuccess("Application submitted successfully!");
+      setError(null);
+
     } else {
       let missingInputs = []
       let needs = ["first name", "last name", "email", "age", "resume/CV", "skills"]
@@ -132,8 +134,8 @@ export default function BecomeTutor() {
       <div className="bt-inner-container">
         <div className="bt-form">
           <h2>Become a Tutor</h2>
-          {error && <ErrorNotice message={error} fade={true} />
-         || success && <SuccessNotice message={success} />}
+          {error && <ErrorNotice message={error} />}
+          {success && <SuccessNotice message={success} />}
           <Form
             id="tutor-form"
             noValidate

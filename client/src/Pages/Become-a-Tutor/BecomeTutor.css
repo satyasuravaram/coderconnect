@@ -1,5 +1,5 @@
 .bt-outer-container {
-  height: 95vh;
+  height: 110vh;
   background-color: rgb(66,133,244);
   position: relative;
 }
@@ -11,7 +11,7 @@
   transform: translate(-50%, -50%);
   position: absolute;
   background-color: #fff;
-  height: 55rem;
+  height: 95%;
   width: 75%;
   margin: 0 auto;
   box-shadow: 0 1.4rem 2rem rgba(0, 0, 0, 0.2);
