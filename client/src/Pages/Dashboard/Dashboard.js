@@ -67,7 +67,7 @@ export default function Dashboard() {
               lastName: tutorArr.data[i].lastName,
               skills: tutorArr.data[i].skills,
               bio: tutorArr.data[i].bio,
-              image: tutorArr.data[i].image
+              image: tutorArr.data[i].image,
             },
           ]);
           setCurrentTutors((prevTutors) => [
@@ -78,7 +78,7 @@ export default function Dashboard() {
               lastName: tutorArr.data[i].lastName,
               skills: tutorArr.data[i].skills,
               bio: tutorArr.data[i].bio,
-              image: tutorArr.data[i].image
+              image: tutorArr.data[i].image,
             },
           ]);
         }
@@ -153,7 +153,11 @@ export default function Dashboard() {
                   <div className="tutor-card-img-container">
                     <img
                       className="tutor-card-img"
-                      src={tutor.image?`data:image;base64,${tutor.image}`: DefaultImg}
+                      src={
+                        tutor.image
+                          ? `data:image;base64,${tutor.image}`
+                          : DefaultImg
+                      }
                       alt={`${tutor.firstName}-img`}
                     />
                   </div>
@@ -175,7 +179,7 @@ export default function Dashboard() {
 
                     {tutor.id !== userData.user._id && (
                       <Button
-                        size="lg"
+                        size="md"
                         variant="primary"
                         onClick={() =>
                           createConnection(tutor.id, userData.user._id, history)
