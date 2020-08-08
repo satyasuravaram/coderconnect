@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/satyasuravaram/coderconnect/issues"
   },
-  "homepage": "https://github.com/satyasuravaram/coderconnect#readme"
+  "homepage": "https://github.com/satyasuravaram/coderconnect#readme",
+  "dependencies": {
+    "server": "file:server"
+  }
 }
