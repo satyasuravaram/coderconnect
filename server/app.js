@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const http = require("http");
 const socketio = require("socket.io");
-
+const path = require("path");
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
@@ -30,6 +30,16 @@ app.use("/users", require("./routes/users"));
 app.use("/messages", require("./routes/messages"));
 app.use("/mail", require("./routes/mail"));
 app.use("/auth", require("./routes/auth"));
+
+//Serve Static Assets
+if (process.env.NODE_ENV === "production") {
+  //Set Static folder
+  app.use(express.static("../client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+  });
+}
 
 io.on("connection", (socket) => {
   console.log(`New User Connected ${socket.id}`);
