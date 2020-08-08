@@ -9,10 +9,13 @@ import Axios from "axios";
 import "./Messages.css";
 import { useHistory } from "react-router-dom";
 import DefaultImg from "../About/images/default-profile-pic.png";
+import { css } from "@emotion/core";
+import ClipLoader from "react-spinners/HashLoader";
 
 export default function Messages() {
   const [connections, setConnections] = useState([]);
   const history = useHistory();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadConnections = async () => {
@@ -53,14 +56,33 @@ export default function Messages() {
           ]);
         }
       }
+      setLoading(false);
     };
-
     loadConnections();
   }, []);
+
+  const override = css`
+    display: block;
+    margin: auto auto;
+    border-color: red;
+    margin-top: 10%;
+  `;
 
   return (
     <div>
       <h2>My Messages</h2>
+
+
+
+      <div className="load-anim">
+        <ClipLoader
+          css={override}
+          size={150}
+          color={"navy"}
+          loading={loading}
+        />
+      </div>
+
       <ListGroup>
         {connections.map((connection, index) => (
           <div

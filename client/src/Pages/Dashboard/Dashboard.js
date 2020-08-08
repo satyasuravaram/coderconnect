@@ -11,6 +11,8 @@ import skillsArray from "../../components/SkillsArray";
 import "./Dashboard.css";
 import DefaultImg from "../About/images/default-profile-pic.png";
 import Pagination from "./Pagination";
+import { css } from "@emotion/core";
+import ClipLoader from "react-spinners/HashLoader";
 
 export default function Dashboard() {
   const [show, setShow] = useState(false);
@@ -107,7 +109,12 @@ export default function Dashboard() {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const filteredTutors = currentTutors.slice(indexOfFirstPost, indexOfLastPost);
-
+  const override = css`
+    display: block;
+    margin: auto auto;
+    border-color: red;
+    margin-top: 10%;
+  `;
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -131,7 +138,6 @@ export default function Dashboard() {
           </Button>
         </div>
       </div>
-
       {!loading ? (
         <div>
           <h6 className="text-center">Tutors:</h6>
@@ -196,7 +202,14 @@ export default function Dashboard() {
           </div>
         </div>
       ) : (
-        <div className="text-center">Page is loading</div>
+        <div className="load-ani">
+          <ClipLoader
+            css={override}
+            size={150}
+            color={"navy"}
+            loading={loading}
+          />
+        </div>
       )}
     </div>
   );
