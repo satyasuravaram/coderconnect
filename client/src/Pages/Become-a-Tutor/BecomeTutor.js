@@ -1,14 +1,13 @@
 import React, { Component, useState, validated, handleSubmit } from "react";
 import { Form, Col, InputGroup, Button } from "react-bootstrap";
-import { render } from 'react-dom';
+import { render } from "react-dom";
 import "./BecomeTutor.css";
 import Skills from "./Skills";
 import Axios from "axios";
 import { makeToast, endSessionToast } from "../../components/misc/Toaster";
 import ErrorNotice from "../../components/misc/ErrorNotice";
 import SuccessNotice from "../../components/misc/SuccessNotice";
-import bsCustomFileInput from "bs-custom-file-input"
-
+import bsCustomFileInput from "bs-custom-file-input";
 
 export default function BecomeTutor() {
   const [validated, setValidated] = useState(true);
@@ -38,85 +37,101 @@ export default function BecomeTutor() {
       data.append("email", email);
       data.append("age", age);
 
-      Axios.post("http://localhost:5000/mail/send", data).then(function (
-        response
-      ) {
+      Axios.post("/mail/send", data).then(function (response) {
         console.log(response);
       });
       document.getElementById("tutor-form").reset();
       setValidated(false);
       setSuccess("Application submitted successfully!");
       setError(null);
-
     } else {
-      let missingInputs = []
-      let needs = ["first name", "last name", "email", "age", "resume/CV", "skills"]
+      let missingInputs = [];
+      let needs = [
+        "first name",
+        "last name",
+        "email",
+        "age",
+        "resume/CV",
+        "skills",
+      ];
       let firstTrue = -1;
       let lastTrue = 0;
       let count = 0;
       let tcount = 0;
-      if (firstName===undefined || firstName.length== 0) {
+      if (firstName === undefined || firstName.length == 0) {
         missingInputs.push(true);
-        if(firstTrue == -1) firstTrue = count;
+        if (firstTrue == -1) firstTrue = count;
         lastTrue = count;
         tcount++;
-      } else {missingInputs.push(false);} count++;
-      if (lastName===undefined || lastName.length== 0) {
+      } else {
+        missingInputs.push(false);
+      }
+      count++;
+      if (lastName === undefined || lastName.length == 0) {
         missingInputs.push(true);
-        if(firstTrue == -1) firstTrue = count;
+        if (firstTrue == -1) firstTrue = count;
         lastTrue = count;
         tcount++;
-        
-      } else {missingInputs.push(false);} count++;
-      if (email===undefined || email.length== 0) {
+      } else {
+        missingInputs.push(false);
+      }
+      count++;
+      if (email === undefined || email.length == 0) {
         missingInputs.push(true);
-        if(firstTrue == -1) firstTrue = count;
+        if (firstTrue == -1) firstTrue = count;
         lastTrue = count;
         tcount++;
-        
-      } else {missingInputs.push(false);} count++;
-      if (age===undefined || age.length== 0) {
+      } else {
+        missingInputs.push(false);
+      }
+      count++;
+      if (age === undefined || age.length == 0) {
         missingInputs.push(true);
-        if(firstTrue == -1) firstTrue = count;
+        if (firstTrue == -1) firstTrue = count;
         lastTrue = count;
         tcount++;
-        
-      } else {missingInputs.push(false);} count++;
-      if (resume===undefined || resume.length== 0) {
+      } else {
+        missingInputs.push(false);
+      }
+      count++;
+      if (resume === undefined || resume.length == 0) {
         missingInputs.push(true);
-        if(firstTrue == -1) firstTrue = count;
+        if (firstTrue == -1) firstTrue = count;
         lastTrue = count;
         tcount++;
-        
-      } else {missingInputs.push(false);} count++;
-      if (skills===null|| skills.length== 0) {
+      } else {
+        missingInputs.push(false);
+      }
+      count++;
+      if (skills === null || skills.length == 0) {
         missingInputs.push(true);
-        if(firstTrue == -1) firstTrue = count;
+        if (firstTrue == -1) firstTrue = count;
         lastTrue = count;
         tcount++;
-        
-      } else {missingInputs.push(false);}
-      console.log("handleSubmit -> lastTrue", lastTrue)
+      } else {
+        missingInputs.push(false);
+      }
+      console.log("handleSubmit -> lastTrue", lastTrue);
       let output = "";
-      firstTrue == lastTrue ? output = "Please output your " : output ="Please output your ";
+      firstTrue == lastTrue
+        ? (output = "Please output your ")
+        : (output = "Please output your ");
       console.log(firstTrue, lastTrue);
-      for(let i = 0; i < missingInputs.length; i++){
-        if(firstTrue != lastTrue){
-          if(missingInputs[i]){
-            if(lastTrue == i){
-              output += "and "
+      for (let i = 0; i < missingInputs.length; i++) {
+        if (firstTrue != lastTrue) {
+          if (missingInputs[i]) {
+            if (lastTrue == i) {
+              output += "and ";
             }
             output += needs[i];
-            if(tcount != 2 && lastTrue != i){
-              output += ", "
-            }
-            else if(tcount == 2 && lastTrue != i){
+            if (tcount != 2 && lastTrue != i) {
+              output += ", ";
+            } else if (tcount == 2 && lastTrue != i) {
               output += " ";
             }
           }
-        }
-        else{
-          if(missingInputs[i]){
+        } else {
+          if (missingInputs[i]) {
             output += needs[i];
           }
         }
@@ -126,8 +141,7 @@ export default function BecomeTutor() {
       e.stopPropagation();
       setValidated(true);
     }
-  }
-
+  };
 
   return (
     <div className="bt-outer-container">
@@ -218,13 +232,13 @@ export default function BecomeTutor() {
                 onChange={(e) => setResume(e.target.files[0])}
                 required
               /> */}
-              <Form.Label>Resume/CV</Form.Label>
+                <Form.Label>Resume/CV</Form.Label>
                 <Form.File
                   id="resume"
                   label="Choose a file..."
                   custom
                   onChange={(e) => setResume(e.target.files[0])}
-                  required 
+                  required
                 />
               </Form.Group>
             </Form.Row>
@@ -244,4 +258,3 @@ export default function BecomeTutor() {
     </div>
   );
 }
-

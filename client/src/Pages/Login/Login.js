@@ -27,14 +27,12 @@ export default function Login() {
         token = "";
       }
 
-      const tokenRes = await Axios.post(
-        "http://localhost:5000/users/isTokenValid",
-        null,
-        { headers: { "x-auth-token": token } }
-      );
+      const tokenRes = await Axios.post("/users/isTokenValid", null, {
+        headers: { "x-auth-token": token },
+      });
 
       if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:5000/users/", {
+        const userRes = await Axios.get("/users/", {
           headers: { "x-auth-token": token },
         });
 
@@ -53,7 +51,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const loginRes = await Axios.post("http://localhost:5000/users/login", {
+      const loginRes = await Axios.post("/users/login", {
         email,
         password,
       });
@@ -73,12 +71,9 @@ export default function Login() {
 
   const responseGoogle = async (res) => {
     try {
-      const googleRes = await Axios.post(
-        "http://localhost:5000/auth/googlelogin",
-        {
-          tokenId: res.tokenId,
-        }
-      );
+      const googleRes = await Axios.post("/auth/googlelogin", {
+        tokenId: res.tokenId,
+      });
 
       setUserData({
         token: googleRes.data.token,
@@ -96,13 +91,10 @@ export default function Login() {
   const responseFacebook = async (res) => {
     console.log(res);
     try {
-      const facebookRes = await Axios.post(
-        "http://localhost:5000/auth/facebooklogin",
-        {
-          accessToken: res.accessToken,
-          userID: res.userID,
-        }
-      );
+      const facebookRes = await Axios.post("/auth/facebooklogin", {
+        accessToken: res.accessToken,
+        userID: res.userID,
+      });
       console.log(facebookRes);
       setUserData({
         token: facebookRes.data.token,

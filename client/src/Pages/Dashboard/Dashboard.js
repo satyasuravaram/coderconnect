@@ -36,14 +36,12 @@ export default function Dashboard() {
         token = "";
       }
 
-      const tokenRes = await Axios.post(
-        "http://localhost:5000/users/isTokenValid",
-        null,
-        { headers: { "x-auth-token": token } }
-      );
+      const tokenRes = await Axios.post("/users/isTokenValid", null, {
+        headers: { "x-auth-token": token },
+      });
 
       if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:5000/users/", {
+        const userRes = await Axios.get("/users/", {
           headers: { "x-auth-token": token },
         });
 
@@ -54,7 +52,7 @@ export default function Dashboard() {
 
         setLoading(true);
 
-        const tutorArr = await Axios.get("http://localhost:5000/users/tutors", {
+        const tutorArr = await Axios.get("/users/tutors", {
           headers: { "x-auth-token": token },
         });
 

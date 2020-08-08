@@ -25,17 +25,17 @@ export default function Messages() {
         token = "";
       }
       const tokenRes = await Axios.post(
-        "http://localhost:5000/users/isTokenValid",
+        "/users/isTokenValid",
         null,
         { headers: { "x-auth-token": token } }
       );
       if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:5000/users/", {
+        const userRes = await Axios.get("/users/", {
           headers: { "x-auth-token": token },
         });
 
         const loadRes = await Axios.post(
-          "http://localhost:5000/messages/loadAllConnections",
+          "/messages/loadAllConnections",
           {
             userID: userRes.data._id,
           }

@@ -39,13 +39,13 @@ export default function PublicProfile() {
       }
 
       const tokenRes = await Axios.post(
-        "http://localhost:5000/users/isTokenValid",
+        "/users/isTokenValid",
         null,
         { headers: { "x-auth-token": token } }
       );
 
       if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:5000/users/", {
+        const userRes = await Axios.get("/users/", {
           headers: { "x-auth-token": token },
         });
 
@@ -57,7 +57,7 @@ export default function PublicProfile() {
 
         if (tokenRes.data) {
           const tutor = await Axios.get(
-            `http://localhost:5000/users/${userid}`,
+            `/users/${userid}`,
             {
               headers: { "x-auth-token": token },
             }
