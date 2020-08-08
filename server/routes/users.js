@@ -10,6 +10,7 @@ const upload = multer({ storage: storage });
 
 //Register Page
 router.post("/register", async (req, res) => {
+  console.log("Called Register request");
   try {
     const { firstName, lastName, email, password, password2 } = req.body;
 
@@ -55,6 +56,7 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  console.log("Called Login request");
   try {
     const { email, password } = req.body;
 
