@@ -1,0 +1,38 @@
+.bt-form-contact {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 2rem;
+    line-height: 1.4rem;
+    width: 100%;
+    padding-right: 4rem;
+  }
+
+  .bt-outer-container-contact {
+    height: 100vh;
+    background-color: rgb(66,133,244);
+    position: relative;
+  }
+
+  .bt-inner-container-contact {
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background-color: #fff;
+    height: 80%;
+    width: 55%;
+    margin: 0 auto;
+    box-shadow: 0 1.4rem 2rem rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+  }
+
+  @media(max-width: 767px){
+    .bt-outer-container-contact{
+        height: 130vh;
+    }
+    .bt-inner-container-contact{
+        width: 80%;
+    }
+  }
