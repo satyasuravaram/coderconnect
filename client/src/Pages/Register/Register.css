@@ -134,6 +134,16 @@
   height: 37.5rem;
 }
 
+.sign-in-already-btn {
+  color: #03acd6;
+}
+.sign-in-already-btn:hover {
+  color: #0192b6;
+  border-bottom: 1px solid #0192b6;
+}
+
+
+
 @media screen and (max-width: 968px) {
   .sign-up-form {
     position: absolute;

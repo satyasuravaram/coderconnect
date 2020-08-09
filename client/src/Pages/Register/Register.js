@@ -88,6 +88,7 @@ export default function Register() {
 
   const responseGoogle = async (res) => {
     try {
+      console.log(res);
       const googleRes = await Axios.post("/auth/googlelogin", {
         tokenId: res.tokenId,
       });
@@ -253,7 +254,7 @@ export default function Register() {
             Sign Up
           </Button>
           <p>
-            Already have an account? <a onClick={() => history.push("/users/login")}>Sign In here</a>
+            Already have an account? <a className="sign-in-already-btn" onClick={() => history.push("/users/login")}>Sign In here</a>
           </p>
         </Form>
         <div className="social-register">
