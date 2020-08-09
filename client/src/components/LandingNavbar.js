@@ -3,7 +3,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import "./LandingNavbar.css";
 function LandingNavbar() {
 	return (
-		<Navbar className="landing-navbar" variant="flat" expand="lg">
+		<Navbar className="landing-navbar" variant="dark" expand="lg">
 			<Navbar.Brand href="/">CoderConnect</Navbar.Brand>
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">

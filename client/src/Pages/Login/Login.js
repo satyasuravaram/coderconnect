@@ -111,7 +111,7 @@ export default function Login() {
 
   return (
     <div className="login-outer-container">
-      <Particles
+            <Particles
         canvasClassName="particles-container"
         params={{
           particles: {
@@ -120,6 +120,21 @@ export default function Login() {
               density: {
                 enable: true,
                 value_area: 1000,
+              },
+              line_linked: {
+                shadow: {
+                  enable: true,
+                  color: "#faa",
+                  blur: 10,
+                },
+              },
+            },
+          },
+          interactivity: {
+            events: {
+              onhover: {
+                enable: true,
+                mode: "repulse",
               },
             },
           },

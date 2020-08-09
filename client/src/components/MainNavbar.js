@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
 import UserContext from '../context/UserContext';
+import "./MainNavbar.css";
 
 function MainNavbar () {
 
@@ -16,7 +17,7 @@ function MainNavbar () {
     };
 
     return (
-        <Navbar bg="primary" variant="dark" expand="lg">
+        <Navbar className="main-navbar" variant="light" expand="lg">
             <Navbar.Brand href="/app/dashboard">CoderConnect</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
