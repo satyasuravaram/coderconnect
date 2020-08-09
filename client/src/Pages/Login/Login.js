@@ -161,7 +161,8 @@ export default function Login() {
 
           <Button className="login-btn-regular">Log In</Button>
           <p>
-            Don't have an account? <a href="/users/register">Sign up here</a>
+            Don't have an account?
+            <a onClick={() => history.push("/users/register")}>Sign up here</a>
           </p>
         </Form>
         <div className="social-login">
