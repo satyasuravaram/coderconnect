@@ -22,7 +22,7 @@ export default function Dashboard() {
   const [currentTutors, setCurrentTutors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(2);
+  const [postsPerPage] = useState(10);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const history = useHistory();
@@ -103,7 +103,6 @@ export default function Dashboard() {
       setCurrentTutors(tutors);
     }
   };
-  console.log(currentTutors);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const filteredTutors = currentTutors.slice(indexOfFirstPost, indexOfLastPost);
@@ -127,7 +126,7 @@ export default function Dashboard() {
             placeholder="Search for a skill..."
           ></Select>
           <Button
-            variant="primary"
+            className=""
             onClick={(e) => {
               return handleSearch(e);
             }}

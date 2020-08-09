@@ -1,6 +1,7 @@
 .full-container {
   margin-left: 0px;
-  background-color: #dbe2ef;
+  background-image: url("./shadow-trianglify.jpg");
+  background-size: cover;
 }
 
 .search-container {

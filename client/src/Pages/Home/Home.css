@@ -1,26 +1,66 @@
-#tsparticles {
-  height: 100%;
-}
 
-.home-btn {
-  margin: 1rem;
-}
 
 .home-container {
-  height: 92vh;
+  height: 100vh;
   text-align: center;
   margin: auto auto;
-  position: relative;
-  background-color: #7cd0e6;
+  display: flex;
+  background-size: cover;
+  background: linear-gradient(
+      to right bottom,
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("./output-onlineimagetools.png");
+  background-size: cover;
+  background-color: transparent;
+  color: white;
+  align-items: center;
+  padding: 0 10rem 7rem 10rem;
 }
 
-.home-contents {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.left-home-col p {
+  color: silver;
+  font-size: 1.3rem;
 }
 
-.home-container{
-    background-color: #03acd6;
+.left-home-col {
+  text-align: left;
+}
+.home-btn-signup {
+  margin-right: 1.5rem;
+  margin-top: 1rem;
+  color: #fff;
+  background-color: #7971ea;
+  border-color: #7971ea;
+}
+.home-btn-signup:hover {
+  color: #fff;
+  background-color: #5a50e5;
+  border-color: #4f45e3;
+}
+.home-btn-signup:focus,
+.home-btn-signup.focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(121, 113, 234, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(121, 113, 234, .5);
+  background-color: midnightblue;
+}
+
+.home-btn-signin{
+  margin-right: 1.5rem;
+  margin-top: 1rem;
+  color: #7971ea;
+  background-color: #fff;
+  border-color: #777;
+}
+.home-btn-signin:hover {
+  color: #4f45e3;
+  background-color: #ddd;
+  border-color: #777;
+}
+.home-btn-signin:focus,
+.home-btn-signin.focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(121, 113, 234, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(121, 113, 234, .5);
+  background-color: #4f45e3;
 }

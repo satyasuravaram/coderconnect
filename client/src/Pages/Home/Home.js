@@ -4,7 +4,6 @@ import { Button } from "react-bootstrap";
 import Axios from "axios";
 import UserContext from "../../context/UserContext";
 import "./Home.css";
-import Particles from "react-particles-js";
 
 export default function Home() {
   const { setUserData } = useContext(UserContext);
@@ -40,53 +39,24 @@ export default function Home() {
   });
   return (
     <div className="home-container">
-      <Particles
-        canvasClassName="particles-container"
-        params={{
-          particles: {
-            number: {
-              value: 110,
-              density: {
-                enable: true,
-                value_area: 1000,
-              },
-              line_linked: {
-                shadow: {
-                  enable: true,
-                  color: "#faa",
-                  blur: 10,
-                },
-              },
-            },
-          },
-          interactivity: {
-            events: {
-              onhover: {
-                enable: true,
-                mode: "repulse",
-              },
-            },
-          },
-        }}
-      />
-      <div className="home-contents">
-        <h2>CoderConnect</h2>
+      <div className="left-home-col">
+        <h1>CoderConnect</h1>
         <br />
         <p>Free coding help from qualified volunteer tutors!</p>
         <Button
-          variant="light"
-          className="home-btn"
+          className="home-btn-signup"
           onClick={() => history.push("/users/register")}
         >
           Sign Up
         </Button>
         <Button
-          variant="primary"
-          className="home-btn"
+          className="home-btn-signin"
           onClick={() => history.push("/users/login")}
         >
           Sign In
         </Button>
+      </div>
+      <div className="right-home-col">
       </div>
     </div>
   );
