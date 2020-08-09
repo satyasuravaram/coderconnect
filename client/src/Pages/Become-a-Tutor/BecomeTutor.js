@@ -4,10 +4,8 @@ import { render } from "react-dom";
 import "./BecomeTutor.css";
 import Skills from "./Skills";
 import Axios from "axios";
-import { makeToast, endSessionToast } from "../../components/misc/Toaster";
 import ErrorNotice from "../../components/misc/ErrorNotice";
 import SuccessNotice from "../../components/misc/SuccessNotice";
-import bsCustomFileInput from "bs-custom-file-input";
 
 export default function BecomeTutor() {
   const [validated, setValidated] = useState(true);

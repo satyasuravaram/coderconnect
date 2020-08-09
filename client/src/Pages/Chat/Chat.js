@@ -17,7 +17,6 @@ export default function Chat() {
   const [sessionInProgress, setSessionInProgress] = useState(false);
   const [sessionType, setSessionType] = useState("Video");
   const [messages, setMessages] = useState([]);
-  const ENDPOINT = "http://localhost:5000";
   const { connectid } = useParams();
   const videoRef = useRef();
   const whiteboardRef = useRef();
