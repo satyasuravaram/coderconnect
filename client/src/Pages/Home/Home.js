@@ -73,10 +73,18 @@ export default function Home() {
         <h2>CoderConnect</h2>
         <br />
         <p>Free coding help from qualified volunteer tutors!</p>
-        <Button variant="light" className="home-btn" href="/users/register">
+        <Button
+          variant="light"
+          className="home-btn"
+          onClick={history.push("/users/register")}
+        >
           Sign Up
         </Button>
-        <Button variant="primary" className="home-btn" href="/users/login">
+        <Button
+          variant="primary"
+          className="home-btn"
+          onClick={history.push("/users/login")}
+        >
           Sign In
         </Button>
       </div>
