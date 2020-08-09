@@ -76,14 +76,14 @@ export default function Home() {
         <Button
           variant="light"
           className="home-btn"
-          onClick={history.push("/users/register")}
+          onClick={() => history.push("/users/register")}
         >
           Sign Up
         </Button>
         <Button
           variant="primary"
           className="home-btn"
-          onClick={history.push("/users/login")}
+          onClick={() => history.push("/users/login")}
         >
           Sign In
         </Button>
