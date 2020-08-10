@@ -254,7 +254,7 @@ export default function Register() {
             Sign Up
           </Button>
           <p>
-            Already have an account? <a className="sign-in-already-btn" onClick={() => history.push("/users/login")}>Sign In here</a>
+            Already have an account? <a className="sign-in-already-btn" onClick={() => history.push("/users/login")}>Sign in here</a>
           </p>
         </Form>
         <div className="social-register">
