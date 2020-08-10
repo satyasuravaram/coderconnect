@@ -116,7 +116,7 @@ export default function Login() {
         params={{
           particles: {
             number: {
-              value: 110,
+              value: 160,
               density: {
                 enable: true,
                 value_area: 1000,
