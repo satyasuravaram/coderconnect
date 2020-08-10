@@ -133,7 +133,7 @@ export default function Register() {
         params={{
           particles: {
             number: {
-              value: 120,
+              value: 150,
               density: {
                 enable: true,
                 value_area: 1500,

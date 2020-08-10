@@ -1,7 +1,7 @@
 .login-outer-container {
-  height: 92.2vh;
+  height: 100vh;
   position: relative;
-  background-color: #03acd6;
+  background-color: #312d35;
 }
 
 .login-container {
@@ -13,7 +13,7 @@
   height: 25rem;
   width: 65%;
   margin: 0 auto;
-  box-shadow: 0 1.4rem 2rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1.5rem 2rem rgba(0, 0, 0, 0.3);
   border-radius: 0.5rem;
   margin-top: 2rem;
 }
@@ -37,7 +37,7 @@
   right: 0;
   width: 40%;
   height: 100%;
-  background: rgb(182, 181, 181);
+  background: rgb(153, 153, 153);
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
 }
