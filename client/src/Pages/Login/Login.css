@@ -18,6 +18,15 @@
   margin-top: 2rem;
 }
 
+.sign-in-already-btn {
+  color: rgb(79, 75, 82) !important;
+}
+
+.sign-in-already-btn:hover {
+ color: gray !important;
+ border-bottom: 1px solid #a45bd5;
+}
+
 .error-condition {
   height: 28rem;
 }
@@ -59,7 +68,7 @@
   margin: 1rem 0 2rem;
   width: 100%;
   border-radius: 20px;
-  background-color: #23a6d5;
+  background-color: #48397cd3;
   border: 0px;
   height: 2.5rem;
 }
@@ -69,7 +78,7 @@
 }
 
 .login-btn-regular:hover {
-  background-color: #23d5ab;
+  background-color: #8675c0;
 }
 
 .facebook-btn-login {
