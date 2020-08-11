@@ -57,6 +57,22 @@ export default function Home() {
         </Button>
       </div>
       <div className="right-home-col">
+        <div className="feature">
+          <img className="feature-img" src={require("./images/conference-video-call.svg")} alt="Video call img" />
+          <span>Video Chat</span>
+        </div>
+        <div className="feature">
+        <img className="feature-img" src={require("./images/web-code.svg")} alt="Collaborative Coding Environment img" />
+          <span>Collaborative Coding Environment</span>
+        </div>
+        <div className="feature">
+        <img className="feature-img" src={require("./images/speaking-bubbles.svg")} alt="Live Chat img" />
+          <span>Live Chat</span>
+        </div>
+        <div className="feature">
+        <img className="feature-img" src={require("./images/whiteboard.svg")} alt="Shared Whiteboard img" />
+          <span>Shared Whiteboard</span>
+        </div>
       </div>
     </div>
   );
