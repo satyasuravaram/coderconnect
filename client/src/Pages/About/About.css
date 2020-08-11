@@ -1,22 +1,23 @@
-.about-container-bottom{
-    display: flex;
+.about-container-bottom {
+  display: flex;
 }
 
-.about-outer-container{
-    background-color: #0093E9;
-    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+.about-outer-container {
+  background-image: linear-gradient(#d3d0fa, #b0aafd);
+  padding: 1rem;
 }
 
-.person{
-    margin: 1rem;
-    text-align: center;
-    padding: 2rem;
-    border-radius: 10px;
-    background-color:whitesmoke;
+.person {
+  margin: 1rem;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 10px;
+  background-color: whitesmoke;
+  box-shadow: 1px 3px 30px rgba(0,0,0,.3);
 }
 
-.person-image{
-    height: 200px;
-    margin: 4%;
-    border-radius: 100%;
+.person-image {
+  height: 200px;
+  margin: 4%;
+  border-radius: 100%;
 }
