@@ -14,13 +14,13 @@
 }
 
 .faq-outer-container{
-    background-color: #0093E9;
-    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);        
+    background-color: #eae9f7;
+    /* background-image: linear-gradient(to right bottom, #c4c1f8, #9b95f8); */
     height: 100vh;  
 }
 
 .header{
-    color: blanchedalmond;
+    color: rgb(75, 74, 74);
 }
 
 .faq-inner-container{
