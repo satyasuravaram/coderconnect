@@ -53,10 +53,21 @@
 }
 
 .messages-chat-box {
+  position: relative;
   height: 70vh;
   background-color: #fff;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
+
+.messages-scroller {
+  height: 70vh;
+  padding: 2% 0;
+  overflow: auto;
+  flex: auto;
+  background: #fff;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+} 
 
 .chat-box-header {
   color: #fff;

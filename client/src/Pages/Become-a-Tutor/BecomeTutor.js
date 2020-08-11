@@ -143,7 +143,6 @@ export default function BecomeTutor() {
 
   return (
     <div className="bt-outer-container">
-      <div className="bt-inner-container">
         <div className="bt-form">
           <h2>Become a Tutor</h2>
           {error && <ErrorNotice message={error} />}
@@ -251,8 +250,6 @@ export default function BecomeTutor() {
             <Button type="submit">Submit app</Button>
           </Form>
         </div>
-        <div className="bt-right-half">hi</div>
       </div>
-    </div>
   );
 }

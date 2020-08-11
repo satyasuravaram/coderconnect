@@ -86,11 +86,6 @@ export default function Chat() {
     sessionMedia = <Whiteboard ref={whiteboardRef} />;
   }
 
-  const handleScreenSwitch = (type) => {
-    console.log(videoRef.current);
-    console.log(whiteboardRef.current);
-  };
-
   return (
     <div className="outer-chat-container">
       {sessionInProgress && (
