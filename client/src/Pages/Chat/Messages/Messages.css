@@ -1,8 +1,8 @@
-.messages {
-    padding: 5% 0;
-    overflow: auto;
-    flex: auto;
-    background: #fff;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-  }
+.messages-scroll-session {
+  padding: 5% 0;
+  overflow: auto;
+  flex: auto;
+  background: #fff;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
