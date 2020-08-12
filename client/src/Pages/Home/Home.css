@@ -26,6 +26,7 @@
 
 .left-home-col {
   text-align: left;
+  margin-right: 30%;
 }
 .home-btn-signup {
   margin-right: 1.5rem;
@@ -68,14 +69,42 @@
 .feature {
   font-size: 1.2rem;
   display: flex;
-  margin: 2rem 1rem;
+  margin: 2rem 0rem;
+  padding-right: 0%;
+  margin-right: 0rem;
 }
 
 .feature-img {
   position: relative;
   float: left;
   width: 7rem;
+  margin-right: 0%;
+  padding-right: 0%;
+}
+
+.feature-text {
+  margin-right: 0%;
+  padding-right: 0%;
+}
+
+.feature h5 {
+  margin: 0rem 0rem .4rem 0rem;
+  padding-bottom: 0%;
   margin-right: 2rem;
+  padding-right: 0%;
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: 4%;
+  width: 70%;
+}
+
+.right-home-col{
+  padding-right: 0%;
+  margin-right: 0;
 }
 
 .right-home-col {

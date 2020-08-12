@@ -58,20 +58,54 @@ export default function Home() {
       </div>
       <div className="right-home-col">
         <div className="feature">
-          <img className="feature-img" src={require("./images/conference-video-call.svg")} alt="Video call img" />
-          <span>Video Chat</span>
+          <img
+            className="feature-img"
+            src={require("./images/conference-video-call.svg")}
+            alt="Video call img"
+          />
+          <div className="feature-text">
+            <h5>Video Chat</h5>
+            <p>Have a video call with your tutor.</p>
+          </div>
         </div>
         <div className="feature">
-        <img className="feature-img" src={require("./images/web-code.svg")} alt="Collaborative Coding Environment img" />
-          <span>Collaborative Coding Environment</span>
+          <img
+            className="feature-img"
+            src={require("./images/web-code.svg")}
+            alt="Collaborative Coding Environment img"
+          />
+          <div className="feature-text">
+            <h5>Collaborative Coding Environment</h5>
+            <p>
+              A real-time shared coding environment during your tutoring
+              sessions.
+            </p>
+          </div>
         </div>
         <div className="feature">
-        <img className="feature-img" src={require("./images/speaking-bubbles.svg")} alt="Live Chat img" />
-          <span>Live Chat</span>
+          <img
+            className="feature-img"
+            src={require("./images/speaking-bubbles.svg")}
+            alt="Live Chat img"
+          />
+          <div className="feature-text">
+            <h5>Chat</h5>
+            <p>Chat anytime, from any device.</p>
+          </div>
         </div>
         <div className="feature">
-        <img className="feature-img" src={require("./images/whiteboard.svg")} alt="Shared Whiteboard img" />
-          <span>Shared Whiteboard</span>
+          <img
+            className="feature-img"
+            src={require("./images/whiteboard.svg")}
+            alt="Shared Whiteboard img"
+          />
+          <div className="feature-text">
+            <h5>Shared Whiteboard</h5>
+            <p>
+              Chart out your flow charts, pseudo code, logic, or whatever you
+              need to.
+            </p>
+          </div>
         </div>
       </div>
     </div>
