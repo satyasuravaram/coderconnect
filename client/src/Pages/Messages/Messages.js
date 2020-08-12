@@ -91,7 +91,7 @@ export default function MessagesPage() {
   `;
   const center = css`
     position: absolute;
-    left: 48 %;
+    left: 48%;
     top: 47%;
     transform: translate(-50%, -50%);
   `;

@@ -1,6 +1,9 @@
 .full-container {
   margin-left: 0px;
-  background-image: url("./shadow-trianglify.jpg");
+  min-height: 100vh;
+  /* background-image: url("./shadow-trianglify.jpg"); */
+  background-image: linear-gradient(to left top,#ccc8fa, #8880f5);
+
   background-size: cover;
 }
 
@@ -62,7 +65,7 @@
   display: flex;
   align-items: center;
   border-radius: 1rem;
-  margin: .5rem;
+  margin: 0.5rem;
 }
 
 .tutor-card-name {
@@ -113,13 +116,11 @@
   }
 
   .tutor-card-name {
-      font-size: 1rem;
+    font-size: 1rem;
   }
   .tutor-card-bio {
-      font-size: .8rem;
+    font-size: 0.8rem;
   }
-
-
 }
 
 @media screen and (max-width: 500px) {
@@ -169,8 +170,6 @@
   }
 }
 
-.load-ani{
-  height: 100vh;  
+.load-ani {
+  height: 100vh;
 }
-
-
