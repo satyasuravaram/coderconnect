@@ -14,12 +14,9 @@ const Board = () => {
 		const test = colorsRef.current;
         const context = canvas.getContext("2d");
         const container = containerRef.current;
-        console.log(container.offsetHeight);
 		// ----------------------- Colors --------------------------------------------------
 
 		const colors = document.getElementsByClassName("color");
-		console.log(colors, "the colors");
-		console.log(test);
 		// set the current color
 		const current = {
 			color: "black",
@@ -66,7 +63,6 @@ const Board = () => {
 
 		const onMouseDown = (e) => {
             var rect = e.target.getBoundingClientRect();
-            console.log(rect);
 			drawing = true;
 			current.x = e.clientX - rect.left || e.touches[0].clientX;
 			current.y = e.clientY - rect.top || e.touches[0].clientY;
