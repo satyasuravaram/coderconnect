@@ -90,7 +90,7 @@
 .feature h5 {
   margin: 0rem 0rem .4rem 0rem;
   padding-bottom: 0%;
-  margin-right: 0%;
+  margin-right: 2rem;
   padding-right: 0%;
 }
 
@@ -105,4 +105,8 @@
 .right-home-col{
   padding-right: 0%;
   margin-right: 0;
+}
+
+.right-home-col {
+  color: #ddd
 }

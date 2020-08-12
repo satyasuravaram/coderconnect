@@ -1,6 +1,7 @@
 .bt-outer-container {
-  height: 110vh;
-  background-color: rgb(66,133,244);
+  /* height: 110vh; */
+  background-color: #eae9f7;
+  min-height: 100vh;
   position: relative;
 }
 
@@ -19,13 +20,11 @@
 }
 
 .bt-form {
-  position: absolute;
-  top: 0;
-  left: 0;
   padding: 2rem;
-  line-height: 1.4rem;
   width: 50%;
-  padding-right: 4rem;
+  line-height: 1.4rem;
+  padding: 3rem;
+  /* background-color: #fff; */
 }
 
 .bt-right-half{

@@ -1,4 +1,4 @@
-import React, { Component, useState, validated, handleSubmit } from "react";
+import React, { Component, useState, validated, handleSubmit, useEffect } from "react";
 import { Form, Col, InputGroup, Button } from "react-bootstrap";
 import { render } from "react-dom";
 import "./BecomeTutor.css";
@@ -6,8 +6,13 @@ import Skills from "./Skills";
 import Axios from "axios";
 import ErrorNotice from "../../components/misc/ErrorNotice";
 import SuccessNotice from "../../components/misc/SuccessNotice";
+import bsCustomFileInput from 'bs-custom-file-input';
 
 export default function BecomeTutor() {
+  useEffect(() => {
+    bsCustomFileInput.init();
+  }, [])
+  
   const [validated, setValidated] = useState(true);
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -17,6 +22,10 @@ export default function BecomeTutor() {
   const [resume, setResume] = useState();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [defaultValue, setDefaultValue] = useState("");
+  useEffect(() => {
+    setDefaultValue(skills);
+  }, [skills])
   const handleSubmit = (e) => {
     const form = e.currentTarget;
     e.preventDefault();
@@ -41,6 +50,7 @@ export default function BecomeTutor() {
       document.getElementById("tutor-form").reset();
       setValidated(false);
       setSuccess("Application submitted successfully!");
+      setDefaultValue("");
       setError(null);
     } else {
       let missingInputs = [];
@@ -143,7 +153,6 @@ export default function BecomeTutor() {
 
   return (
     <div className="bt-outer-container">
-      <div className="bt-inner-container">
         <div className="bt-form">
           <h2>Become a Tutor</h2>
           {error && <ErrorNotice message={error} />}
@@ -243,7 +252,7 @@ export default function BecomeTutor() {
             <Form.Row>
               <Form.Group as={Col} controlId="validationCustom06">
                 <Form.Label>Skills</Form.Label>
-                <Skills setSkills={setSkills} required />
+                <Skills defaultValue={defaultValue} setSkills={setSkills} required />
               </Form.Group>
             </Form.Row>
 
@@ -251,8 +260,6 @@ export default function BecomeTutor() {
             <Button type="submit">Submit app</Button>
           </Form>
         </div>
-        <div className="bt-right-half">hi</div>
       </div>
-    </div>
   );
 }

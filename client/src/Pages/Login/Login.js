@@ -174,7 +174,7 @@ export default function Login() {
             </Col>
           </Row>
 
-          <Button className="login-btn-regular">Log In</Button>
+          <Button className="login-btn-regular">Sign In</Button>
           <p>
             Don't have an account? &nbsp;
             <a
