@@ -27,7 +27,9 @@
 .left-home-col {
   text-align: left;
   margin-right: 30%;
+  flex-wrap: wrap;
 }
+
 .home-btn-signup {
   margin-right: 1.5rem;
   margin-top: 1rem;
@@ -105,8 +107,22 @@
 .right-home-col{
   padding-right: 0%;
   margin-right: 0;
+  color: #ddd;
 }
 
-.right-home-col {
-  color: #ddd
+@media screen and (max-width: 1085px) {
+  .right-home-col {
+    visibility: hidden;
+  }
+  .left-home-col {
+    padding-left: auto;
+    padding-right: auto;
+    padding-top: 15rem;
+  }
+
+  .home-container {
+    display: inherit;
+    width: 100%;
+  }
+
 }
