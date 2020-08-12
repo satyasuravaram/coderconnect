@@ -123,7 +123,7 @@ export default function Dashboard() {
             className="searchbar"
             onChange={setSearchSkill}
             options={skillsArray}
-            placeholder="Search for a skill..."
+            placeholder="Search for tutor by skill..."
           ></Select>
           <Button
             className=""
@@ -197,6 +197,12 @@ export default function Dashboard() {
               ))
             )}
           </div>
+          <Pagination
+            className="center"
+            postsPerPage={postsPerPage}
+            totalPosts={currentTutors.length}
+            paginate={paginate}
+          />
         </div>
       ) : (
         <div className="load-ani">

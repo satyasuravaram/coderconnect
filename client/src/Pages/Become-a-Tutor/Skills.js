@@ -9,7 +9,7 @@ export default function Skills(props) {
 
     return (
         <div>
-            <Select isMulti onChange={props.setSkills} options={skillsArray}/>
+            <Select isMulti value={props.defaultValue} onChange={props.setSkills} options={skillsArray}/>
         </div>
     )
 }
