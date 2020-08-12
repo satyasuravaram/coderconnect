@@ -110,7 +110,7 @@
   color: #ddd;
 }
 
-@media screen and (max-width: 1085px) {
+@media screen and (max-width: 1255px) {
   .right-home-col {
     visibility: hidden;
   }
