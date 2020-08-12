@@ -126,3 +126,9 @@
   }
 
 }
+
+@media screen and (max-width: 785px) {
+  .home-container {
+    height: 124vh;
+  }
+}
