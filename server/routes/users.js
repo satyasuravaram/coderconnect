@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 const User = require("../models/User");
+const Feedback = require("../models/Feedback");
 const multer = require("multer");
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -216,6 +217,23 @@ router.get("/:userid", async (req, res) => {
     res.json(user);
   } catch (err) {
     return res.json(false);
+  }
+});
+
+router.post("/feedback", async (req, res) => {
+  try {
+    const { tutorId, data } = req.body;
+
+    const feedback = new Feedback({
+      tutorId: tutorId,
+      data: data
+    });
+
+    await feedback.save();
+
+    res.status(200).json(feedback);
+  } catch (err) {
+    return res.status(400).json(err)
   }
 });
 

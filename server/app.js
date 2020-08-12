@@ -49,8 +49,13 @@ io.on("connection", (socket) => {
   socket.on("statusReady", (data) => {
     console.log("User ready");
     console.log(data.room);
-    socket.broadcast.to(data.room).emit("statusReady");
+    socket.broadcast.to(data.room).emit("statusReady", data);
   });
+
+  socket.on("setOtherUser", (data) => {
+    console.log(data);
+    io.to(data.room).emit("otherUserID", data.otherUserID);
+  })
 
   socket.on("callUser", (data) => {
     socket.broadcast.to(data.room).emit("hey", {

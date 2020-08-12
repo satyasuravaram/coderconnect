@@ -1,3 +1,13 @@
+.chat-no-session-wrapper {
+	min-height: 100vh;
+	background-color: #7971ea;
+}
+.chat-session-wrapper {
+	min-height: 285vh;
+	background-color: #7971ea;
+
+}
+
 .outer-chat-container {
 	height: 85vh;
 }
@@ -16,6 +26,8 @@
 	height: 90%;
 	display: flex;
 	padding: 5px;
+	background-color: #7971ea;
+
 }
 
 .messages-container {
@@ -33,7 +45,7 @@
 #whiteboard,
 #code-playground {
 	margin-left: 1rem;
-	color: rgb(77, 77, 77);
+	color: #fff;
 }
 
 #btn-whiteboard,

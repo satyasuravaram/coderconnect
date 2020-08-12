@@ -5,7 +5,7 @@ import Message from '../Message/Message';
 import './Messages.css';
 
 const Messages = (props) => (
-  <ScrollToBottom className="messages">
+  <ScrollToBottom className="messages-scroll-session">
     {props.messages.map((message, i) => <Message message={message} userID={props.userID}/>) }
   </ScrollToBottom>
 );
