@@ -11,13 +11,15 @@ const CreateSession = (props) => {
     socket.on("statusReady", (data) => {
       console.log("status ready");
       setOtherUserStatus(true);
+      socket.emit("setOtherUser", {room: data.room, otherUserID: data.otherUserID})
+      // console.log("other userid: ", otherUserID);
     });
   }, []);
 
   const handleClick = (e) => {
     e.preventDefault();
     setMyStatus(true);
-    socket.emit("statusReady", { room: props.room });
+    socket.emit("statusReady", { room: props.room, otherUserID: props.userID });
   };
 
   if (myStatus && otherUserStatus) {

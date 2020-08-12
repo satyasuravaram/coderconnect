@@ -28,7 +28,9 @@ export default function Chat() {
   const [leaveStatus, setLeaveStatus] = useState(false);
 
   useEffect(() => {
+    let currentUserID;
     let currentUserIsTutor;
+    let otherUserCurrID;
     const getUser = async () => {
       const token = localStorage.getItem("auth-token");
       const userRes = await Axios.get("/users/", {
@@ -36,22 +38,29 @@ export default function Chat() {
       });
       setUserID(userRes.data._id);
       setIsTutor(userRes.data.tutor);
+      currentUserID = userRes.data._id;
       currentUserIsTutor = userRes.data.tutor;
     };
     getUser();
     socket.emit("join", { connectid }, () => {});
 
+    socket.on("otherUserID", (otherUserID) => {
+      if (otherUserID !== currentUserID) {
+        otherUserCurrID = otherUserID;
+      }
+    });
+
     socket.on("endSession", (data) => {
       setSessionInProgress(false);
       makeToast("success", "Session has been ended.");
+      console.log("Other user ID", otherUserCurrID);
       if (!currentUserIsTutor) {
         setTimeout(() => {
-          feedbackToast(connectid);
+          feedbackToast(connectid, otherUserCurrID);
         }, 1000);
       }
     });
   }, []);
-
 
   useEffect(() => {
     const loadConversation = async () => {
@@ -104,7 +113,7 @@ export default function Chat() {
         {sessionInProgress && (
           <div className="call-options">
             <Button id="btn-code" color="primary" href="#code-playground">
-              Code Playground
+              Code Editor
             </Button>
             <Button id="btn-whiteboard" href="#whiteboard">
               Whiteboard
@@ -127,6 +136,7 @@ export default function Chat() {
             {!sessionInProgress ? (
               <CreateSession
                 room={connectid}
+                userID={userID}
                 setSessionInProgress={setSessionInProgress}
               />
             ) : (
@@ -141,7 +151,7 @@ export default function Chat() {
         </div>
         {sessionInProgress && (
           <>
-            <h2 id="code-playground">Code Playground</h2>
+            <h2 id="code-playground">Code Editor</h2>
             <CodeEditor room={connectid} />
             <h2 id="whiteboard">Whiteboard</h2>
             <Whiteboard />
