@@ -75,4 +75,9 @@
   position: relative;
   float: left;
   width: 7rem;
+  margin-right: 2rem;
+}
+
+.right-home-col {
+  color: #ddd
 }
