@@ -78,7 +78,7 @@ export default function PublicProfile() {
   }, []);
 
   return (
-    <div>
+    <div className="whole-container">
       <h2 className="full-name">
         {profileData.firstName} {profileData.lastName + "'s"} Profile
         <span>
