@@ -114,7 +114,6 @@ export default function Home() {
         <h2 className="how-it-works-main-header">How it Works</h2>
         <div className="how-it-works-row">
           <div className="how-it-works-item">
-            <div className="how-it-works__step-number">1</div>
             <div className="how-it-works-img-container">
               <img
                 src={require("./images/search.svg")}
@@ -129,8 +128,6 @@ export default function Home() {
             </p>
           </div>
           <div className="how-it-works-item">
-            <div className="how-it-works__step-number">2</div>
-
             <div className="how-it-works-img-container">
               <img
                 src={require("./images/daily-schedule.svg")}
@@ -145,8 +142,6 @@ export default function Home() {
             </p>
           </div>
           <div className="how-it-works-item">
-            <div className="how-it-works__step-number">3</div>
-
             <div className="how-it-works-img-container">
               <img
                 src={require("./images/video-call.svg")}
@@ -161,8 +156,6 @@ export default function Home() {
             </p>
           </div>
           <div className="how-it-works-item">
-            <div className="how-it-works__step-number">4</div>
-
             <div className="how-it-works-img-container">
               <img
                 src={require("./images/feedback.svg")}
