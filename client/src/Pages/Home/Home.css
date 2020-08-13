@@ -189,11 +189,11 @@
 }
 
 @media screen and (max-width: 1255px) {
-  .feature-text{
-    font-size: .8rem;
+  .feature-text {
+    font-size: 0.8rem;
   }
 
-  .feature-img{
+  .feature-img {
     width: 4rem;
   }
 
@@ -206,15 +206,14 @@
   .home-container {
     display: inherit;
     width: 100%;
-  }
-}
-@media screen and (max-width: 580px) {
-  .home-container{
-    padding-left: 6rem;
-    padding-bottom: 2rem;
     height: 120vh;
   }
+}
 
+@media screen and (max-width: 880px) {
+  .home-container {
+    height: 130vh;
+  }
   .left-home-col p {
     font-size: 1rem;
   }
@@ -223,6 +222,15 @@
     font-size: 2rem;
     margin-bottom: 0rem;
   }
-
+  .how-it-works-row {
+    flex-wrap: wrap;
+  }
 }
 
+@media screen and (max-width: 580px) {
+  .home-container {
+    padding-left: 6rem;
+    padding-bottom: 2rem;
+    height: 160vh;
+  }
+}
