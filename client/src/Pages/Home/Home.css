@@ -45,11 +45,11 @@
 .home-btn-signup:focus,
 .home-btn-signup.focus {
   -webkit-box-shadow: 0 0 0 0.2rem rgba(121, 113, 234, 0.5);
-  box-shadow: 0 0 0 0.2rem rgba(121, 113, 234, .5);
+  box-shadow: 0 0 0 0.2rem rgba(121, 113, 234, 0.5);
   background-color: midnightblue;
 }
 
-.home-btn-signin{
+.home-btn-signin {
   margin-right: 1.5rem;
   margin-top: 1rem;
   color: #7971ea;
@@ -64,7 +64,7 @@
 .home-btn-signin:focus,
 .home-btn-signin.focus {
   -webkit-box-shadow: 0 0 0 0.2rem rgba(121, 113, 234, 0.5);
-  box-shadow: 0 0 0 0.2rem rgba(121, 113, 234, .5);
+  box-shadow: 0 0 0 0.2rem rgba(121, 113, 234, 0.5);
   background-color: #4f45e3;
 }
 
@@ -90,7 +90,7 @@
 }
 
 .feature h5 {
-  margin: 0rem 0rem .4rem 0rem;
+  margin: 0rem 0rem 0.4rem 0rem;
   padding-bottom: 0%;
   margin-right: 2rem;
   padding-right: 0%;
@@ -104,10 +104,88 @@
   width: 70%;
 }
 
-.right-home-col{
+.right-home-col {
   padding-right: 0%;
   margin-right: 0;
   color: #ddd;
+}
+
+.how-it-works {
+  padding: 3rem 4rem 5rem;
+}
+
+.how-it-works-main-header {
+  text-align: center;
+  margin-bottom: 5rem;
+  font-size: 3rem;
+  background-image: linear-gradient(#c5c1fa, #6b61f5);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 0.15rem;
+  transition: all 0.2s;
+}
+.how-it-works-header {
+  background-image: linear-gradient(#c5c1fa, #6b61f5);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 0.1rem;
+  transition: all 0.2s;
+}
+
+.how-it-works-row {
+  text-align: center;
+  display: flex;
+}
+
+.how-it-works-item {
+  border-radius: 10px;
+  margin: 1rem;
+  margin: auto;
+  width: 70%;
+}
+
+.how-it-works__step-number {
+  width: 2rem;
+  line-height: 2rem;
+  border-radius: 50%;
+  background-image: linear-gradient(#aba5fc, #6b61f5);
+  color: #fff;
+  margin: 0 auto;
+}
+
+.how-it-works__step-number > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2rem;
+  transform: translate(-50%, -50%);
+  background-color: purple;
+  clip-path: circle(10px at center);
+  /* width: 1rem; */
+  /* height: 3rem; */
+  /* padding: ; */
+}
+
+.how-it-works-img-container {
+  margin: 0 auto;
+  height: 12rem;
+  width: 12rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.how-it-works__img {
+  margin: 1rem;
+  width: 8rem;
+}
+
+.how-it-works-paragraph {
+  padding: 0.3rem 1rem;
+  height: 6rem;
 }
 
 @media screen and (max-width: 1255px) {
@@ -129,7 +207,6 @@
     display: inherit;
     width: 100%;
   }
-
 }
 @media screen and (max-width: 580px) {
   .home-container{
@@ -148,3 +225,4 @@
   }
 
 }
+
