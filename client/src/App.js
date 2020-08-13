@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Footer from "./components/Footer";
 import "./App.css";
 
 //Context
@@ -24,6 +25,7 @@ function App() {
             <Route path="/" component={LandingLayout}></Route>
           </Switch>
         </div>
+        <Footer />
       </UserContext.Provider>
     </Router>
   );
