@@ -1,6 +1,5 @@
 import React, { Component, useState, validated, handleSubmit, useEffect } from "react";
 import { Form, Col, InputGroup, Button } from "react-bootstrap";
-import { render } from "react-dom";
 import "./BecomeTutor.css";
 import Skills from "./Skills";
 import Axios from "axios";
@@ -12,7 +11,7 @@ export default function BecomeTutor() {
   useEffect(() => {
     bsCustomFileInput.init();
   }, [])
-  
+
   const [validated, setValidated] = useState(true);
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -156,121 +155,114 @@ export default function BecomeTutor() {
       <div className="bt-top-container">
         <h1 className="bt-header">Why tutor with us?</h1>
         <div className="why-tutor">
-        <hr className="bt-header-line"/>
-          <p className="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-            scelerisque vehicula risus eget molestie. Curabitur ut bibendum diam.
-            Vivamus et nulla vulputate neque finibus dictum sed non odio. Etiam
-            magna justo, tempor eget nisl ullamcorper, euismod vulputate est.
-            Aliquam varius justo congue orci bibendum elementum. Proin lacinia</p>
+          <hr className="bt-header-line" />
+          <p className="bt-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+          scelerisque vehicula risus eget molestie. Curabitur ut bibendum diam.
+          Vivamus et nulla vulputate neque finibus dictum sed non odio. Etiam
+          magna justo, tempor eget nisl ullamcorper, euismod vulputate est. Aliquam varius justo congue orci bibendum elementum. Proin lacinia</p>
         </div>
       </div>
-        <div className="bt-form">
-          <h1 className="bt-title">Become a Tutor</h1>
-          {error && <ErrorNotice message={error} />}
-          {success && <SuccessNotice message={success} />}
-          <Form
-            id="tutor-form"
-            noValidate
-            validated={validated}
-            onSubmit={handleSubmit}
-          >
-            <Form.Row>
-              <Form.Group as={Col} controlId="validationCustom01">
-                <Form.Label>First name</Form.Label>
+      <div className="bt-form">
+        <h1 className="bt-title">Become a Tutor</h1>
+        {error && <ErrorNotice message={error} />}
+        {success && <SuccessNotice message={success} />}
+        <Form
+          id="tutor-form"
+          noValidate
+          validated={validated}
+          onSubmit={handleSubmit}
+        >
+          <Form.Row>
+            <Form.Group as={Col} controlId="validationCustom01">
+              <Form.Label>First name</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                placeholder="First name"
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+              <Form.Control.Feedback type="valid">
+                Looks good!
+                </Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                Please input your first name.
+                </Form.Control.Feedback>
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group as={Col} controlId="validationCustom02">
+              <Form.Label>Last name</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                placeholder="Last name"
+                onChange={(e) => setLastName(e.target.value)}
+              />
+              <Form.Control.Feedback type="valid">
+                Looks good!
+                </Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                Please input your last name.
+                </Form.Control.Feedback>
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group as={Col} controlId="validationCustomEmail">
+              <Form.Label>Email</Form.Label>
+              <InputGroup>
                 <Form.Control
+                  type="email"
+                  placeholder="foo@gmail.com"
                   required
-                  type="text"
-                  placeholder="First name"
-                  onChange={(e) => setFirstName(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <Form.Control.Feedback type="valid">
                   Looks good!
-                </Form.Control.Feedback>
-                <Form.Control.Feedback type="invalid">
-                  Please input your first name.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Form.Row>
-            <Form.Row>
-              <Form.Group as={Col} controlId="validationCustom02">
-                <Form.Label>Last name</Form.Label>
-                <Form.Control
-                  required
-                  type="text"
-                  placeholder="Last name"
-                  onChange={(e) => setLastName(e.target.value)}
-                />
-                <Form.Control.Feedback type="valid">
-                  Looks good!
-                </Form.Control.Feedback>
-                <Form.Control.Feedback type="invalid">
-                  Please input your last name.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Form.Row>
-            <Form.Row>
-              <Form.Group as={Col} controlId="validationCustomEmail">
-                <Form.Label>Email</Form.Label>
-                <InputGroup>
-                  <Form.Control
-                    type="email"
-                    placeholder="foo@gmail.com"
-                    required
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  <Form.Control.Feedback type="valid">
-                    Looks good!
                   </Form.Control.Feedback>
-                  <Form.Control.Feedback type="invalid">
-                    Please input your email address.
-                  </Form.Control.Feedback>
-                </InputGroup>
-              </Form.Group>
-              <Form.Group as={Col} md="3" controlId="validationCustom05">
-                <Form.Label>Age</Form.Label>
-                <Form.Control
-                  onChange={(e) => setAge(e.target.value)}
-                  type="number"
-                  placeholder="Age"
-                  required
-                />
-                <Form.Control.Feedback type="valid">
-                  Looks good!
-                </Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
-                  Please provide a valid age.
+                  Please input your email address.
+                  </Form.Control.Feedback>
+              </InputGroup>
+            </Form.Group>
+            <Form.Group as={Col} md="3" controlId="validationCustom05">
+              <Form.Label>Age</Form.Label>
+              <Form.Control
+                onChange={(e) => setAge(e.target.value)}
+                type="number"
+                placeholder="Age"
+                required
+              />
+              <Form.Control.Feedback type="valid">
+                Looks good!
                 </Form.Control.Feedback>
-              </Form.Group>
-            </Form.Row>
-            <Form.Row>
-              <Form.Group as={Col} controlId="validationCustom03">
-                {/* <Form.File
+              <Form.Control.Feedback type="invalid">
+                Please provide a valid age.
+                </Form.Control.Feedback>
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group as={Col} controlId="validationCustom03">
+              <Form.Label>Resume/CV</Form.Label>
+              <Form.File
                 id="resume"
-                label="Resume/CV"
+                label="Choose a file..."
+                custom
                 onChange={(e) => setResume(e.target.files[0])}
                 required
-              /> */}
-                <Form.Label>Resume/CV</Form.Label>
-                <Form.File
-                  id="resume"
-                  label="Choose a file..."
-                  custom
-                  onChange={(e) => setResume(e.target.files[0])}
-                  required
-                />
-              </Form.Group>
-            </Form.Row>
-            <Form.Row>
-              <Form.Group as={Col} controlId="validationCustom06">
-                <Form.Label>Skills</Form.Label>
-                <Skills defaultValue={defaultValue} setSkills={setSkills} required />
-              </Form.Group>
-            </Form.Row>
+              />
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group as={Col} controlId="validationCustom06">
+              <Form.Label>Skills</Form.Label>
+              <Skills defaultValue={defaultValue} setSkills={setSkills} required />
+            </Form.Group>
+          </Form.Row>
 
-            <hr />
-            <Button type="submit">Submit app</Button>
-          </Form>
-        </div>
+          <hr />
+          <Button type="submit">Submit app</Button>
+        </Form>
       </div>
+    </div>
   );
 }
