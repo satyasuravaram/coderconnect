@@ -10,6 +10,7 @@ import Register from "../Pages/Register/Register";
 import Login from "../Pages/Login/Login";
 import LandingNavbar from "../components/LandingNavbar";
 import "./Landing.css";
+
 function Landing() {
   return (
     <React.Fragment>
