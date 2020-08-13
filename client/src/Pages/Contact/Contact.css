@@ -1,10 +1,8 @@
 .contact-whole-container {
   min-height: 100vh;
-  position: relative;
 }
 
 .contact-top-container {
-  position: relative;
   background-image: linear-gradient(#d3d0fa, #b0aafd);
   color: white;
   height: 20rem;
@@ -24,7 +22,6 @@
 }
 
 .contact-whole-form {
-  position: relative;
   background-color: rgb(243, 233, 250);
   line-height: 1.4rem;
   padding: 3rem;
@@ -34,11 +31,6 @@
   flex-direction: column;
 }
 
-@media(max-width: 767px){
-  .bt-outer-container-contact{
-      height: 130vh;
-  }
-  .bt-inner-container-contact{
-      width: 80%;
-  }
+#contact-form {
+  width: 40rem;
 }

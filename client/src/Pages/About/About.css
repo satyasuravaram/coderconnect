@@ -3,7 +3,7 @@
 }
 
 .about-top-container {
-  height: 15rem;
+  height: 20rem;
   background-image: linear-gradient(#d3d0fa, #b0aafd);
   display: flex;
   flex-wrap: wrap;
@@ -16,6 +16,11 @@
 .about-info{
   display: block;
   width: 60%;
+}
+
+.about-answer {
+  flex: 1 1 auto;
+  padding: 1.755rem;
 }
 
 .mt-title{

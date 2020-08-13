@@ -11,7 +11,7 @@ export default function About() {
         <div className="about-info">
         <h1 class="title">About Us</h1>
         <hr/>
-        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+        <p className="about-answer"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
             scelerisque vehicula risus eget molestie. Curabitur ut bibendum diam.
             Vivamus et nulla vulputate neque finibus dictum sed non odio. Etiam
             magna justo, tempor eget nisl ullamcorper, euismod vulputate est.
