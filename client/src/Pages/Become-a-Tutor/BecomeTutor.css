@@ -31,3 +31,7 @@
   justify-content: center;
   flex-direction: column;
 }
+
+#tutor-form {
+  width: 40rem;
+}

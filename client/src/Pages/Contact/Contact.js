@@ -47,7 +47,7 @@ export default function Contact() {
             Aliquam varius justo congue orci bibendum elementum. Proin lacinia</p>
         </div>
       </div>
-      <div className="bt-form">
+      <div className="contact-whole-form">
         <h1 className="contact-title">Contact Us</h1>
         {success && <SuccessNotice message={success} />}
         <Form
