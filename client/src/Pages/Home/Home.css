@@ -116,7 +116,7 @@
 
 .how-it-works-main-header {
   text-align: center;
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
   font-size: 3rem;
   background-image: linear-gradient(#c5c1fa, #6b61f5);
   background-clip: text;
@@ -146,28 +146,6 @@
   width: 70%;
 }
 
-.how-it-works__step-number {
-  width: 2rem;
-  line-height: 2rem;
-  border-radius: 50%;
-  background-image: linear-gradient(#aba5fc, #6b61f5);
-  color: #fff;
-  margin: 0 auto;
-}
-
-.how-it-works__step-number > div {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 2rem;
-  transform: translate(-50%, -50%);
-  background-color: purple;
-  clip-path: circle(10px at center);
-  /* width: 1rem; */
-  /* height: 3rem; */
-  /* padding: ; */
-}
-
 .how-it-works-img-container {
   margin: 0 auto;
   height: 12rem;
@@ -181,6 +159,10 @@
 .how-it-works__img {
   margin: 1rem;
   width: 8rem;
+}
+
+.how-it-works__img:hover {
+  filter: invert(27%) sepia(51%);
 }
 
 .how-it-works-paragraph {
