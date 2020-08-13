@@ -211,11 +211,13 @@
 }
 
 @media screen and (max-width: 880px) {
-  .home-container {
-    height: 130vh;
-  }
   .left-home-col p {
     font-size: 1rem;
+    width: 150%;
+  }
+
+  .left-home-col {
+    width: 120%;
   }
 
   h1 {
@@ -231,6 +233,13 @@
   .home-container {
     padding-left: 6rem;
     padding-bottom: 2rem;
-    height: 160vh;
+    height: 190vh;
+  }
+  .how-it-works-item {
+    margin-top: 3rem;
+    width: 20rem;
+  }
+  .how-it-works-main-header {
+    margin-bottom: 3rem;
   }
 }
