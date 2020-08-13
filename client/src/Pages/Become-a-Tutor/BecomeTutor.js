@@ -152,9 +152,20 @@ export default function BecomeTutor() {
   };
 
   return (
-    <div className="bt-outer-container">
+    <div className="bt-whole-container">
+      <div className="bt-top-container">
+        <h1 className="bt-header">Why tutor with us?</h1>
+        <div className="why-tutor">
+        <hr className="bt-header-line"/>
+          <p className="answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+            scelerisque vehicula risus eget molestie. Curabitur ut bibendum diam.
+            Vivamus et nulla vulputate neque finibus dictum sed non odio. Etiam
+            magna justo, tempor eget nisl ullamcorper, euismod vulputate est.
+            Aliquam varius justo congue orci bibendum elementum. Proin lacinia</p>
+        </div>
+      </div>
         <div className="bt-form">
-          <h2>Become a Tutor</h2>
+          <h1 className="bt-title">Become a Tutor</h1>
           {error && <ErrorNotice message={error} />}
           {success && <SuccessNotice message={success} />}
           <Form

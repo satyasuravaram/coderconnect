@@ -7,7 +7,7 @@ import karthik from "./images/karthik.jpeg";
 
 export default function About() {
   return(<div>
-      <div div className="about-top-container">
+      <div className="about-top-container">
         <div className="about-info">
         <h1 class="title">About Us</h1>
         <hr/>
