@@ -16,7 +16,7 @@
   width: 60%;
 }
 
-.contact-answer{
+.contact-answer {
   flex: 1 1 auto;
   padding: 1.755rem;
 }
@@ -34,3 +34,19 @@
 #contact-form {
   width: 40rem;
 }
+
+@media screen and (max-width: 700px) {
+  #contact-form {
+    width: 90%;
+  }
+
+  .contact-info {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .contact-top-container{
+    height: 30rem;
+  }
+} 
