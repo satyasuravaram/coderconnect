@@ -1,17 +1,19 @@
-.bt-outer-container {
-  /* height: 110vh; */
-  background-color: #eae9f7;
+.bt-whole-container {
   min-height: 100vh;
   position: relative;
 }
 
+.bt-header{
+  color: white;
+}
+
 .bt-inner-container {
   background-color: white;
+  color: white;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
-  background-color: #fff;
   height: 95%;
   width: 75%;
   margin: 0 auto;
@@ -19,12 +21,28 @@
   border-radius: 0.5rem;
 }
 
+.bt-top-container {
+  background-image: linear-gradient(#d3d0fa, #b0aafd);
+  color: white;
+  height: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.why-tutor {
+  width: 60%;
+}
+
 .bt-form {
-  padding: 2rem;
-  width: 50%;
+  background-color: rgb(243, 233, 250);
   line-height: 1.4rem;
   padding: 3rem;
-  /* background-color: #fff; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .bt-right-half{
