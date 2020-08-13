@@ -3,24 +3,6 @@
   position: relative;
 }
 
-.bt-header{
-  color: white;
-}
-
-.bt-inner-container {
-  background-color: white;
-  color: white;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  height: 95%;
-  width: 75%;
-  margin: 0 auto;
-  box-shadow: 0 1.4rem 2rem rgba(0, 0, 0, 0.2);
-  border-radius: 0.5rem;
-}
-
 .bt-top-container {
   background-image: linear-gradient(#d3d0fa, #b0aafd);
   color: white;
@@ -35,6 +17,11 @@
   width: 60%;
 }
 
+.bt-answer{
+  flex: 1 1 auto;
+  padding: 1.755rem;
+}
+
 .bt-form {
   background-color: rgb(243, 233, 250);
   line-height: 1.4rem;
@@ -43,15 +30,4 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
-
-.bt-right-half{
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50%;
-    height: 100%;
-    background: rgb(182, 181, 181);
-    border-top-right-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
 }

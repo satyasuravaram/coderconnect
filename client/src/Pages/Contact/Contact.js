@@ -1,7 +1,6 @@
 import React, { useState, validated, handleSubmit } from "react";
 import { Form, Col, InputGroup, Button } from "react-bootstrap";
 import "./Contact.css";
-import { makeToast, endSessionToast } from "../../components/misc/Toaster";
 import Axios from "axios";
 import SuccessNotice from "../../components/misc/SuccessNotice";
 
@@ -36,95 +35,98 @@ export default function Contact() {
   };
 
   return (
-    <div>
-      <div className="bt-outer-container-contact">
-        <div className="bt-inner-container-contact">
-          <div className="bt-form-contact">
-            <h2>Contact Us</h2>
-            {success && <SuccessNotice message={success} />}
-            <Form
-              id="contact-form"
-              noValidate
-              validated={validated}
-              onSubmit={handleSubmit}
-            >
-              <Form.Row>
-                <Form.Group as={Col} md="6" controlId="validationCustom01">
-                  <Form.Label>First name</Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    placeholder="First name"
-                    onChange={(e) => setFirstName(e.target.value)}
-                  />
-                  <Form.Control.Feedback type="valid">
-                    Looks good!
+    <div className="contact-whole-container">
+      <div className="contact-top-container">
+        <h1 className="contact-header">Contact Us</h1>
+        <div className="contact-info">
+          <hr className="contact-header-line" />
+          <p className="contact-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+          scelerisque vehicula risus eget molestie. Curabitur ut bibendum diam.
+          Vivamus et nulla vulputate neque finibus dictum sed non odio. Etiam
+          magna justo, tempor eget nisl ullamcorper, euismod vulputate est.
+            Aliquam varius justo congue orci bibendum elementum. Proin lacinia</p>
+        </div>
+      </div>
+      <div className="bt-form">
+        <h1 className="contact-title">Contact Us</h1>
+        {success && <SuccessNotice message={success} />}
+        <Form
+          id="contact-form"
+          noValidate
+          validated={validated}
+          onSubmit={handleSubmit}
+        >
+          <Form.Row>
+            <Form.Group as={Col} controlId="validationCustom01">
+              <Form.Label>First name</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                placeholder="First name"
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+              <Form.Control.Feedback type="valid">
+                Looks good!
                   </Form.Control.Feedback>
-                  <Form.Control.Feedback type="invalid">
-                    Please input your first name.
+              <Form.Control.Feedback type="invalid">
+                Please input your first name.
                   </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group as={Col} md="6" controlId="validationCustom02">
-                  <Form.Label>Last name</Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    placeholder="Last name"
-                    onChange={(e) => setLastName(e.target.value)}
-                  />
-                  <Form.Control.Feedback type="valid">
-                    Looks good!
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group as={Col} controlId="validationCustom02">
+              <Form.Label>Last name</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                placeholder="Last name"
+                onChange={(e) => setLastName(e.target.value)}
+              />
+              <Form.Control.Feedback type="valid">
+                Looks good!
                   </Form.Control.Feedback>
-                  <Form.Control.Feedback type="invalid">
-                    Please input your last name.
+              <Form.Control.Feedback type="invalid">
+                Please input your last name.
                   </Form.Control.Feedback>
-                </Form.Group>
-              </Form.Row>
-              <Form.Row>
-                <Form.Group as={Col} controlId="validationCustomEmail">
-                  <Form.Label>Email</Form.Label>
-                  <InputGroup>
-                    <InputGroup.Prepend>
-                      <InputGroup.Text id="inputGroupPrepend">
-                        @
-                      </InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <Form.Control
-                      type="email"
-                      placeholder="foo@gmail.com"
-                      aria-describedby="inputGroupPrepend"
-                      required
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <Form.Control.Feedback type="valid">
-                      Looks good!
-                    </Form.Control.Feedback>
-                    <Form.Control.Feedback type="invalid">
-                      Please input your email address.
-                    </Form.Control.Feedback>
-                  </InputGroup>
-                </Form.Group>
-              </Form.Row>
-              <Form.Group controlId="exampleForm.ControlTextarea1">
-                <Form.Label>Message</Form.Label>
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group as={Col} controlId="validationCustomEmail">
+              <Form.Label>Email</Form.Label>
+              <InputGroup>
                 <Form.Control
+                  type="email"
+                  placeholder="foo@gmail.com"
                   required
-                  as="textarea"
-                  rows="3"
-                  onChange={(e) => setMessage(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <Form.Control.Feedback type="valid">
                   Looks good!
-                </Form.Control.Feedback>
+                    </Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
-                  Please input your message
+                  Please input your email address.
+                    </Form.Control.Feedback>
+              </InputGroup>
+            </Form.Group>
+          </Form.Row>
+          <Form.Group controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Message</Form.Label>
+            <Form.Control
+              required
+              as="textarea"
+              rows="4"
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <Form.Control.Feedback type="valid">
+              Looks good!
                 </Form.Control.Feedback>
-              </Form.Group>
-              <hr />
-              <Button type="submit">Submit message</Button>
-            </Form>
-          </div>
-        </div>
+            <Form.Control.Feedback type="invalid">
+              Please input your message
+                </Form.Control.Feedback>
+          </Form.Group>
+          <hr />
+          <Button type="submit">Submit message</Button>
+        </Form>
       </div>
     </div>
   );
