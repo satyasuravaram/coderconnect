@@ -189,23 +189,48 @@
 }
 
 @media screen and (max-width: 1255px) {
-  .right-home-col {
-    visibility: hidden;
+  .feature-text {
+    font-size: 0.8rem;
   }
+
+  .feature-img {
+    width: 4rem;
+  }
+
   .left-home-col {
     padding-left: auto;
     padding-right: auto;
-    padding-top: 15rem;
+    padding-top: 10rem;
   }
 
   .home-container {
     display: inherit;
     width: 100%;
+    height: 120vh;
   }
 }
 
-@media screen and (max-width: 785px) {
+@media screen and (max-width: 880px) {
   .home-container {
-    height: 124vh;
+    height: 130vh;
+  }
+  .left-home-col p {
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 0rem;
+  }
+  .how-it-works-row {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .home-container {
+    padding-left: 6rem;
+    padding-bottom: 2rem;
+    height: 160vh;
   }
 }
