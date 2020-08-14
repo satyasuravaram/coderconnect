@@ -4,10 +4,20 @@ import "./FAQ.css";
 
 export default function FAQ() {
   return (
-    <div className="faq-outer-container">
-      <div className="faq-inner-container">
-      <h2 class="header">Frequently Asked Questions</h2>
-      <Accordion defaultActiveKey="0">
+    <div className="faq-whole-container">
+      <div className="faq-top-container">
+        <h1 class="faq-header">Frequently Asked Questions</h1>
+        <div className="faq-info">
+            <hr className="faq-header-line" />
+            <p className="faq-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+            scelerisque vehicula risus eget molestie. Curabitur ut bibendum diam.
+            Vivamus et nulla vulputate neque finibus dictum sed non odio. Etiam
+            magna justo, tempor eget nisl ullamcorper, euismod vulputate est.
+              Aliquam varius justo congue orci bibendum elementum. Proin lacinia</p>
+        </div>
+      </div>
+      <div className="faq-bottom-container">
+      <Accordion id="faqs">
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Card.Header} variant="link" eventKey="0">
@@ -15,7 +25,7 @@ export default function FAQ() {
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="0">
-            <Card.Body class="answer">
+            <Card.Body>
               Since CoderConnect is a volunteering site, tutoring is{" "}
               <span class="important-word">free</span>. Tutors are given
               volunteer hours instead of money
@@ -54,8 +64,48 @@ export default function FAQ() {
             <Card.Body>Hello! I'm another body</Card.Body>
           </Accordion.Collapse>
         </Card>
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle as={Card.Header} variant="link" eventKey="3">
+              <strong>Where does the tutoring take place?</strong>
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="3">
+            <Card.Body>Hello! I'm another body</Card.Body>
+          </Accordion.Collapse>
+        </Card>
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle as={Card.Header} variant="link" eventKey="3">
+              <strong>Where does the tutoring take place?</strong>
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="3">
+            <Card.Body>Hello! I'm another body</Card.Body>
+          </Accordion.Collapse>
+        </Card>
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle as={Card.Header} variant="link" eventKey="3">
+              <strong>Where does the tutoring take place?</strong>
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="3">
+            <Card.Body>Hello! I'm another body</Card.Body>
+          </Accordion.Collapse>
+        </Card>
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle as={Card.Header} variant="link" eventKey="3">
+              <strong>Where does the tutoring take place?</strong>
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="3">
+            <Card.Body>Hello! I'm another body</Card.Body>
+          </Accordion.Collapse>
+        </Card>
       </Accordion>
-    </div>
+      </div>
     </div>
   );
 }

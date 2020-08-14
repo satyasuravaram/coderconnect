@@ -21,11 +21,16 @@
 .about-answer {
   flex: 1 1 auto;
   padding: 1.755rem;
+  text-align: left;
+}
+
+.about-bw-container {
+  background-color: rgb(243, 233, 250);
+  padding: 3rem;
 }
 
 .mt-title{
   text-align: center;
-  margin: 2rem;
 }
 
 .person {
