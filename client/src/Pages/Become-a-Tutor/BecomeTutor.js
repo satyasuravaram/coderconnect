@@ -1,16 +1,23 @@
-import React, { Component, useState, validated, handleSubmit, useEffect } from "react";
+import React, {
+  Component,
+  useState,
+  validated,
+  handleSubmit,
+  useEffect,
+} from "react";
 import { Form, Col, InputGroup, Button } from "react-bootstrap";
 import "./BecomeTutor.css";
 import Skills from "./Skills";
 import Axios from "axios";
 import ErrorNotice from "../../components/misc/ErrorNotice";
 import SuccessNotice from "../../components/misc/SuccessNotice";
-import bsCustomFileInput from 'bs-custom-file-input';
+import bsCustomFileInput from "bs-custom-file-input";
+import ec2url from "../../context/Config";
 
 export default function BecomeTutor() {
   useEffect(() => {
     bsCustomFileInput.init();
-  }, [])
+  }, []);
 
   const [validated, setValidated] = useState(true);
   const [firstName, setFirstName] = useState();
@@ -24,7 +31,7 @@ export default function BecomeTutor() {
   const [defaultValue, setDefaultValue] = useState("");
   useEffect(() => {
     setDefaultValue(skills);
-  }, [skills])
+  }, [skills]);
   const handleSubmit = (e) => {
     const form = e.currentTarget;
     e.preventDefault();
@@ -42,8 +49,13 @@ export default function BecomeTutor() {
       data.append("lastName", lastName);
       data.append("email", email);
       data.append("age", age);
-
-      Axios.post("/mail/send", data).then(function (response) {
+      let url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/mail/send";
+      } else {
+        url = "/mail/send";
+      }
+      Axios.post(url, data).then(function (response) {
         console.log(response);
       });
       document.getElementById("tutor-form").reset();
@@ -156,10 +168,14 @@ export default function BecomeTutor() {
         <h1 className="bt-header">Why tutor with us?</h1>
         <div className="why-tutor">
           <hr className="bt-header-line" />
-          <p className="bt-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-          scelerisque vehicula risus eget molestie. Curabitur ut bibendum diam.
-          Vivamus et nulla vulputate neque finibus dictum sed non odio. Etiam
-          magna justo, tempor eget nisl ullamcorper, euismod vulputate est. Aliquam varius justo congue orci bibendum elementum. Proin lacinia</p>
+          <p className="bt-answer">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+            scelerisque vehicula risus eget molestie. Curabitur ut bibendum
+            diam. Vivamus et nulla vulputate neque finibus dictum sed non odio.
+            Etiam magna justo, tempor eget nisl ullamcorper, euismod vulputate
+            est. Aliquam varius justo congue orci bibendum elementum. Proin
+            lacinia
+          </p>
         </div>
       </div>
       <div className="bt-form">
@@ -183,10 +199,10 @@ export default function BecomeTutor() {
               />
               <Form.Control.Feedback type="valid">
                 Looks good!
-                </Form.Control.Feedback>
+              </Form.Control.Feedback>
               <Form.Control.Feedback type="invalid">
                 Please input your first name.
-                </Form.Control.Feedback>
+              </Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
           <Form.Row>
@@ -200,10 +216,10 @@ export default function BecomeTutor() {
               />
               <Form.Control.Feedback type="valid">
                 Looks good!
-                </Form.Control.Feedback>
+              </Form.Control.Feedback>
               <Form.Control.Feedback type="invalid">
                 Please input your last name.
-                </Form.Control.Feedback>
+              </Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
           <Form.Row>
@@ -218,10 +234,10 @@ export default function BecomeTutor() {
                 />
                 <Form.Control.Feedback type="valid">
                   Looks good!
-                  </Form.Control.Feedback>
+                </Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
                   Please input your email address.
-                  </Form.Control.Feedback>
+                </Form.Control.Feedback>
               </InputGroup>
             </Form.Group>
             <Form.Group as={Col} md="3" controlId="validationCustom05">
@@ -234,10 +250,10 @@ export default function BecomeTutor() {
               />
               <Form.Control.Feedback type="valid">
                 Looks good!
-                </Form.Control.Feedback>
+              </Form.Control.Feedback>
               <Form.Control.Feedback type="invalid">
                 Please provide a valid age.
-                </Form.Control.Feedback>
+              </Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
           <Form.Row>
@@ -255,7 +271,11 @@ export default function BecomeTutor() {
           <Form.Row>
             <Form.Group as={Col} controlId="validationCustom06">
               <Form.Label>Skills</Form.Label>
-              <Skills defaultValue={defaultValue} setSkills={setSkills} required />
+              <Skills
+                defaultValue={defaultValue}
+                setSkills={setSkills}
+                required
+              />
             </Form.Group>
           </Form.Row>
 

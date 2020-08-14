@@ -9,6 +9,7 @@ import { Button } from "react-bootstrap";
 import "./Profile.css";
 import Axios from "axios";
 import DefaultImg from "../About/images/default-profile-pic.png";
+import ec2url from "../../context/Config";
 
 export default function Profile() {
   const [profileData, setProfileData] = useState({
@@ -25,8 +26,14 @@ export default function Profile() {
     const getUser = async () => {
       try {
         const token = localStorage.getItem("auth-token");
+        let url = "";
+        if (process.env.NODE_ENV === "production") {
+          url = ec2url + "/users/";
+        } else {
+          url = "/users/";
+        }
 
-        const userRes = await Axios.get("/users/", {
+        const userRes = await Axios.get(url, {
           headers: { "x-auth-token": token },
         });
 

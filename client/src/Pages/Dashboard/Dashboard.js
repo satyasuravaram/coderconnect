@@ -13,6 +13,7 @@ import DefaultImg from "../About/images/default-profile-pic.png";
 import Pagination from "./Pagination";
 import { css } from "@emotion/core";
 import ClipLoader from "react-spinners/HashLoader";
+import ec2url from "../../context/Config";
 
 export default function Dashboard() {
   const [show, setShow] = useState(false);
@@ -36,12 +37,24 @@ export default function Dashboard() {
         token = "";
       }
 
-      const tokenRes = await Axios.post("/users/isTokenValid", null, {
+      let url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/users/isTokenValid";
+      } else {
+        url = "/users/isTokenValid";
+      }
+      const tokenRes = await Axios.post(url, null, {
         headers: { "x-auth-token": token },
       });
 
       if (tokenRes.data) {
-        const userRes = await Axios.get("/users/", {
+        let userUrl = "";
+        if (process.env.NODE_ENV === "production") {
+          userUrl = ec2url + "/users/";
+        } else {
+          userUrl = "/users/";
+        }
+        const userRes = await Axios.get(userUrl, {
           headers: { "x-auth-token": token },
         });
 
@@ -51,8 +64,13 @@ export default function Dashboard() {
         });
 
         setLoading(true);
-
-        const tutorArr = await Axios.get("/users/tutors", {
+        url = "";
+        if (process.env.NODE_ENV === "production") {
+          url = ec2url + "/users/tutors";
+        } else {
+          url = "/users/tutors";
+        }
+        const tutorArr = await Axios.get(url, {
           headers: { "x-auth-token": token },
         });
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-
+import ec2url from "../context/Config";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Messages from "../Pages/Messages/Messages";
 import Profile from "../Pages/Profile/Profile";
@@ -11,7 +11,7 @@ import Chat from "../Pages/Chat/Chat";
 import UserContext from "../context/UserContext";
 import Axios from "axios";
 import MainNavbar from "../components/MainNavbar";
-import "./Main.css"
+import "./Main.css";
 
 function Main() {
   const { setUserData } = useContext(UserContext);
@@ -26,14 +26,25 @@ function Main() {
         token = "";
       }
 
-      const tokenRes = await Axios.post(
-        "/users/isTokenValid",
-        null,
-        { headers: { "x-auth-token": token } }
-      );
+      let url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/users/isTokenValid";
+      } else {
+        url = "/users/isTokenValid";
+      }
+      const tokenRes = await Axios.post(url, null, {
+        headers: { "x-auth-token": token },
+      });
+
+      url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/users/";
+      } else {
+        url = "/users/";
+      }
 
       if (tokenRes.data) {
-        const userRes = await Axios.get("/users/", {
+        const userRes = await Axios.get(url, {
           headers: { "x-auth-token": token },
         });
 

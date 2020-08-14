@@ -6,6 +6,7 @@ import UserContext from "../../context/UserContext";
 import { useHistory } from "react-router-dom";
 import ErrorNotice from "../../components/misc/ErrorNotice";
 import Particles from "react-particles-js";
+import ec2url from "../../context/Config";
 import Axios from "axios";
 import "./Register.css";
 
@@ -30,14 +31,27 @@ export default function Register() {
         localStorage.setItem("auth-token", "");
         token = "";
       }
-      console.log("Before token");
-      const tokenRes = await Axios.post("/users/isTokenValid", null, {
+
+      let url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/users/isTokenValid";
+      } else {
+        url = "/users/isTokenValid";
+      }
+
+      const tokenRes = await Axios.post(url, null, {
         headers: { "x-auth-token": token },
       });
       console.log("After token res", tokenRes);
 
       if (tokenRes.data) {
-        const userRes = await Axios.get("/users/", {
+        url = "";
+        if (process.env.NODE_ENV === "production") {
+          url = ec2url + "/users/";
+        } else {
+          url = "/users/";
+        }
+        const userRes = await Axios.get(url, {
           headers: { "x-auth-token": token },
         });
 
@@ -64,9 +78,21 @@ export default function Register() {
         password2,
       };
 
-      await Axios.post("/users/register", newUser);
+      let url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/users/register";
+      } else {
+        url = "/users/register";
+      }
+      await Axios.post(url, newUser);
 
-      const loginRes = await Axios.post("/users/login", {
+      url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/users/login";
+      } else {
+        url = "/users/login";
+      }
+      const loginRes = await Axios.post(url, {
         email,
         password,
       });
@@ -89,7 +115,13 @@ export default function Register() {
   const responseGoogle = async (res) => {
     try {
       console.log(res);
-      const googleRes = await Axios.post("/auth/googlelogin", {
+      let url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/auth/googlelogin";
+      } else {
+        url = "/auth/googlelogin";
+      }
+      const googleRes = await Axios.post(url, {
         tokenId: res.tokenId,
       });
 
@@ -108,7 +140,13 @@ export default function Register() {
   const responseFacebook = async (res) => {
     console.log(res);
     try {
-      const facebookRes = await Axios.post("/auth/facebooklogin", {
+      let url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/auth/facebooklogin";
+      } else {
+        url = "/auth/facebooklogin";
+      }
+      const facebookRes = await Axios.post(url, {
         accessToken: res.accessToken,
         userID: res.userID,
       });
@@ -254,7 +292,13 @@ export default function Register() {
             Sign Up
           </Button>
           <p>
-            Already have an account? <a className="sign-in-already-btn" onClick={() => history.push("/users/login")}>Sign in here</a>
+            Already have an account?{" "}
+            <a
+              className="sign-in-already-btn"
+              onClick={() => history.push("/users/login")}
+            >
+              Sign in here
+            </a>
           </p>
         </Form>
         <div className="social-register">

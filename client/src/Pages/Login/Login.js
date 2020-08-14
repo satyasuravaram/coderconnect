@@ -8,6 +8,7 @@ import ErrorNotice from "../../components/misc/ErrorNotice";
 import Particles from "react-particles-js";
 import "./Login.css";
 import Axios from "axios";
+import ec2url from "../../context/Config";
 
 export default function Login() {
   const [email, setEmail] = useState();
@@ -27,12 +28,24 @@ export default function Login() {
         token = "";
       }
 
-      const tokenRes = await Axios.post("/users/isTokenValid", null, {
+      let url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/users/isTokenValid";
+      } else {
+        url = "/users/isTokenValid";
+      }
+      const tokenRes = await Axios.post(url, null, {
         headers: { "x-auth-token": token },
       });
 
       if (tokenRes.data) {
-        const userRes = await Axios.get("/users/", {
+        url = "";
+        if (process.env.NODE_ENV === "production") {
+          url = ec2url + "/users/";
+        } else {
+          url = "/users/";
+        }
+        const userRes = await Axios.get(url, {
           headers: { "x-auth-token": token },
         });
 
@@ -51,7 +64,14 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const loginRes = await Axios.post("/users/login", {
+      let url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/users/login";
+      } else {
+        url = "/users/login";
+      }
+      
+      const loginRes = await Axios.post(url, {
         email,
         password,
       });
@@ -71,7 +91,14 @@ export default function Login() {
 
   const responseGoogle = async (res) => {
     try {
-      const googleRes = await Axios.post("/auth/googlelogin", {
+      let url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/auth/googlelogin";
+      } else {
+        url = "/auth/googlelogin";
+      }
+      
+      const googleRes = await Axios.post(url, {
         tokenId: res.tokenId,
       });
 
@@ -111,7 +138,7 @@ export default function Login() {
 
   return (
     <div className="login-outer-container">
-            <Particles
+      <Particles
         canvasClassName="particles-container"
         params={{
           particles: {

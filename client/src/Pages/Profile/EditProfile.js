@@ -7,6 +7,7 @@ import skillsArray from "../../components/SkillsArray";
 import "./EditProfile.css";
 import SkillsDropdown from "./SkillsDropdown";
 import DefaultImg from "../About/images/default-profile-pic.png";
+import ec2url from "../../context/Config";
 
 export default function EditProfile() {
   const [profileData, setProfileData] = useState({
@@ -29,8 +30,14 @@ export default function EditProfile() {
     const getUser = async () => {
       try {
         const token = localStorage.getItem("auth-token");
+        let url = "";
+        if (process.env.NODE_ENV === "production") {
+          url = ec2url + "/users/";
+        } else {
+          url = "/users/";
+        }
 
-        const userRes = await Axios.get("/users/", {
+        const userRes = await Axios.get(url, {
           headers: { "x-auth-token": token },
         });
 
@@ -95,14 +102,31 @@ export default function EditProfile() {
       data.append("prevEmail", profileData.email);
       data.append("email", newProfileData.email);
       data.append("bio", newProfileData.bio);
-      const editRes = await Axios.post(
-        "/users/edit",
-        data,
-        { headers: { "x-auth-token": token } }
-      );
+      let url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/users/isTokenValid";
+      } else {
+        url = "/users/isTokenValid";
+      }
+      const tokenRes = await Axios.post(url, null, {
+        headers: { "x-auth-token": token },
+      });
 
-      if (editRes.data) {
-        history.push("/app/profile");
+      if (tokenRes.data) {
+        url = "";
+        if (process.env.NODE_ENV === "production") {
+          url = ec2url + "/users/edit";
+        } else {
+          url = "/users/edit";
+        }
+
+        const editRes = await Axios.post(url, data, {
+          headers: { "x-auth-token": token },
+        });
+
+        if (editRes.data) {
+          history.push("/app/profile");
+        }
       }
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Axios from "axios";
 import UserContext from "../../context/UserContext";
+import ec2url from "../../context/Config";
 import "./Home.css";
 
 export default function Home() {
@@ -18,12 +19,24 @@ export default function Home() {
         token = "";
       }
 
-      const tokenRes = await Axios.post("/users/isTokenValid", null, {
+      let url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/users/isTokenValid";
+      } else {
+        url = "/users/isTokenValid";
+      }
+      const tokenRes = await Axios.post(url, null, {
         headers: { "x-auth-token": token },
       });
 
       if (tokenRes.data) {
-        const userRes = await Axios.get("/users/", {
+        url = "";
+        if (process.env.NODE_ENV === "production") {
+          url = ec2url + "/users/";
+        } else {
+          url = "/users/";
+        }
+        const userRes = await Axios.get(url, {
           headers: { "x-auth-token": token },
         });
 
