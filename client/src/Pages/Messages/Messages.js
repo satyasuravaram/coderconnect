@@ -155,10 +155,10 @@ export default function MessagesPage() {
                     />
                   </div>
                   <div key={index} className="connection-item">
-                    <ListGroupItemHeading>
+                    <ListGroupItemHeading className="connection-name">
                       {connection.firstName} {connection.lastName}
                     </ListGroupItemHeading>
-                    <ListGroupItemText>
+                    <ListGroupItemText className="connection-last-message">
                       {currConnectionName ===
                         `${connection.firstName} ${connection.lastName}` &&
                       newMessages.length > 0
