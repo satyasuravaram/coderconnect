@@ -1,5 +1,36 @@
-.full-name{
+.pp-whole {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: linear-gradient(#d3d0fa, #b0aafd);
+}
+
+.pp-both-container {
+    background-color: #fff;
+    margin: 3rem;
+    border-radius: 2%;
+}
+
+.pp-top-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 20rem;
+}
+
+.pp-bottom-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 20rem;
+}
+
+.pp-full-name{
     margin-left: 2rem;
+    display: block;
 }
 
 .edit-btn-2{
@@ -18,6 +49,3 @@
     background-color: lightblue;
 }
 
-.whole-container{
-    background-color: purple;
-}
