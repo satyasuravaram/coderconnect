@@ -48,10 +48,23 @@ export default function Profile() {
   }, []);
 
   return (
-    <div>
-      <h2>
-        {profileData.firstName} {profileData.lastName}
-        <span>
+    <div className="p-whole">
+      <div className="p-both-container">
+        <div className="p-top-container">
+          <div className="tutor-card-img-container">
+            <img
+              className="tutor-card-img"
+              src={
+                profileData.image
+                  ? `data:image;base64,${profileData.image}`
+                  : DefaultImg
+              }
+              alt={`${profileData.firstName}-img`}
+            />
+          </div>
+          <h2 className="p-full-name">
+            {profileData.firstName} {profileData.lastName}
+          </h2>
           <Button
             className="edit-btn"
             variant="outline-primary"
@@ -60,54 +73,34 @@ export default function Profile() {
           >
             Edit Profile
           </Button>
-        </span>
-      </h2>
-      <ListGroup>
-        <ListGroupItem>
-          <ListGroupItemHeading>Picture</ListGroupItemHeading>
-          <ListGroupItemText>
-            <div className="tutor-card-img-container">
-              <img
-                className="tutor-card-img"
-                src={
-                  profileData.image
-                    ? `data:image;base64,${profileData.image}`
-                    : DefaultImg
-                }
-                alt={`${profileData.firstName}-img`}
-              />
-            </div>
-          </ListGroupItemText>
-        </ListGroupItem>
-        <ListGroupItem>
-          <ListGroupItemHeading>Name</ListGroupItemHeading>
-          <ListGroupItemText>
-            {profileData.firstName} {profileData.lastName}
-          </ListGroupItemText>
-        </ListGroupItem>
-        {profileData.tutor && (
-          <ListGroupItem>
-            <ListGroupItemHeading>Bio</ListGroupItemHeading>
-            <ListGroupItemText>{profileData.bio}</ListGroupItemText>
-          </ListGroupItem>
-        )}
+        </div>
+        <div className="p-bottom-container">
+          <ListGroup flush>
+            {profileData.tutor && (
+              <ListGroupItem>
+                <ListGroupItemHeading>Bio</ListGroupItemHeading>
+                <ListGroupItemText>{profileData.bio}</ListGroupItemText>
+              </ListGroupItem>
+            )}
 
-        <ListGroupItem>
-          <ListGroupItemHeading>Email</ListGroupItemHeading>
-          <ListGroupItemText>{profileData.email}</ListGroupItemText>
-        </ListGroupItem>
+            <ListGroupItem>
+              <ListGroupItemHeading>Email</ListGroupItemHeading>
+              <ListGroupItemText>{profileData.email}</ListGroupItemText>
+            </ListGroupItem>
 
-        {profileData.tutor && (
-          <ListGroupItem>
-            <ListGroupItemHeading>Skills</ListGroupItemHeading>
-            <ListGroup horizontal="lg">
-              {profileData.skills.map((skill, index) => (
-                <ListGroupItem>{skill}</ListGroupItem>
-              ))}
-            </ListGroup>
-          </ListGroupItem>
-        )}
-      </ListGroup>
+            {profileData.tutor && (
+              <ListGroupItem>
+                <ListGroupItemHeading>Skills</ListGroupItemHeading>
+                <div className="listgroup-skills">
+                  {profileData.skills.map((skill, index) => (
+                    <div className="listgroup-skill">{skill}</div>
+                  ))}
+                </div>
+              </ListGroupItem>
+            )}
+          </ListGroup>
+        </div>
+      </div>
     </div>
   );
 }

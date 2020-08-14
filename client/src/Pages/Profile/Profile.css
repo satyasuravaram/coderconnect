@@ -1,3 +1,53 @@
 .edit-btn {
     margin: 1rem;
 }
+
+.p-whole {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: linear-gradient(#d3d0fa, #b0aafd);
+}
+
+.p-both-container {
+    background-color: #fff;
+    margin: 3rem;
+    width: 60%;
+    border-radius: 3%;
+}
+
+.p-top-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 20rem;
+}
+
+.p-full-name{
+    display: block;
+}
+.p-bottom-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-right: 3rem;
+    padding-left: 3rem;
+    min-height: 20rem;
+}
+
+.listgroup-skills {
+    display: flex;
+    flex-wrap: wrap;
+}
+.listgroup-skill {
+    margin: .25rem;
+    padding: .5rem 1rem;
+    border: 1px #777 solid;
+    border-radius: 8px;
+    background-image: linear-gradient(#6f65fa, #4538f8);
+    color: white;
+}
+
