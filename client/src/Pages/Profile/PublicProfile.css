@@ -45,6 +45,7 @@
     display: flex;
     flex-wrap: wrap;
 }
+
 .listgroup-skill {
     margin: .25rem;
     padding: .5rem 1rem;
@@ -54,3 +55,14 @@
     color: white;
 }
 
+
+@media screen and (max-width: 505px) {
+    .pp-bottom-container {
+        padding-left: 0rem;
+        padding-right: 0rem;
+    }
+
+    .pp-both-container {
+        width: 90%;
+    }
+}
