@@ -13,7 +13,7 @@ code {
     monospace;
 }
 
-h1{
+h1, button, a{
   font-family: 'Baloo Tamma 2', cursive;
 }
 
