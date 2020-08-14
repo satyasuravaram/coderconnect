@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Row, Col, Form, Input, FormGroup, Label, Button } from "reactstrap";
+import { Row, Col, Form, Input, FormGroup, CustomInput, Label, Button } from "reactstrap";
 import Axios from "axios";
 import ErrorNotice from "../../components/misc/ErrorNotice";
 import skillsArray from "../../components/SkillsArray";
@@ -145,31 +145,34 @@ export default function EditProfile() {
   };
 
   return (
-    <div className="editContainer">
-      <h2>Edit Profile</h2>
-      {error && <ErrorNotice message={error} />}
-      <Form onSubmit={editProfile}>
-        <Row>
-          <Col>
-            <Label for="bio">Profile Picture</Label>
-            <br />
-            <input type="file" name="image" onChange={imageHandler} />
-            <div className="tutor-card-img-container">
-              <img
-                className="tutor-card-img"
-                src={
-                  !profilePic.startsWith("data")
-                    ? `data:image;base64,${profileData.image}`
-                    : profilePic
-                }
-                alt="profile-picture"
-              />
-            </div>
-          </Col>
-        </Row>
+    <div className="ep-whole-container">
+      <div className="ep-both-container">
+        <h2 className="ep-header">Edit Profile</h2>
+        {error && <ErrorNotice message={error} />}
+        <Form onSubmit={editProfile} className="ep-form-container">
+          <Row>
+            <Col>
+              <Label for="bio">Profile Picture</Label>
+              <br />
+              <CustomInput type="file" id="exampleCustomFileBrowser" name="image" onChange={imageHandler} />
+              <div className="ep-top-container">
+                <div className="tutor-card-img-container">
+                  <img
+                    className="tutor-card-img"
+                    src={
+                      !profilePic.startsWith("data")
+                        ? `data:image;base64,${profileData.image}`
+                        : profilePic
+                    }
+                    alt="profile-picture"
+                  />
+                </div>
+              </div>
+            </Col>
+          </Row>
 
         <Row form>
-          <Col md={3}>
+          <Col>
             <FormGroup>
               <Label for="firstName">First Name</Label>
               <Input
@@ -181,7 +184,7 @@ export default function EditProfile() {
               />
             </FormGroup>
           </Col>
-          <Col md={3}>
+          <Col>
             <FormGroup>
               <Label for="lastName">Last Name</Label>
               <Input
@@ -196,7 +199,7 @@ export default function EditProfile() {
         </Row>
 
         <Row form>
-          <Col md={6}>
+          <Col>
             <FormGroup>
               <Label for="email">Email</Label>
               <Input
@@ -212,7 +215,7 @@ export default function EditProfile() {
 
         {profileData.tutor && (
           <Row form>
-            <Col md={6}>
+            <Col>
               <FormGroup>
                 <Label for="bio">Bio</Label>
                 <Input
@@ -229,7 +232,7 @@ export default function EditProfile() {
 
         {profileData.tutor && (
           <Row form>
-            <Col md={6}>
+            <Col>
               <Label>Skills</Label>
 
               <SkillsDropdown
@@ -241,8 +244,9 @@ export default function EditProfile() {
           </Row>
         )}
 
-        <Button type="submit">Save Changes</Button>
-      </Form>
+        <Button className="ep-button" type="submit">Save Changes</Button>
+        </Form>
     </div>
+    </div >
   );
 }
