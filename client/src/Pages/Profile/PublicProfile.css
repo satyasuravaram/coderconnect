@@ -9,7 +9,8 @@
 .pp-both-container {
     background-color: #fff;
     margin: 3rem;
-    border-radius: 2%;
+    width: 60%;
+    border-radius: 3%;
 }
 
 .pp-top-container{
@@ -25,17 +26,20 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    padding-right: 3rem;
+    padding-left: 3rem;
     min-height: 20rem;
 }
 
 .pp-full-name{
-    margin-left: 2rem;
     display: block;
 }
 
 .edit-btn-2{
     margin-left: 1rem;
 }
+
+
 
 .listgroup-skills {
     display: flex;
@@ -46,6 +50,7 @@
     padding: .5rem 1rem;
     border: 1px #777 solid;
     border-radius: 8px;
-    background-color: lightblue;
+    background-image: linear-gradient(#6f65fa, #4538f8);
+    color: white;
 }
 
