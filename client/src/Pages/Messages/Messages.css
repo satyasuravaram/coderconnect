@@ -52,6 +52,10 @@
   /* margin: .5rem; */
 }
 
+.connection-item{
+  margin-top: 1rem;
+}
+
 .messages-chat-box {
   position: relative;
   height: 70vh;
@@ -82,4 +86,69 @@
 
 .input-box {
   display: flex;
+}
+
+@media screen and (max-width: 990px){
+  .tutor-card-img-container-messages{
+    min-width: 3rem;
+    max-width: 3rem;
+    height: 3rem;
+    margin: 0.25rem .5rem;
+    margin-right: 1rem;
+  }
+
+  .connection-item {
+    font-size: .9rem;
+  }
+
+  .connection-name{
+    font-size: 1.3rem;
+  }
+}
+@media screen and (max-width: 750px){
+  .tutor-card-img-container-messages{
+    min-width: 2rem;
+    max-width: 2rem;
+    height: 2rem;
+    margin: .1rem .25rem;
+    margin-right: .5rem;
+  }
+  .connection-item {
+    font-size: .7rem;
+  }
+
+  .connection-name{
+    font-size: 1rem;
+  }
+
+}
+
+@media screen and (max-width: 550px){
+  .connection-last-message {
+    display: none;
+  }
+  .connection-name{
+    font-size: .8rem;
+  }
+  .connection-item {
+    margin-top: .1rem;
+  }
+  .tutor-card-img-container-messages{
+    margin-left: 0rem;
+    padding-left: 0rem;
+  }
+  .messages-page-outer-container{
+    padding: .4rem;
+  }
+  .message-connection{
+    margin-left: 0rem;
+    margin-right: .4rem;
+  }
+  .chat-box-header{
+    font-size: 1rem;
+  }
+  .success {
+    font-size: .8rem;
+    margin-left: .3rem;
+  }
 }
