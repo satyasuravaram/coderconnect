@@ -48,7 +48,7 @@ export default function Contact() {
         </div>
       </div>
       <div className="contact-whole-form">
-        <h1 className="contact-title">Contact Us</h1>
+        {/* <h1 className="contact-title">Send Us a Message</h1> */}
         {success && <SuccessNotice message={success} />}
         <Form
           id="contact-form"
@@ -125,7 +125,7 @@ export default function Contact() {
                 </Form.Control.Feedback>
           </Form.Group>
           <hr />
-          <Button type="submit">Submit message</Button>
+          <Button type="submit">Send message</Button>
         </Form>
       </div>
     </div>

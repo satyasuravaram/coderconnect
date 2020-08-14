@@ -54,3 +54,14 @@
     color: white;
 }
 
+@media screen and (max-width: 505px) {
+    .pp-bottom-container {
+        padding-left: 0rem;
+        padding-right: 0rem;
+    }
+
+    .pp-both-container {
+        width: 90%;
+    }
+}
+
