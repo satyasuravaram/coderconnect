@@ -99,7 +99,7 @@ export default function PublicProfile() {
             {profileData.id !== loggedInID && (
               <Button
                 className="edit-btn"
-                variant="primary"
+                variant="success"
                 size="md"
                 onClick={() =>
                   createConnection(profileData.id, userData.user._id, history)
@@ -110,7 +110,7 @@ export default function PublicProfile() {
             )}
             <Button
               className="edit-btn-2"
-              variant="outline-secondary"
+              variant="primary"
               href="/app/dashboard"
               size="md"
             >
@@ -119,7 +119,7 @@ export default function PublicProfile() {
           </span>
         </div>
         <div className="pp-bottom-container">
-          <ListGroup>
+          <ListGroup flush>
             <ListGroupItem>
               <ListGroupItemHeading>Bio</ListGroupItemHeading>
               <ListGroupItemText>{profileData.bio}</ListGroupItemText>
