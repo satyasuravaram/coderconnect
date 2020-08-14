@@ -198,6 +198,7 @@ export default function EditProfile() {
                   <Label for="bio">Bio</Label>
                   <Input
                     type="textarea"
+                    rows="4"
                     name="bio"
                     id="bio"
                     defaultValue={profileData.bio}

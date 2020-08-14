@@ -66,41 +66,41 @@ export default function FAQ() {
         </Card>
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Card.Header} variant="link" eventKey="3">
+            <Accordion.Toggle as={Card.Header} variant="link" eventKey="4">
               <strong>Where does the tutoring take place?</strong>
             </Accordion.Toggle>
           </Card.Header>
-          <Accordion.Collapse eventKey="3">
+          <Accordion.Collapse eventKey="4">
             <Card.Body>Hello! I'm another body</Card.Body>
           </Accordion.Collapse>
         </Card>
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Card.Header} variant="link" eventKey="3">
+            <Accordion.Toggle as={Card.Header} variant="link" eventKey="5">
               <strong>Where does the tutoring take place?</strong>
             </Accordion.Toggle>
           </Card.Header>
-          <Accordion.Collapse eventKey="3">
+          <Accordion.Collapse eventKey="5">
             <Card.Body>Hello! I'm another body</Card.Body>
           </Accordion.Collapse>
         </Card>
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Card.Header} variant="link" eventKey="3">
+            <Accordion.Toggle as={Card.Header} variant="link" eventKey="6">
               <strong>Where does the tutoring take place?</strong>
             </Accordion.Toggle>
           </Card.Header>
-          <Accordion.Collapse eventKey="3">
+          <Accordion.Collapse eventKey="6">
             <Card.Body>Hello! I'm another body</Card.Body>
           </Accordion.Collapse>
         </Card>
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Card.Header} variant="link" eventKey="3">
+            <Accordion.Toggle as={Card.Header} variant="link" eventKey="7">
               <strong>Where does the tutoring take place?</strong>
             </Accordion.Toggle>
           </Card.Header>
-          <Accordion.Collapse eventKey="3">
+          <Accordion.Collapse eventKey="7">
             <Card.Body>Hello! I'm another body</Card.Body>
           </Accordion.Collapse>
         </Card>
