@@ -78,64 +78,70 @@ export default function PublicProfile() {
   }, []);
 
   return (
-    <div className="whole-container">
-      <h2 className="full-name">
-        {profileData.firstName} {profileData.lastName + "'s"} Profile
-        <span>
-          {profileData.id !== loggedInID && (
-            <Button
-              className="edit-btn"
-              variant="primary"
-              size="md"
-              onClick={() =>
-                createConnection(profileData.id, userData.user._id, history)
+    <div className="pp-whole">
+      <div className="pp-both-container">
+        <div className="pp-top-container">
+          <div className="tutor-card-img-container">
+            <img
+              className="tutor-card-img"
+              src={
+                profileData.image
+                  ? `data:image;base64,${profileData.image}`
+                  : DefaultImg
               }
-            >
-              Connect
-            </Button>
-          )}
-          <Button
-            className="edit-btn-2"
-            variant="outline-secondary"
-            href="/app/dashboard"
-            size="md"
-          >
-            Back to dashboard
-          </Button>
-        </span>
-      </h2>
-      <div className="tutor-card-img-container">
-        <img
-          className="tutor-card-img"
-          src={
-            profileData.image
-              ? `data:image;base64,${profileData.image}`
-              : DefaultImg
-          }
-          alt={`${profileData.firstName}-img-public`}
-        />
-      </div>
-      <ListGroup>
-        <ListGroupItem>
-          <ListGroupItemHeading>Bio</ListGroupItemHeading>
-          <ListGroupItemText>{profileData.bio}</ListGroupItemText>
-        </ListGroupItem>
-        
-        <ListGroupItem>
-          <ListGroupItemHeading>Email</ListGroupItemHeading>
-          <ListGroupItemText>{profileData.email}</ListGroupItemText>
-        </ListGroupItem>
-
-
-        <ListGroupItem>
-          <ListGroupItemHeading>Skills</ListGroupItemHeading>
-          <div className="listgroup-skills">
-            {profileData.skills.map((skill, index) => (
-              <div className="listgroup-skill">{skill}</div>
-            ))}
+              alt={`${profileData.firstName}-img-public`}
+            />
           </div>
-        </ListGroupItem>
-      </ListGroup>
+          <h2 className="pp-full-name">
+            {profileData.firstName} {profileData.lastName}
+          </h2>
+          <span>
+            {profileData.id !== loggedInID && (
+              <Button
+                className="edit-btn"
+                variant="primary"
+                size="md"
+                onClick={() =>
+                  createConnection(profileData.id, userData.user._id, history)
+                }
+              >
+                Connect
+              </Button>
+            )}
+            <Button
+              className="edit-btn-2"
+              variant="outline-secondary"
+              href="/app/dashboard"
+              size="md"
+            >
+              Back to dashboard
+          </Button>
+          </span>
+        </div>
+        <div className="pp-bottom-container">
+          <ListGroup>
+            <ListGroupItem>
+              <ListGroupItemHeading>Bio</ListGroupItemHeading>
+              <ListGroupItemText>{profileData.bio}</ListGroupItemText>
+            </ListGroupItem>
+
+            <ListGroupItem>
+              <ListGroupItemHeading>Email</ListGroupItemHeading>
+              <ListGroupItemText>{profileData.email}</ListGroupItemText>
+            </ListGroupItem>
+
+
+            <ListGroupItem>
+              <ListGroupItemHeading>Skills</ListGroupItemHeading>
+              <div className="listgroup-skills">
+                {profileData.skills.map((skill, index) => (
+                  <div className="listgroup-skill">{skill}</div>
+                ))}
+              </div>
+            </ListGroupItem>
+          </ListGroup>
+        </div>
+      </div>
     </div>
   );
 }
