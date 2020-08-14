@@ -6,7 +6,7 @@ import createConnection from "../../actions/CreateConnection";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 import DefaultImg from "../About/images/default-profile-pic.png";
-
+import ec2url from "../../context/Config";
 import {
   ListGroup,
   ListGroupItem,
@@ -37,15 +37,24 @@ export default function PublicProfile() {
         localStorage.setItem("auth-token", "");
         token = "";
       }
-
-      const tokenRes = await Axios.post(
-        "/users/isTokenValid",
-        null,
-        { headers: { "x-auth-token": token } }
-      );
+      let url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/users/isTokenValid";
+      } else {
+        url = "/users/isTokenValid";
+      }
+      const tokenRes = await Axios.post(url, null, {
+        headers: { "x-auth-token": token },
+      });
 
       if (tokenRes.data) {
-        const userRes = await Axios.get("/users/", {
+        url = "";
+        if (process.env.NODE_ENV === "production") {
+          url = ec2url + "/users/";
+        } else {
+          url = "/users/";
+        }
+        const userRes = await Axios.get(url, {
           headers: { "x-auth-token": token },
         });
 
@@ -56,12 +65,15 @@ export default function PublicProfile() {
         });
 
         if (tokenRes.data) {
-          const tutor = await Axios.get(
-            `/users/${userid}`,
-            {
-              headers: { "x-auth-token": token },
-            }
-          );
+          url = "";
+          if (process.env.NODE_ENV === "production") {
+            url = ec2url + "/users/" + userid;
+          } else {
+            url = `/users/${userid}`;
+          }
+          const tutor = await Axios.get(url, {
+            headers: { "x-auth-token": token },
+          });
           setProfileData({
             firstName: tutor.data.firstName,
             lastName: tutor.data.lastName,
@@ -115,7 +127,7 @@ export default function PublicProfile() {
               size="md"
             >
               Back to dashboard
-          </Button>
+            </Button>
           </span>
         </div>
         <div className="pp-bottom-container">
@@ -129,7 +141,6 @@ export default function PublicProfile() {
               <ListGroupItemHeading>Email</ListGroupItemHeading>
               <ListGroupItemText>{profileData.email}</ListGroupItemText>
             </ListGroupItem>
-
 
             <ListGroupItem>
               <ListGroupItemHeading>Skills</ListGroupItemHeading>

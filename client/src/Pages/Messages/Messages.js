@@ -18,6 +18,7 @@ import Messages from "../Chat/Messages/Messages";
 import Message from "../Chat/Message/Message";
 import Input from "../Chat/Input/Input";
 import { socket } from "../../context/Socket";
+import ec2url from "../../context/Config";
 
 export default function MessagesPage() {
   const [connections, setConnections] = useState([]);
@@ -37,11 +38,24 @@ export default function MessagesPage() {
         localStorage.setItem("auth-token", "");
         token = "";
       }
-      const tokenRes = await Axios.post("/users/isTokenValid", null, {
+      let url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/users/isTokenValid";
+      } else {
+        url = "/users/isTokenValid";
+      }
+      const tokenRes = await Axios.post(url, null, {
         headers: { "x-auth-token": token },
       });
+
       if (tokenRes.data) {
-        const userRes = await Axios.get("/users/", {
+        url = "";
+        if (process.env.NODE_ENV === "production") {
+          url = ec2url + "/users/";
+        } else {
+          url = "/users/";
+        }
+        const userRes = await Axios.get(url, {
           headers: { "x-auth-token": token },
         });
 
@@ -185,12 +199,12 @@ export default function MessagesPage() {
             </div>
             <div className="messages-chat-box">
               {loadingConv ? (
-                  <SyncLoader
-                    css={center}
-                    size={40}
-                    color={"navy"}
-                    loading={loadingConv}
-                  />
+                <SyncLoader
+                  css={center}
+                  size={40}
+                  color={"navy"}
+                  loading={loadingConv}
+                />
               ) : (
                 <ScrollToBottom className="messages-scroller">
                   {messages.map((message, i) => (

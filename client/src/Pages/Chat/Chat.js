@@ -5,6 +5,7 @@ import Input from "./Input/Input";
 import Messages from "./Messages/Messages";
 import VideoChat from "./Video/VideoChat";
 import Axios from "axios";
+import ec2url from "../../context/Config";
 import "./Chat.css";
 import {
   makeToast,
@@ -33,7 +34,13 @@ export default function Chat() {
     let otherUserCurrID;
     const getUser = async () => {
       const token = localStorage.getItem("auth-token");
-      const userRes = await Axios.get("/users/", {
+      let url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/users/";
+      } else {
+        url = "/users/";
+      }
+      const userRes = await Axios.get(url, {
         headers: { "x-auth-token": token },
       });
       setUserID(userRes.data._id);
@@ -65,7 +72,13 @@ export default function Chat() {
   useEffect(() => {
     const loadConversation = async () => {
       try {
-        const loadRes = await Axios.get(`/messages/${connectid}`);
+        let url = "";
+        if (process.env.NODE_ENV === "production") {
+          url = ec2url + "/messages/" + connectid;
+        } else {
+          url = `/messages/${connectid}`;
+        }
+        const loadRes = await Axios.get(url);
         const existingMessages = loadRes.data;
         for (let i = 0; i < existingMessages.length; i++) {
           setMessages((oldMessages) => [...oldMessages, existingMessages[i]]);

@@ -1,16 +1,29 @@
 import Axios from "axios";
+import ec2url from "../context/Config";
 
 async function createConnection(tutorID, userID, history) {
   try {
     //Check if conversation already exists
-    const conversationRes = await Axios.post("/messages/findExisting", {
+    let outerUrl = "";
+    if (process.env.NODE_ENV === "production") {
+      outerUrl = ec2url + "/messages/findExisting";
+    } else {
+      outerUrl = "/messages/findExisting";
+    }
+    const conversationRes = await Axios.post(outerUrl, {
       tutorID: tutorID,
       userID: userID,
     });
 
     if (conversationRes.data === false) {
       //Create new Connection and Conversation
-      const connectionRes = await Axios.post("/messages/newConnection", {
+      let url = "";
+      if (process.env.NODE_ENV === "production") {
+        url = ec2url + "/messages/newConnection";
+      } else {
+        url = "/messages/newConnection";
+      }
+      const connectionRes = await Axios.post(url, {
         tutorId: tutorID,
         currentUserId: userID,
       });
