@@ -39,3 +39,18 @@
     margin-top: 1rem;
     margin-bottom: 2rem;
 }
+
+@media screen and (max-width: 505px) {
+    .ep-bottom-container {
+        padding-left: 0rem;
+        padding-right: 0rem;
+    }
+
+    .ep-both-container {
+        width: 90%;
+    }
+
+    .ep-form-container{
+        width: 105%;
+    }
+}
