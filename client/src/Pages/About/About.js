@@ -18,6 +18,7 @@ export default function About() {
             Aliquam varius justo congue orci bibendum elementum. Proin lacinia</p>
         </div>
       </div>
+      <div className="about-bw-container">
         <h1 className="mt-title">Meet the Team</h1>
         <div className="about-bottom-container">
           <div class="person">
@@ -68,6 +69,7 @@ export default function About() {
               
             </p>
           </div>
+      </div>
       </div>
     </div>
   )}
