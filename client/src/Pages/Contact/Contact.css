@@ -5,11 +5,16 @@
 .contact-top-container {
   background-image: linear-gradient(#d3d0fa, #b0aafd);
   color: white;
-  height: 20rem;
+  height: 16rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.email-link {
+  text-decoration: none;
+  color: #786ef8;
 }
 
 .contact-info {
@@ -19,6 +24,7 @@
 .contact-answer {
   flex: 1 1 auto;
   padding: 1.755rem;
+  text-align: center;
 }
 
 .contact-whole-form {

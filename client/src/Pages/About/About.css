@@ -18,10 +18,14 @@
   width: 60%;
 }
 
+.andrew-pic {
+  width: 12.5rem;
+}
+
 .about-answer {
   flex: 1 1 auto;
   padding: 1.755rem;
-  text-align: left;
+  text-align: center;
 }
 
 .about-bw-container {
@@ -34,6 +38,7 @@
 }
 
 .person {
+  width: 30rem;
   margin: 1rem;
   text-align: center;
   padding: 2rem;
@@ -47,4 +52,3 @@
   margin: 4%;
   border-radius: 100%;
 }
-
