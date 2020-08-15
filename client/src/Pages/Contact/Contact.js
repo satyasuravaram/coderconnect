@@ -40,11 +40,10 @@ export default function Contact() {
         <h1 className="contact-header">Contact Us</h1>
         <div className="contact-info">
           <hr className="contact-header-line" />
-          <p className="contact-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-          scelerisque vehicula risus eget molestie. Curabitur ut bibendum diam.
-          Vivamus et nulla vulputate neque finibus dictum sed non odio. Etiam
-          magna justo, tempor eget nisl ullamcorper, euismod vulputate est.
-            Aliquam varius justo congue orci bibendum elementum. Proin lacinia</p>
+          <h6 className="contact-answer">
+            If you have any other questions, feel free to contact us at our
+            email: <a className="email-link" href="mailto:coderconnectteam@gmail.com">coderconnectteam@gmail.com</a>
+          </h6>
         </div>
       </div>
       <div className="contact-whole-form">
@@ -67,10 +66,10 @@ export default function Contact() {
               />
               <Form.Control.Feedback type="valid">
                 Looks good!
-                  </Form.Control.Feedback>
+              </Form.Control.Feedback>
               <Form.Control.Feedback type="invalid">
                 Please input your first name.
-                  </Form.Control.Feedback>
+              </Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
           <Form.Row>
@@ -84,10 +83,10 @@ export default function Contact() {
               />
               <Form.Control.Feedback type="valid">
                 Looks good!
-                  </Form.Control.Feedback>
+              </Form.Control.Feedback>
               <Form.Control.Feedback type="invalid">
                 Please input your last name.
-                  </Form.Control.Feedback>
+              </Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
           <Form.Row>
@@ -102,10 +101,10 @@ export default function Contact() {
                 />
                 <Form.Control.Feedback type="valid">
                   Looks good!
-                    </Form.Control.Feedback>
+                </Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
                   Please input your email address.
-                    </Form.Control.Feedback>
+                </Form.Control.Feedback>
               </InputGroup>
             </Form.Group>
           </Form.Row>
@@ -119,10 +118,10 @@ export default function Contact() {
             />
             <Form.Control.Feedback type="valid">
               Looks good!
-                </Form.Control.Feedback>
+            </Form.Control.Feedback>
             <Form.Control.Feedback type="invalid">
               Please input your message
-                </Form.Control.Feedback>
+            </Form.Control.Feedback>
           </Form.Group>
           <hr />
           <Button type="submit">Send message</Button>

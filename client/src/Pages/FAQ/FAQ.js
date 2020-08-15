@@ -7,14 +7,6 @@ export default function FAQ() {
     <div className="faq-whole-container">
       <div className="faq-top-container">
         <h1 class="faq-header">Frequently Asked Questions</h1>
-        <div className="faq-info">
-            <hr className="faq-header-line" />
-            <p className="faq-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-            scelerisque vehicula risus eget molestie. Curabitur ut bibendum diam.
-            Vivamus et nulla vulputate neque finibus dictum sed non odio. Etiam
-            magna justo, tempor eget nisl ullamcorper, euismod vulputate est.
-              Aliquam varius justo congue orci bibendum elementum. Proin lacinia</p>
-        </div>
       </div>
       <div className="faq-bottom-container">
       <Accordion id="faqs">
