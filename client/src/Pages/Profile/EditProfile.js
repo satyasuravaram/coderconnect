@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Row, Col, Form, Input, FormGroup, CustomInput, Label, Button } from "reactstrap";
+import {
+  Row,
+  Col,
+  Form,
+  Input,
+  FormGroup,
+  CustomInput,
+  Label,
+  Button,
+} from "reactstrap";
 import Axios from "axios";
 import ErrorNotice from "../../components/misc/ErrorNotice";
 import skillsArray from "../../components/SkillsArray";
@@ -101,7 +110,6 @@ export default function EditProfile() {
       });
 
       if (tokenRes.data) {
-
         const editRes = await Axios.post("/users/edit", data, {
           headers: { "x-auth-token": token },
         });
@@ -136,12 +144,21 @@ export default function EditProfile() {
             <Col>
               <Label for="bio">Profile Picture</Label>
               <br />
-              <CustomInput type="file" id="exampleCustomFileBrowser" name="image" onChange={imageHandler} />
+              <CustomInput
+                type="file"
+                id="exampleCustomFileBrowser"
+                name="image"
+                onChange={imageHandler}
+              />
               <div className="ep-top-container">
                 <div className="tutor-card-img-container">
                   <img
                     className="tutor-card-img"
-                    src={!profilePic.startsWith("data") ? `data:image;base64,${profileData.image}` : profilePic}
+                    src={
+                      !profilePic.startsWith("data")
+                        ? `data:image;base64,${profileData.image}`
+                        : profilePic
+                    }
                     alt="profile-picture"
                   />
                 </div>
@@ -223,9 +240,11 @@ export default function EditProfile() {
             </Row>
           )}
 
-          <Button className="ep-button" type="submit">Save Changes</Button>
+          <Button className="ep-button" type="submit">
+            Save Changes
+          </Button>
         </Form>
       </div>
-    </div >
+    </div>
   );
 }

@@ -22,7 +22,7 @@ export default function Dashboard() {
   const [currentTutors, setCurrentTutors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(10);
+  const [postsPerPage] = useState(7);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const history = useHistory();
