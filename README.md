@@ -37,7 +37,7 @@
   * [Built With](#built-with)
 * [Usage](#usage)
 * [Roadmap](#roadmap)
-* [Contributing](#contributing)
+* [Contribute](#contribute)
 * [Contact](#contact)
 * [Acknowledgements](#acknowledgements)
 
