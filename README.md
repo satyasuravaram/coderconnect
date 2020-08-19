@@ -59,15 +59,15 @@ You may also suggest changes by forking this repo and creating a pull request or
 A list of resources we used are listed in the acknowledgements.
 
 ### Built With
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+These are some of the main frameworks we used. There are some more in the [acknowledgements](#acknowledgements) section.
 * [React.JS](https://reactjs.org)
 * [MongoDB](https://www.mongodb.com/)
 * [Node.JS](https://nodejs.org)
 * [Express.JS](https://expressjs.com/)
 * [WebRTC](https://webrtc.org/)
-* [WebSockets](https://www.websocket.org/)
 * [React Bootstrap](https://react-bootstrap.github.io/)
 * [Reactstrap](https://reactstrap.github.io/)
+* [Socket.io](https://socket.io/)
 
 
 <!-- USAGE EXAMPLES -->
@@ -101,7 +101,6 @@ Project Link: [https://github.com/satyasuravaram/coderconnect](https://github.co
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 * [Multer](https://github.com/expressjs/multer)
-* [Socket.io](https://socket.io/)
 * [Simple Peer](https://github.com/feross/simple-peer)
 * [Img Shields](https://shields.io)
 * [Axios](https://github.com/axios/axios)
