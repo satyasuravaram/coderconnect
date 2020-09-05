@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Footer from "./components/Footer";
 import "./App.css";
-
+/*
 //Context
 import UserContext from "./context/UserContext";
 
@@ -32,3 +32,4 @@ function App() {
 }
 
 export default App;
+*/
