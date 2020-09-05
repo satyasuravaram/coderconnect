@@ -7,9 +7,12 @@ const path = require("path");
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+const enforce = require('express-sslify');
 
 app.use(cors());
 app.use(express.json());
+
+app.use(enforce.HTTPS({ trustProtoHeader: true })); //forces https
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
