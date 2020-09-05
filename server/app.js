@@ -12,7 +12,7 @@ const enforce = require('express-sslify');
 app.use(cors());
 app.use(express.json());
 
-app.use(enforce.HTTPS({ trustProtoHeader: true })); //forces https
+app.use(enforce.HTTPS({ trustXForwardedHostHeader: true })); //forces https
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
