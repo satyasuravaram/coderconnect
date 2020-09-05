@@ -7,6 +7,7 @@ const path = require("path");
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+const enforce = require('express-sslify');
 
 app.use(cors());
 app.use(express.json());
@@ -107,6 +108,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const port = process.env.PORT || 5000;
-server.listen(app.get(port), () => {
+server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
