@@ -12,7 +12,7 @@ const enforce = require('express-sslify');
 app.use(cors());
 app.use(express.json());
 
-app.use(enforce.HTTPS()); //forces https
+app.use(enforce.HTTPS({ trustProtoHeader: true })); //forces https
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
@@ -108,6 +108,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const port = process.env.PORT || 5000;
-server.listen(port, () => {
+server.listen(app.get(port), () => {
   console.log(`Server running on port ${port}`);
 });
